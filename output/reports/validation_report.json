@@ -1,0 +1,258 @@
+{
+  "all_gates_passed": true,
+  "gates": [
+    {
+      "phase": "phase2",
+      "name": "toc_section_count",
+      "passed": true,
+      "detail": "124 sections (expected >= 100)",
+      "metric": 124
+    },
+    {
+      "phase": "phase2",
+      "name": "all_divisions_present",
+      "passed": true,
+      "detail": "24 divisions (expected 24)",
+      "metric": 24
+    },
+    {
+      "phase": "phase2",
+      "name": "door_schedule_size",
+      "passed": true,
+      "detail": "60 doors (expected > 50)",
+      "metric": 60
+    },
+    {
+      "phase": "phase2",
+      "name": "finish_schedule_size",
+      "passed": true,
+      "detail": "65 rooms (expected > 25)",
+      "metric": 65
+    },
+    {
+      "phase": "phase2",
+      "name": "abbreviation_list_size",
+      "passed": true,
+      "detail": "410 abbreviations (expected > 100)",
+      "metric": 410
+    },
+    {
+      "phase": "phase3",
+      "name": "sheet_count",
+      "passed": true,
+      "detail": "133 sheets (expected 133)",
+      "metric": 133
+    },
+    {
+      "phase": "phase3",
+      "name": "all_disciplines_present",
+      "passed": true,
+      "detail": "9 disciplines represented",
+      "metric": 9
+    },
+    {
+      "phase": "phase3",
+      "name": "sample_sheets_classified",
+      "passed": true,
+      "detail": "11/11 sample sheets in registry",
+      "metric": null
+    },
+    {
+      "phase": "phase3",
+      "name": "sample_page_numbers_verified",
+      "passed": true,
+      "detail": "11/11 sample page numbers match",
+      "metric": null
+    },
+    {
+      "phase": "phase5",
+      "name": "element_connectivity",
+      "passed": true,
+      "detail": "0 isolated element nodes (243 isolated nodes total, mostly unreferenced specs/sheets)",
+      "metric": 0
+    },
+    {
+      "phase": "phase5",
+      "name": "door_to_spec_rate",
+      "passed": true,
+      "detail": "60/60 doors resolve to a spec (100.0%)",
+      "metric": 1.0
+    },
+    {
+      "phase": "phase5",
+      "name": "room_to_finish_rate",
+      "passed": true,
+      "detail": "64/67 rooms resolve finishes (95.5%)",
+      "metric": 0.955
+    },
+    {
+      "phase": "domain",
+      "name": "doors_have_hardware_set",
+      "passed": true,
+      "detail": "60/60 doors have a hardware set (100.0%)",
+      "metric": 1.0
+    },
+    {
+      "phase": "domain",
+      "name": "doors_have_frame_material",
+      "passed": true,
+      "detail": "60/60 doors specify a frame material (100.0%)",
+      "metric": 1.0
+    },
+    {
+      "phase": "domain",
+      "name": "rooms_have_floor_finish",
+      "passed": true,
+      "detail": "65/65 rooms have a floor finish (100.0%)",
+      "metric": 1.0
+    }
+  ],
+  "graph_stats": {
+    "total_nodes": 386,
+    "total_edges": 744,
+    "nodes_by_type": {
+      "spec_section": 124,
+      "sheet": 133,
+      "abbreviation": 2,
+      "room": 67,
+      "door": 60
+    },
+    "edges_by_type": {
+      "REFERENCES": 3,
+      "FINISH_SPECIFIED_IN": 191,
+      "APPEARS_ON": 250,
+      "DOOR_SPECIFIED_IN": 52,
+      "FRAME_SPECIFIED_IN": 58,
+      "HARDWARE_SPECIFIED_IN": 60,
+      "GLAZING_SPECIFIED_IN": 44,
+      "LOCATED_IN": 60,
+      "HAS_MATERIAL": 26
+    }
+  },
+  "connection_rates": {
+    "door_to_spec": 1.0,
+    "room_to_finish": 0.955
+  },
+  "unresolved": {
+    "orphan_doors": [],
+    "orphan_spec_count": 113,
+    "orphan_spec_sample": [
+      "011000",
+      "012200",
+      "012300",
+      "012500",
+      "012510",
+      "012600",
+      "012900",
+      "012973",
+      "013100",
+      "013110"
+    ],
+    "missing_connections": [
+      {
+        "id": "room:N108",
+        "node_type": "room",
+        "codes": [
+          "FRP-1"
+        ]
+      },
+      {
+        "id": "room:N109",
+        "node_type": "room",
+        "codes": [
+          "FTL-1",
+          "TL-2",
+          "TWB-1"
+        ]
+      },
+      {
+        "id": "room:N141",
+        "node_type": "room",
+        "codes": [
+          "FLT-1",
+          "TWB-1"
+        ]
+      },
+      {
+        "id": "room:N142",
+        "node_type": "room",
+        "codes": [
+          "FTL-1",
+          "TWB-1"
+        ]
+      },
+      {
+        "id": "room:S102",
+        "node_type": "room",
+        "codes": [
+          "ESD-1"
+        ]
+      },
+      {
+        "id": "room:S102A",
+        "node_type": "room",
+        "codes": [
+          "ESD-1"
+        ]
+      },
+      {
+        "id": "door:S102A",
+        "node_type": "door",
+        "codes": [
+          "PAINTED MASONITE"
+        ]
+      },
+      {
+        "id": "door:S102B",
+        "node_type": "door",
+        "codes": [
+          "PAINTED MASONITE"
+        ]
+      },
+      {
+        "id": "door:S102C",
+        "node_type": "door",
+        "codes": [
+          "PAINTED MASONITE"
+        ]
+      },
+      {
+        "id": "door:S103",
+        "node_type": "door",
+        "codes": [
+          "PAINTED MASONITE"
+        ]
+      },
+      {
+        "id": "door:S105",
+        "node_type": "door",
+        "codes": [
+          "PAINTED MASONITE"
+        ]
+      },
+      {
+        "id": "door:S108A",
+        "node_type": "door",
+        "codes": [
+          "PAINTED MASONITE",
+          "MTL"
+        ]
+      },
+      {
+        "id": "door:S109",
+        "node_type": "door",
+        "codes": [
+          "PAINTED MASONITE"
+        ]
+      }
+    ]
+  },
+  "confidence": {
+    "min": 1.0,
+    "max": 1.0,
+    "mean": 1.0,
+    "buckets": {
+      "1.0": 386
+    }
+  }
+}
