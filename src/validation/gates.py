@@ -144,8 +144,13 @@ def build_report(kg, toc, registry, doors, rooms, abbrev_count, reconciliation) 
     }
 
 
-def run_all(manual_path, drawings_path) -> dict:
-    """Parse every phase, build the graph, run all gates, and return the report."""
+def run_all(manual_path, drawings_path, doc_map=None) -> dict:
+    """Parse every phase, build the graph, run all gates, and return the report.
+
+    Pages come from the document map (discovered by signature), not hardcoded
+    indices; the same map is threaded into build_graph so the two agree.
+    """
+    from src.pipeline.build_document_map import build_document_map, extraction_pages
     from src.pipeline.phase2_abbreviation_parser import parse_abbreviations
     from src.pipeline.phase2_drawing_index import parse_drawing_index
     from src.pipeline.phase2_schedule_parser import parse_door_schedule, parse_finish_schedule
@@ -153,13 +158,21 @@ def run_all(manual_path, drawings_path) -> dict:
     from src.pipeline.phase3_sheet_classifier import classify_sheets, reconcile
     from src.pipeline.phase5_graph_builder import build_graph
 
-    toc = parse_spec_toc(manual_path)
-    registry = parse_drawing_index(drawings_path)
-    doors = parse_door_schedule(drawings_path)
-    rooms = parse_finish_schedule(drawings_path)
-    abbrev_count = len(parse_abbreviations(drawings_path))
+    if doc_map is None:
+        doc_map = build_document_map([drawings_path, manual_path])
+    pg = extraction_pages(doc_map)
+
+    toc = parse_spec_toc(manual_path, start_page=pg["toc_start"] or 0)
+    registry = parse_drawing_index(drawings_path, page_index=pg["drawing_index"]) \
+        if pg["drawing_index"] is not None else []
+    doors = parse_door_schedule(drawings_path, page_index=pg["door_schedule"]) \
+        if pg["door_schedule"] is not None else []
+    rooms = parse_finish_schedule(drawings_path, page_index=pg["finish_schedule"]) \
+        if pg["finish_schedule"] is not None else []
+    abbrev_count = len(parse_abbreviations(drawings_path, page_index=pg["abbreviations"])) \
+        if pg["abbreviations"] is not None else 0
     reconciliation = reconcile(classify_sheets(drawings_path), registry)
-    kg = build_graph(manual_path, drawings_path)
+    kg = build_graph(manual_path, drawings_path, doc_map=doc_map)
 
     return build_report(kg, toc, registry, doors, rooms, abbrev_count, reconciliation)
 
