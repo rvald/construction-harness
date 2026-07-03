@@ -54,9 +54,12 @@ def test_pinney_toc_parses_from_located_page():
     # Locator fix: pointed at the located TOC page, divisions are recovered.
     assert len(located.divisions) >= 15
     assert len(located.divisions) > len(old.divisions)
-    # Note: located.total_sections is still 0 — Pinney's section-line grammar
-    # differs from UCCS. That's the DEFERRED field-level generalization, not a
-    # locator concern: this phase's job (find the manual TOC) is done.
+    # Grammar generalization: Pinney's section lines ("03 30 00 TITLE", no SECTION
+    # keyword, no dash) now parse too — the manual is genuinely readable, not just
+    # located. (Was 0 sections before the generalized SECTION_RE.)
+    assert located.total_sections >= 80
+    div_08 = next(d for d in located.divisions if d["number"] == "08")
+    assert any(s["number"] == "081113" for s in div_08["sections"])
 
 
 def test_pinney_door_schedule_extracts_end_to_end():
