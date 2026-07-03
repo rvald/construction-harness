@@ -1,6 +1,31 @@
 # Semantic Section Resolver (B9) — Design
 
-**Status:** Active build. Follows the Schedule Resolver; companion to `generalization_inventory.md`.
+**Status:** Built (M1–M4, 121 tests). Follows the Schedule Resolver; companion to `generalization_inventory.md`.
+
+## Outcome (as built)
+
+- **Derivation replaces the hand-authored dicts** as the source of truth; the dicts
+  survive only as a shrinking `seed` override. On UCCS: 8/15 derived by the
+  deterministic matcher, the rest overridden → every section equals the seed, so the
+  validation report is **byte-identical**.
+- **Dubious seeds surfaced, not hidden:** `MWP`/`WP` (hand-authored → painting) are
+  overridden but flagged `seed_disputed` with the derivation's suggestion
+  (074213.23, Metal Wall Panels) recorded.
+- **LLM backend (M4)** plugs into the same `matcher` seam via `build_section_map(...,
+  llm=...)`, resolving the low-confidence tail (`AL`/`T` broken-expansion, `WB`
+  semantic) by grounded `select_section` tool-choice over division-filtered
+  candidates. It flips those from `override` to `derived_llm` while keeping the
+  section (= seed) unchanged, so byte-identical is preserved regardless of what the
+  LLM says — the seed guarantees correctness, the LLM only earns *credit*.
+- **Offline-safe:** `anthropic` is an optional/lazy import (`section_llm.py`), the
+  matcher takes an injectable client, and tests use a fake/replay client — core CI
+  needs neither the SDK nor network. `build_graph` defaults to `section_llm=None`.
+
+**Pending credentials:** the one-time recording pass (`RecordingClient` → committed
+fixtures) and the live network-gated test. Mechanism is built; run with an API key
+to populate `tests/fixtures/section_llm.json`.
+
+---
 **Scope:** Replace the hand-authored `MATERIAL_SECTION` / `FINISH_SECTION` code→section
 dicts in `phase5_graph_builder.py` with edges *derived* by semantically matching a
 code's expansion against the project's real TOC section titles, constrained by CSI

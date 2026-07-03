@@ -62,6 +62,7 @@ def build_graph(
     manual_path: str | pathlib.Path,
     drawings_path: str | pathlib.Path,
     doc_map: DocumentMap | None = None,
+    section_llm=None,
 ) -> KnowledgeGraph:
     kg = KnowledgeGraph()
 
@@ -101,9 +102,9 @@ def build_graph(
     # maps are passed only as a shrinking `seed` override for cases the matcher
     # can't yet derive, so UCCS stays byte-identical.
     material_links = build_section_map(MATERIAL_SECTION, abbrev, applied, section_titles,
-                                       "material", "08", seed=MATERIAL_SECTION)
+                                       "material", "08", seed=MATERIAL_SECTION, llm=section_llm)
     finish_links = build_section_map(FINISH_SECTION, abbrev, applied, section_titles,
-                                     "finish", None, seed=FINISH_SECTION)
+                                     "finish", None, seed=FINISH_SECTION, llm=section_llm)
 
     # enrich the trace sections with page provenance + collect cross-references
     section_refs: dict[str, set[str]] = {}

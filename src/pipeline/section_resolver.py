@@ -125,35 +125,48 @@ def match_section(
 @dataclass
 class SectionLink:
     section: str | None
-    method: str            # derived_lexical | derived_llm | override | unresolved
+    method: str                    # derived_lexical | derived_llm | override | unresolved
     confidence: float
+    suggestion: str | None = None  # what derivation proposed when we overrode it
+    seed_disputed: bool = False    # derivation disagreed with the hand-authored seed
 
 
 def build_section_map(
     codes, abbrev: dict[str, str], applied: dict[str, str], titles: dict[str, str],
     kind: str, division: str | None, seed: dict[str, str] | None = None,
-    matcher=match_section,
+    matcher=match_section, llm=None,
 ) -> dict[str, SectionLink]:
     """Resolve each code to a spec section by derivation, using `seed` (the
     hand-authored map) only as an override for cases the matcher can't yet derive.
 
-    Derivation is primary: when the matcher agrees with the seed (or no seed is
-    given, e.g. a new project) the edge is `derived_*`. When it disagrees or finds
-    nothing but a seed exists, we fall back to `override` — so UCCS stays
-    byte-identical while the override table shrinks as the matcher (M4 LLM) improves.
+    Derivation is primary: the deterministic matcher first, then (for its
+    low-confidence tail) an optional `llm` backend. When derivation agrees with the
+    seed (or no seed is given, e.g. a new project) the edge is `derived_*`. When it
+    disagrees or finds nothing but a seed exists, we fall back to `override` and
+    flag the disagreement — so UCCS stays byte-identical while the override table
+    shrinks as derivation improves.
     """
     seed = seed or {}
     out: dict[str, SectionLink] = {}
     for code in codes:
         exp = expansion(code, abbrev, applied, "material" if kind == "material" else "finish")
         got, conf = matcher(exp, titles, division)
+        method = "derived_lexical"
+        if got is None and llm is not None:
+            cands = {n: t for n, t in titles.items() if not division or n.startswith(division)}
+            llm_sec, llm_conf, _reason = llm.resolve(code, kind, exp, cands)
+            if llm_sec is not None:
+                got, conf, method = llm_sec, llm_conf, "derived_llm"
+
         want = seed.get(code)
         if got is not None and (want is None or got == want):
-            out[code] = SectionLink(got, "derived_lexical", conf)
+            out[code] = SectionLink(got, method, round(conf, 3))
         elif want is not None:
-            out[code] = SectionLink(want, "override", conf)
+            disputed = got is not None and got != want
+            out[code] = SectionLink(want, "override", round(conf, 3),
+                                    suggestion=got if disputed else None, seed_disputed=disputed)
         else:
-            out[code] = SectionLink(None, "unresolved", conf)
+            out[code] = SectionLink(None, "unresolved", round(conf, 3))
     return out
 
 
