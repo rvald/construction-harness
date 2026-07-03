@@ -1,6 +1,23 @@
 # Document Locator — Design
 
-**Status:** Active build. Companion to `generalization_inventory.md`.
+**Status:** Built (M1–M7 complete, 103 tests green). Companion to `generalization_inventory.md`.
+
+## Outcome (as built)
+
+- **UCCS**: the map rediscovers every previously-hardcoded page (TOC 4-8, index 1,
+  door 37, finish 48, abbrev 5). The full pipeline emits a **byte-identical**
+  validation report — behavior unchanged, only the *source* of page indices changed.
+- **Pinney** (combined, drawings-first, different firm): segments correctly into
+  manual/drawings/front_matter; the located TOC recovers **20 divisions vs 0 before**
+  (the original silent failure), and the three differently-formatted schedules are
+  honestly flagged `absent` (completeness 0.4). No crash, no silent-wrong.
+- **Boundary proven**: Pinney section-lines still parse to 0 sections — that's the
+  **deferred field-level generalization** (section grammar, header-driven schedule
+  columns, code→section resolver), not a locator concern. This phase's job — *find
+  the page* — is done; *parse any firm's format* is the next phase.
+
+---
+
 **Date:** 2026-07-02
 **Scope:** The *discovery* front-half of the pipeline. Given a bid package of any
 shape (separate files or one combined PDF), determine what each page is and where
