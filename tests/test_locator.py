@@ -74,8 +74,17 @@ def test_pinney_toc_found_in_manual_block():
     assert all(97 <= i <= 505 for i in art.page_indices)
 
 
-def test_pinney_schedules_absent_not_crashed():
-    for name in ("drawing_index", "door_schedule", "finish_schedule"):
+def test_pinney_door_schedule_detected_via_coverage():
+    # Softened detection (M3): Pinney's 16-col door schedule is now recognized by
+    # header coverage, where the old exactly-14-col signature rejected it.
+    art = _PINNEY.locate("door_schedule")
+    assert art.status == STATUS_FOUND
+    assert art.page_indices == [88]
+
+
+def test_pinney_remaining_schedules_absent_not_crashed():
+    # No room-finish schedule exists in Pinney, and its index doesn't match yet.
+    for name in ("drawing_index", "finish_schedule"):
         art = _PINNEY.locate(name)
         assert art.status == STATUS_ABSENT
         assert art.pages == []
@@ -84,5 +93,5 @@ def test_pinney_schedules_absent_not_crashed():
 def test_pinney_completeness_reports_the_gaps():
     comp = _PINNEY.completeness
     assert comp["score"] < 1.0
-    assert set(comp["missing"]) == {"drawing_index", "door_schedule", "finish_schedule"}
+    assert set(comp["missing"]) == {"drawing_index", "finish_schedule"}
     assert comp["not_applicable"] == []               # both regions exist, so nothing is N/A

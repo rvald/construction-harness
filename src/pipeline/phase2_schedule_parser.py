@@ -22,6 +22,9 @@ import re
 import pdfplumber
 
 from src.models.schedule import DoorEntry, FinishEntry
+from src.pipeline.schedule_resolver import (
+    DOOR_SCHEMA, FINISH_SCHEMA, ColumnMap, resolve_columns, select_schedule_table,
+)
 
 _DEFAULT_PDF = pathlib.Path(__file__).resolve().parents[2] / "data" / "uccs" / "drawings.pdf"
 _PAGE_INDEX = 37                       # 0-indexed -> PDF page 38
@@ -30,13 +33,7 @@ _EXPECTED_COLUMNS = 14
 DOOR_MARK_RE = re.compile(r"^[NS][A-Z]?\d{2,}[A-Z]{0,2}$")   # N107B, N120CA, NE180B, S101
 _MARK_TOKEN_RE = re.compile(r"[NS][A-Z]?\d{2,}[A-Z]{0,2}")   # same, for splitting merged cells
 
-# Column index -> DoorEntry field (14 columns, verified against the sheet).
-_COLUMNS = [
-    "door_mark", "fire_rating_minutes", "width", "height",
-    "door_elevation_type", "door_material", "door_finish",
-    "frame_elevation_type", "frame_material", "frame_finish",
-    "hardware_set", "glass_film", "glass_type", "special_notes",
-]
+# Columns are resolved by header label (schedule_resolver), not by fixed index.
 
 
 def _clean(cell: str | None) -> str:
@@ -59,14 +56,14 @@ def _select_schedule_table(tables: list[list[list]]) -> list[list] | None:
     return None
 
 
-def _expand_merged(row: list) -> list[list]:
+def _expand_merged(row: list, mark_col: int = 0) -> list[list]:
     """Split a row that merged N identical doors ('N105A N105B N106A') into N rows.
 
     Each column's tokens divide evenly across the N doors; a column that doesn't
     divide evenly gives its value to the first door and blanks to the rest.
     Merged rows are the exception, not the rule.
     """
-    n = len(_clean(row[0]).split())
+    n = len(_clean(row[mark_col]).split())
     per_col: list[list[str]] = []
     for cell in row:
         toks = _clean(cell).split()
@@ -78,26 +75,71 @@ def _expand_merged(row: list) -> list[list]:
     return [[per_col[c][r] for c in range(len(row))] for r in range(n)]
 
 
-def _build_entry(row: list) -> DoorEntry:
-    v = {field: _clean(row[i]) for i, field in enumerate(_COLUMNS)}
-    mark = v["door_mark"]
+def _build_entry(row: list, cm: ColumnMap) -> DoorEntry:
+    """Build a DoorEntry using the resolved column map (field -> column index)."""
+    def get(field: str) -> str:
+        c = cm.by_field.get(field)
+        return _clean(row[c]) if (c is not None and c < len(row)) else ""
+
+    mark = get("door_mark")
+    frc = cm.by_field.get("fire_rating_minutes")
+    fire = _fire_rating(row[frc]) if (frc is not None and frc < len(row)) else None
     return DoorEntry(
         door_mark=mark,
-        fire_rating_minutes=_fire_rating(row[1]),
-        width=v["width"],
-        height=v["height"],
-        door_elevation_type=v["door_elevation_type"],
-        door_material=v["door_material"],
-        door_finish=v["door_finish"],
-        frame_elevation_type=v["frame_elevation_type"] or None,
-        frame_material=v["frame_material"],
-        frame_finish=v["frame_finish"],
-        hardware_set=v["hardware_set"],
-        glass_film=v["glass_film"] or None,
-        glass_type=v["glass_type"] or None,
-        special_notes=v["special_notes"] or None,
-        building={"N": "North", "S": "South"}.get(mark[0], ""),
+        fire_rating_minutes=fire,
+        width=get("width"),
+        height=get("height"),
+        door_elevation_type=get("door_elevation_type"),
+        door_material=get("door_material"),
+        door_finish=get("door_finish"),
+        frame_elevation_type=get("frame_elevation_type") or None,
+        frame_material=get("frame_material"),
+        frame_finish=get("frame_finish"),
+        hardware_set=get("hardware_set"),
+        glass_film=get("glass_film") or None,
+        glass_type=get("glass_type") or None,
+        special_notes=get("special_notes") or None,
+        building={"N": "North", "S": "South"}.get(mark[0], "") if mark else "",
     )
+
+
+_MIN_BUILTIN_MARKS = 5                              # trust [NS] convention if it clearly applies
+_DISCOVER_TOKEN_RE = re.compile(r"[A-Za-z0-9]+")
+
+
+def _looks_like_mark(cell: str) -> bool:
+    """Firm-agnostic door-mark shape: a short single alnum token containing a digit
+    (e.g. 'B01w', '101w', 'N101A'). Rejects multi-word section headers like
+    'BASEMENT - EAST' and dimension strings."""
+    return (2 <= len(cell) <= 8
+            and _DISCOVER_TOKEN_RE.fullmatch(cell) is not None
+            and any(ch.isdigit() for ch in cell))
+
+
+def _select_door_rows(table: list[list], mark_col: int, is_mark, is_token) -> list[list]:
+    out: list[list] = []
+    for row in table:
+        c0 = _clean(row[mark_col]) if mark_col < len(row) else ""
+        tokens = c0.split()
+        if len(tokens) >= 2 and all(is_token(t) for t in tokens):
+            out.extend(_expand_merged(row, mark_col))   # merged identical doors
+        elif c0 and is_mark(c0):
+            out.append(row)                             # single-door row
+    return out
+
+
+def _select_door_rows_auto(table: list[list], mark_col: int) -> list[list]:
+    """Select data rows by mark grammar. The built-in [NS] convention is tried
+    first (keeps UCCS identical); if it barely matches, a discovered grammar takes
+    over for other firms' mark schemes."""
+    builtin = _select_door_rows(
+        table, mark_col,
+        lambda s: bool(DOOR_MARK_RE.match(s)),
+        lambda s: bool(_MARK_TOKEN_RE.fullmatch(s)),
+    )
+    if len(builtin) >= _MIN_BUILTIN_MARKS:
+        return builtin
+    return _select_door_rows(table, mark_col, _looks_like_mark, _looks_like_mark)
 
 
 def parse_door_schedule(
@@ -108,36 +150,27 @@ def parse_door_schedule(
     with pdfplumber.open(pdf_path) as pdf:
         tables = pdf.pages[page_index].extract_tables()
 
-    table = _select_schedule_table(tables)
+    table = select_schedule_table(tables, DOOR_SCHEMA)
     if table is None:
-        raise ValueError("Door schedule table (14 columns) not found on page.")
+        raise ValueError("No door schedule table (by header coverage) found on page.")
 
-    entries: list[DoorEntry] = []
-    for row in table:
-        c0 = _clean(row[0])
-        tokens = c0.split()
-        if len(tokens) >= 2 and all(_MARK_TOKEN_RE.fullmatch(t) for t in tokens):
-            rows = _expand_merged(row)            # merged identical doors
-        elif DOOR_MARK_RE.match(c0):
-            rows = [row]                          # normal single-door row
-        else:
-            continue                              # title / header / stray
-        entries.extend(_build_entry(r) for r in rows)
-    return entries
+    cm = resolve_columns(table, DOOR_SCHEMA)
+    mark_col = cm.by_field.get("door_mark", 0)
+    rows = _select_door_rows_auto(table, mark_col)
+    return [_build_entry(r, cm) for r in rows]
 
 
 def extraction_confidence(entries: list[DoorEntry]) -> float:
-    """Simple confidence score for the extraction (0..1).
+    """Intrinsic confidence for the extraction (0..1) — no answer-key count term.
 
-    Blends: door marks matching the N/S grammar, count plausibility (~58 expected),
-    and coverage of the core door/frame material fields.
+    Blends: door marks matching the mark grammar, and coverage of the core
+    door/frame material fields. (Dropped the old `/58` UCCS-count term, C10.)
     """
     if not entries:
         return 0.0
     valid_marks = sum(1 for e in entries if DOOR_MARK_RE.match(e.door_mark)) / len(entries)
-    count_score = min(len(entries), 58) / 58
     filled = sum(1 for e in entries if e.door_material and e.frame_material) / len(entries)
-    return round((valid_marks + count_score + filled) / 3, 3)
+    return round((valid_marks + filled) / 2, 3)
 
 
 # ---------------------------------------------------------------------------
@@ -164,26 +197,49 @@ def parse_finish_schedule(
     seen: set[str] = set()
     entries: list[FinishEntry] = []
     for t in tables:
-        if not t or len(t[0]) != 7:
+        if not t or len(t[0]) < 6:
             continue
-        header = " ".join(_clean(c) for row in t[:3] for c in row).upper()
-        if "ROOM FINISH SCHEDULE" not in header and not ("FLOOR" in header and "CEILING" in header):
+        cm = resolve_columns(t, FINISH_SCHEMA)
+        if cm.coverage < 0.75:                      # not a room-finish table
             continue
-        for row in t:
-            room = _clean(row[0])
-            if not ROOM_RE.match(room) or room in seen:
+        room_col = cm.by_field.get("room_number", 0)
+        for row in _select_finish_rows_auto(t, room_col):
+            room = _clean(row[room_col]) if room_col < len(row) else ""
+            if room in seen:
                 continue
             seen.add(room)
-            entries.append(FinishEntry(
-                room_number=room,
-                room_name=_clean(row[1]),
-                floor_finish=_clean(row[2]),
-                base_finish=_clean(row[3]),
-                wall_finish=_clean(row[4]),
-                ceiling_finish=_clean(row[5]),
-                comments=_clean(row[6]) or None,
-            ))
+            entries.append(_build_finish_entry(row, cm))
     return entries
+
+
+def _build_finish_entry(row: list, cm: ColumnMap) -> FinishEntry:
+    def get(field: str) -> str:
+        c = cm.by_field.get(field)
+        return _clean(row[c]) if (c is not None and c < len(row)) else ""
+
+    return FinishEntry(
+        room_number=get("room_number"),
+        room_name=get("room_name"),
+        floor_finish=get("floor_finish"),
+        base_finish=get("base_finish"),
+        wall_finish=get("wall_finish"),
+        ceiling_finish=get("ceiling_finish"),
+        comments=get("comments") or None,
+    )
+
+
+def _select_finish_rows(table: list[list], room_col: int, is_room) -> list[list]:
+    return [row for row in table
+            if room_col < len(row) and is_room(_clean(row[room_col]))]
+
+
+def _select_finish_rows_auto(table: list[list], room_col: int) -> list[list]:
+    """Built-in [NS] room grammar first (keeps UCCS identical), discovered grammar
+    as fallback for other firms' room numbering."""
+    builtin = _select_finish_rows(table, room_col, lambda s: bool(ROOM_RE.match(s)))
+    if len(builtin) >= _MIN_BUILTIN_MARKS:
+        return builtin
+    return _select_finish_rows(table, room_col, _looks_like_mark)
 
 
 def parse_applied_finish_list(

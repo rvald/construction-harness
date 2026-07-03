@@ -27,8 +27,9 @@ from src.models.document_map import (
     FileRef, LocatedArtifact, PageProfile, PageRef, Region,
 )
 from src.pipeline.phase2_drawing_index import _is_sheet_list_table
-from src.pipeline.phase2_schedule_parser import _clean, _select_schedule_table
+from src.pipeline.phase2_schedule_parser import _clean
 from src.pipeline.phase2_spec_parser import DIVISION_RE, SECTION_RE
+from src.pipeline.schedule_resolver import DOOR_SCHEMA, resolve_columns, select_schedule_table
 
 # --- confirm signatures (run on candidate pages only) ------------------------
 
@@ -45,7 +46,15 @@ def _confirm_drawing_index(page: "pdfplumber.page.Page", _profile: PageProfile) 
 
 
 def _confirm_door_schedule(page: "pdfplumber.page.Page", _profile: PageProfile) -> float:
-    return 1.0 if _select_schedule_table(page.extract_tables()) is not None else 0.0
+    """Detect a door schedule by header coverage (order/count-agnostic) rather than
+    the old exactly-14-column + literal-anchor test — so a 16-col schedule from
+    another firm is still recognized. Confidence = best door-field coverage."""
+    best = 0.0
+    for t in page.extract_tables():
+        if not t or len(t[0]) < 6:
+            continue
+        best = max(best, resolve_columns(t, DOOR_SCHEMA).coverage)
+    return best if best >= 0.75 else 0.0
 
 
 def _confirm_finish_schedule(page: "pdfplumber.page.Page", _profile: PageProfile) -> float:

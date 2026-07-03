@@ -33,18 +33,16 @@ def _g(name: str, passed: bool, detail: str, metric=None) -> GateResult:
 # --- Phase 2 -------------------------------------------------------------
 
 def check_phase2(toc, door_count: int, room_count: int, abbrev_count: int) -> list[GateResult]:
+    # Structural invariants (project-agnostic): each phase produced content. The exact
+    # magnitudes are reported as `metric`, not asserted against UCCS counts (C11) — so
+    # these gates don't invert on a differently-sized project.
     divisions = [d["number"] for d in toc.divisions]
     return [
-        _g("toc_section_count", toc.total_sections >= 100,
-           f"{toc.total_sections} sections (expected >= 100)", toc.total_sections),
-        _g("all_divisions_present", len(divisions) == 24,
-           f"{len(divisions)} divisions (expected 24)", len(divisions)),
-        _g("door_schedule_size", door_count > 50,
-           f"{door_count} doors (expected > 50)", door_count),
-        _g("finish_schedule_size", room_count > 25,
-           f"{room_count} rooms (expected > 25)", room_count),
-        _g("abbreviation_list_size", abbrev_count > 100,
-           f"{abbrev_count} abbreviations (expected > 100)", abbrev_count),
+        _g("spec_toc_parsed", len(divisions) > 0,
+           f"{len(divisions)} divisions, {toc.total_sections} sections", toc.total_sections),
+        _g("door_schedule_parsed", door_count > 0, f"{door_count} doors", door_count),
+        _g("finish_schedule_parsed", room_count > 0, f"{room_count} rooms", room_count),
+        _g("abbreviations_parsed", abbrev_count > 0, f"{abbrev_count} abbreviations", abbrev_count),
     ]
 
 
@@ -55,9 +53,9 @@ def check_phase3(registry, reconciliation: list[dict]) -> list[GateResult]:
     all_found = all(r["in_registry"] for r in reconciliation)
     pages_ok = all(r["page_matches"] for r in reconciliation)
     return [
-        _g("sheet_count", len(registry) == 133,
-           f"{len(registry)} sheets (expected 133)", len(registry)),
-        _g("all_disciplines_present", len(disciplines) >= 9,
+        _g("sheets_registered", len(registry) > 0,
+           f"{len(registry)} sheets", len(registry)),
+        _g("disciplines_identified", len(disciplines) > 0,
            f"{len(disciplines)} disciplines represented", len(disciplines)),
         _g("sample_sheets_classified", all_found,
            f"{sum(r['in_registry'] for r in reconciliation)}/{len(reconciliation)} sample sheets in registry"),

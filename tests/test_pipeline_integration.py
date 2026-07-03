@@ -12,7 +12,9 @@ from __future__ import annotations
 
 import pathlib
 
+from src.models.document_map import STATUS_FOUND
 from src.pipeline.build_document_map import build_document_map
+from src.pipeline.phase2_schedule_parser import parse_door_schedule
 from src.pipeline.phase2_spec_parser import parse_spec_toc
 from src.pipeline.phase5_graph_builder import build_graph
 from src.validation.gates import run_all
@@ -57,7 +59,19 @@ def test_pinney_toc_parses_from_located_page():
     # locator concern: this phase's job (find the manual TOC) is done.
 
 
-def test_pinney_flags_absent_schedules_without_crashing():
+def test_pinney_door_schedule_extracts_end_to_end():
+    # Located → columns resolved by header → rows found via discovered grammar.
+    dm = build_document_map([PINNEY])
+    art = dm.locate("door_schedule")
+    assert art.status == STATUS_FOUND
+    doors = parse_door_schedule(PINNEY, page_index=art.pages[0].page_index)
+    assert len(doors) >= 50                                  # ~91 real doors (was 0 before)
+    assert not all(d.door_mark[:1] in ("N", "S") for d in doors)   # Pinney's own mark grammar
+    assert sum(1 for d in doors if d.door_material) >= 40          # header-resolved fields populated
+
+
+def test_pinney_flags_remaining_gaps_without_crashing():
     dm = build_document_map([PINNEY])
     assert dm.completeness["score"] < 1.0
-    assert set(dm.completeness["missing"]) == {"drawing_index", "door_schedule", "finish_schedule"}
+    # door_schedule now resolves; index + finish remain genuine gaps.
+    assert set(dm.completeness["missing"]) == {"drawing_index", "finish_schedule"}

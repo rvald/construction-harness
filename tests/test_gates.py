@@ -23,13 +23,19 @@ def test_report_structure():
 
 
 def test_phase2_gates_present_and_pass():
-    for name in ("toc_section_count", "all_divisions_present", "door_schedule_size",
-                 "finish_schedule_size", "abbreviation_list_size"):
+    # Structural gates (C11 split) — magnitudes live in `metric`, not the threshold.
+    for name in ("spec_toc_parsed", "door_schedule_parsed",
+                 "finish_schedule_parsed", "abbreviations_parsed"):
         assert _gate(name)["passed"]
 
 
+def test_phase2_magnitudes_reported_as_metrics():
+    assert _gate("door_schedule_parsed")["metric"] == 60      # reported, not asserted-on
+    assert _gate("finish_schedule_parsed")["metric"] == 65
+
+
 def test_phase3_sheet_and_page_verification():
-    assert _gate("sheet_count")["metric"] == 133
+    assert _gate("sheets_registered")["metric"] == 133        # UCCS count as a metric
     assert _gate("sample_page_numbers_verified")["passed"]
 
 
