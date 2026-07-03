@@ -39,6 +39,30 @@ def _completeness(artifacts: dict, regions: list) -> dict:
     }
 
 
+def extraction_pages(doc_map: DocumentMap) -> dict:
+    """Resolve located pages for the extraction parsers (0-indexed).
+
+    A single page per single-page artifact; for the TOC, both its start page and
+    the page after its last (the point past which spec sections begin, so a section
+    scan never false-matches a TOC listing). Absent artifacts resolve to None — the
+    caller skips them rather than reading a wrong page.
+    """
+    def first(name: str) -> int | None:
+        art = doc_map.locate(name)
+        return art.pages[0].page_index if (art and art.pages) else None
+
+    toc = doc_map.locate("spec_toc")
+    toc_pages = toc.pages if (toc and toc.pages) else []
+    return {
+        "toc_start": toc_pages[0].page_index if toc_pages else None,
+        "section_start_hint": (toc_pages[-1].page_index + 1) if toc_pages else 0,
+        "drawing_index": first("drawing_index"),
+        "door_schedule": first("door_schedule"),
+        "finish_schedule": first("finish_schedule"),
+        "abbreviations": first("abbreviations"),
+    }
+
+
 def build_document_map(paths: list[str | pathlib.Path]) -> DocumentMap:
     """Discover the structure of a bid package (separate files or one combined PDF)."""
     files: list[FileRef] = intake_package(paths)

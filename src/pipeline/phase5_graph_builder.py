@@ -18,7 +18,9 @@ from __future__ import annotations
 import pathlib
 import re
 
+from src.models.document_map import DocumentMap
 from src.models.graph import GraphEdge, GraphNode, KnowledgeGraph
+from src.pipeline.build_document_map import build_document_map, extraction_pages
 from src.pipeline.phase2_abbreviation_parser import parse_abbreviations, abbreviations_as_dict
 from src.pipeline.phase2_drawing_index import parse_drawing_index
 from src.pipeline.phase2_schedule_parser import (
@@ -55,15 +57,27 @@ def _room_of(mark: str) -> str:
 def build_graph(
     manual_path: str | pathlib.Path,
     drawings_path: str | pathlib.Path,
+    doc_map: DocumentMap | None = None,
 ) -> KnowledgeGraph:
     kg = KnowledgeGraph()
 
-    toc = parse_spec_toc(manual_path)
-    registry = parse_drawing_index(drawings_path)
-    doors = parse_door_schedule(drawings_path)
-    rooms = parse_finish_schedule(drawings_path)
-    abbrev = abbreviations_as_dict(parse_abbreviations(drawings_path))
-    door_conf = round(extraction_confidence(doors), 3)
+    # Discover where each artifact lives instead of hardcoding page indices.
+    # Absent artifacts (an artifact the locator couldn't confirm) resolve to None
+    # and their parser is skipped rather than reading a wrong page.
+    if doc_map is None:
+        doc_map = build_document_map([drawings_path, manual_path])
+    pg = extraction_pages(doc_map)
+
+    toc = parse_spec_toc(manual_path, start_page=pg["toc_start"] or 0)
+    registry = parse_drawing_index(drawings_path, page_index=pg["drawing_index"]) \
+        if pg["drawing_index"] is not None else []
+    doors = parse_door_schedule(drawings_path, page_index=pg["door_schedule"]) \
+        if pg["door_schedule"] is not None else []
+    rooms = parse_finish_schedule(drawings_path, page_index=pg["finish_schedule"]) \
+        if pg["finish_schedule"] is not None else []
+    abbrev = abbreviations_as_dict(parse_abbreviations(drawings_path, page_index=pg["abbreviations"])) \
+        if pg["abbreviations"] is not None else {}
+    door_conf = round(extraction_confidence(doors), 3) if doors else 0.0
 
     section_titles: dict[str, str] = {}
 
@@ -80,7 +94,7 @@ def build_graph(
     # enrich the trace sections with page provenance + collect cross-references
     section_refs: dict[str, set[str]] = {}
     for num in _TRACE_SECTIONS:
-        sec = parse_spec_section(manual_path, num, toc=toc, start_hint=340)
+        sec = parse_spec_section(manual_path, num, toc=toc, start_hint=pg["section_start_hint"])
         section_refs[num] = {r for r in _SECTION_REF_RE.findall(sec.raw_text) if r != num}
         if _sid(num) in kg.g:
             kg.g.nodes[_sid(num)]["source_page"] = sec.page_range[0]

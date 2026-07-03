@@ -52,12 +52,19 @@ def _is_toc_page(text: str) -> bool:
     return any(DIVISION_RE.match(line) for line in text.splitlines())
 
 
-def _toc_lines(pdf_path: str | pathlib.Path, scan_pages: int = 20) -> list[str]:
-    """Return the raw lines of the (contiguous) TOC pages, in order."""
+def _toc_lines(pdf_path: str | pathlib.Path, start_page: int = 0, scan_pages: int = 20) -> list[str]:
+    """Return the raw lines of the (contiguous) TOC pages, in order.
+
+    `start_page` (0-indexed) is where scanning begins — pass the located TOC page
+    from the document map so this works when the manual isn't at the front of the
+    package (e.g. a combined, drawings-first PDF). Default 0 preserves the old
+    front-of-document behavior.
+    """
     lines: list[str] = []
     started = False
     with pdfplumber.open(pdf_path) as pdf:
-        for i in range(min(scan_pages, len(pdf.pages))):
+        end = min(start_page + scan_pages, len(pdf.pages))
+        for i in range(start_page, end):
             text = pdf.pages[i].extract_text() or ""
             if _is_toc_page(text):
                 started = True
@@ -67,13 +74,13 @@ def _toc_lines(pdf_path: str | pathlib.Path, scan_pages: int = 20) -> list[str]:
     return lines
 
 
-def parse_spec_toc(pdf_path: str | pathlib.Path = _DEFAULT_PDF) -> SpecTOC:
+def parse_spec_toc(pdf_path: str | pathlib.Path = _DEFAULT_PDF, start_page: int = 0) -> SpecTOC:
     """Parse the project manual TOC into a structured SpecTOC."""
     divisions: list[dict] = []
     current: dict | None = None
     last_section: dict | None = None
 
-    for raw in _toc_lines(pdf_path):
+    for raw in _toc_lines(pdf_path, start_page):
         if _is_noise(raw):
             continue
 
