@@ -86,6 +86,25 @@ FINISH_SCHEMA = ScheduleSchema(
     row_key="room_number",
 )
 
+# A window schedule is keyed by a mark/type (one row = one window type), so it is a
+# CATALOG: it carries size + glazing areas per type, but the count of each type lives
+# on the elevations/plans (left as unknown_plan_count). Validated on Pinney (composite
+# window schedule: MARK, TYPE, SIZE, DAYLIGHT AREA (S.F.), VENTILATION AREA, NOTES).
+WINDOW_SCHEMA = ScheduleSchema(
+    name="window",
+    fields={
+        "mark": ["mark", "window mark", "window", "type mark"],
+        "window_type": ["type", "window type"],
+        "size": ["size", "size width x height", "dimensions"],
+        "daylight_area": ["daylight area", "glass area", "glazing area"],
+        "ventilation_area": ["ventilation area", "vent area", "operable area"],
+        "notes": ["notes", "remarks", "comments"],
+    },
+    core_fields=["mark", "window_type", "size"],
+    shape="catalog",
+    row_key="mark",
+)
+
 
 @dataclass
 class ColumnMap:
