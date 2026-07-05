@@ -8,10 +8,12 @@ from __future__ import annotations
 import pathlib
 
 from src.pipeline.bid_structure import (
-    extract_bid_structure, parse_alternates, parse_unit_prices,
+    build_bid_structure, extract_bid_structure, parse_alternates, parse_unit_prices,
 )
 
-MANUAL = pathlib.Path(__file__).resolve().parents[1] / "data" / "uccs" / "project_manual.pdf"
+DATA = pathlib.Path(__file__).resolve().parents[1] / "data" / "uccs"
+MANUAL = DATA / "project_manual.pdf"
+PINNEY = DATA / "pinney" / "pinney_library_drawings_and_project_manual.pdf"
 
 # The measured shape of UCCS 012300 PART 3 (SCHEDULE OF ALTERNATES).
 _SAMPLE = """PART 3 - EXECUTION
@@ -96,3 +98,18 @@ def test_allowances_absent_flagged():
     # UCCS has no 012100 Allowances section -> degrade + flag, never faked.
     _, located = extract_bid_structure(MANUAL)
     assert located["allowance"] == "absent"
+
+
+def test_build_artifact_summary():
+    report = build_bid_structure(MANUAL)
+    s = report["summary"]
+    assert s["located"]["alternate"] == "found" and s["located"]["allowance"] == "absent"
+    assert s["counts"]["alternate"] >= 3 and s["counts"]["unit_price"] >= 2
+    assert s["total_items"] == len(report["items"])
+
+
+def test_pinney_degrades_all_absent():
+    # Pinney has no formal Div-01 pricing sections -> everything absent, items empty.
+    items, located = extract_bid_structure(PINNEY)
+    assert items == []
+    assert set(located.values()) == {"absent"}

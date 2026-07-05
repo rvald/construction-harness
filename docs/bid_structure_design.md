@@ -72,8 +72,10 @@ class BidItem(JsonModel):
   end-to-end (4 alternates, add/deduct, provenance). Parser tested on the measured shape.
 - **M2 — unit prices + allowances.** `parse_unit_prices` (012200: item + unit of measure),
   `parse_allowances` (012100; absent on UCCS → flagged). Register in the driver.
-- **M3 — artifact + generalization.** Emit a `bid_structure` section (items + `located`
-  map) into the reports; Pinney "absent, flagged" test proves graceful degradation.
+- **M3 — artifact + generalization.** ✅ `locate_sections` (single page-pass for all
+  wanted sections) + `build_bid_structure` → `output/reports/bid_structure.json`
+  ({summary: located + counts, items}). Pinney degrades to all-absent (proven cross-firm).
+  UCCS: 4 alternates + 2 unit prices; allowances absent-flagged.
 
 ## 7. Honest labeling
 

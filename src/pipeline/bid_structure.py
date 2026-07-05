@@ -46,32 +46,45 @@ def _clean(s: str) -> str:
     return re.sub(r"\s+", " ", s).strip()
 
 
-def section_text(doc, section_number: str, max_pages: int = 6) -> tuple[str | None, int | None]:
-    """Return (joined text, 1-indexed start page) for a spec section BODY, or (None, None).
+def _head_of(text: str) -> str:
+    """First 8 NON-BLANK lines (headers sit past blank lines / title block)."""
+    return " ".join([l.strip() for l in text.splitlines() if l.strip()][:8]).upper()
 
-    Locates the section by its header near the top of a page (skipping the TOC listing),
-    then reads forward until the next section header or `max_pages`."""
-    def head_of(text: str) -> str:
-        # first 8 NON-BLANK lines (headers sit past blank lines / title block)
-        return " ".join([l.strip() for l in text.splitlines() if l.strip()][:8]).upper()
 
-    start = None
-    for i in range(doc.page_count):
-        head = head_of(doc[i].get_text())
-        if f"SECTION {section_number}" in head and "TABLE OF CONTENTS" not in head:
-            start = i
-            break
-    if start is None:
-        return None, None
+def _body(doc, start: int, section_number: str, max_pages: int = 6) -> str:
+    """Joined text of a section body from its start page to the next section header."""
     texts = []
     for i in range(start, min(start + max_pages, doc.page_count)):
         t = doc[i].get_text()
         if i > start:
-            m = _SECTION_HEADER.search(head_of(t))
+            m = _SECTION_HEADER.search(_head_of(t))
             if m and m.group(1) != section_number:      # next section began
                 break
         texts.append(t)
-    return "\n".join(texts), start + 1
+    return "\n".join(texts)
+
+
+def locate_sections(doc, wanted: set[str]) -> dict[str, int]:
+    """One page-pass: {section_number -> 0-indexed start page} for the wanted sections
+    (header near the top of a page, skipping the TOC listing). First occurrence wins."""
+    starts: dict[str, int] = {}
+    for i in range(doc.page_count):
+        head = _head_of(doc[i].get_text())
+        if "TABLE OF CONTENTS" in head:
+            continue
+        m = _SECTION_HEADER.search(head)
+        if m and m.group(1) in wanted and m.group(1) not in starts:
+            starts[m.group(1)] = i
+    return starts
+
+
+def section_text(doc, section_number: str, max_pages: int = 6) -> tuple[str | None, int | None]:
+    """Return (joined body text, 1-indexed start page) for one section, or (None, None)."""
+    starts = locate_sections(doc, {section_number})
+    if section_number not in starts:
+        return None, None
+    s = starts[section_number]
+    return _body(doc, s, section_number, max_pages), s + 1
 
 
 def parse_alternates(text: str, source: dict | None = None) -> list[BidItem]:
@@ -126,6 +139,23 @@ _REGISTRY = {
 }
 
 
+def summarize(items: list[BidItem], located: dict) -> dict:
+    """Reported metrics: which kinds were found/absent and how many items each."""
+    from collections import Counter
+
+    return {
+        "located": located,
+        "counts": dict(Counter(i.kind for i in items)),
+        "total_items": len(items),
+    }
+
+
+def build_bid_structure(manual_path) -> dict:
+    """Full artifact: {summary, items}. Absent sections are flagged, not faked."""
+    items, located = extract_bid_structure(manual_path)
+    return {"summary": summarize(items, located), "items": [i.to_dict() for i in items]}
+
+
 def extract_bid_structure(manual_path) -> tuple[list[BidItem], dict]:
     """Locate and parse the Division-01 pricing sections. Returns (items, located)
     where `located` maps each kind to 'found' | 'absent'."""
@@ -133,9 +163,24 @@ def extract_bid_structure(manual_path) -> tuple[list[BidItem], dict]:
     items: list[BidItem] = []
     located: dict[str, str] = {}
     with fitz.open(str(manual_path)) as doc:
+        starts = locate_sections(doc, set(_REGISTRY))       # one page-pass for all sections
         for number, (kind, parser) in _REGISTRY.items():
-            text, page = section_text(doc, number)
-            located[kind] = "found" if text else "absent"
-            if text:
-                items += parser(text, {"file_id": fid, "page": page, "section": number})
+            if number in starts:
+                s = starts[number]
+                located[kind] = "found"
+                items += parser(_body(doc, s, number), {"file_id": fid, "page": s + 1, "section": number})
+            else:
+                located[kind] = "absent"
     return items, located
+
+
+if __name__ == "__main__":
+    import json
+
+    manual = pathlib.Path(__file__).resolve().parents[2] / "data" / "uccs" / "project_manual.pdf"
+    out = pathlib.Path(__file__).resolve().parents[2] / "output" / "reports" / "bid_structure.json"
+    report = build_bid_structure(manual)
+    print(json.dumps(report["summary"], indent=2))
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(report, indent=2, ensure_ascii=False))
+    print(f"\nwrote {out}  ({report['summary']['total_items']} bid items)")
