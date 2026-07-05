@@ -1,0 +1,3787 @@
+{
+  "summary": {
+    "total_items": 135,
+    "by_schedule": {
+      "door": 60,
+      "finish": 65,
+      "plumbing_fixture": 10
+    },
+    "by_basis": {
+      "row_count": 125,
+      "unknown_plan_count": 10
+    },
+    "known_quantity_total": 125.0,
+    "count_pending_items": 10
+  },
+  "area_coverage": {
+    "finish_rooms": 65,
+    "rooms_with_area": 25,
+    "coverage": 0.385
+  },
+  "items": [
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N101A",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N101A",
+        "fire_rating_minutes": "",
+        "width": "6' - 0\"",
+        "height": "8' - 9 1/2\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-11",
+        "glass_film": "N/A",
+        "glass_type": "GL-3",
+        "special_notes": "EXTERIOR STOREFRONT SYSTEM - REFER TO ELEVATIONS"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N101B",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N101B",
+        "fire_rating_minutes": "",
+        "width": "6' - 0\"",
+        "height": "7' - 9 1/2\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-10",
+        "glass_film": "GL-1",
+        "glass_type": "GL-1",
+        "special_notes": "INTERIOR STOREFRONT SYSTEM - REFER TO ELEVATIONS"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N104",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N104",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 8\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-01",
+        "glass_film": "GLF-2",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N104A",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N104A",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-04",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N104B",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N104B",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-04",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N104C",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N104C",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-04",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N104D",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N104D",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-05",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N104E",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N104E",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-04",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N104F",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N104F",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-05",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N105A",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N105A",
+        "fire_rating_minutes": "45",
+        "width": "3' - 0\"",
+        "height": "7' - 8\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "DF",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-09",
+        "glass_film": "GLF-2",
+        "glass_type": "GL-6",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N105B",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N105B",
+        "fire_rating_minutes": "45",
+        "width": "3' - 0\"",
+        "height": "7' - 8\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "DF",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-09",
+        "glass_film": "GLF-2",
+        "glass_type": "GL-6",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N106A",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N106A",
+        "fire_rating_minutes": "45",
+        "width": "3' - 0\"",
+        "height": "7' - 8\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "DF",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-09",
+        "glass_film": "GLF-2",
+        "glass_type": "GL-6",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N106B",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N106B",
+        "fire_rating_minutes": "45",
+        "width": "3' - 0\"",
+        "height": "7' - 8\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "DF",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-09",
+        "glass_film": "GLF-2",
+        "glass_type": "GL-6",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N107B",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N107B",
+        "fire_rating_minutes": "",
+        "width": "6' - 0\"",
+        "height": "7' - 0\"",
+        "door_elevation_type": "F",
+        "door_material": "WD",
+        "door_finish": "WV-1",
+        "frame_elevation_type": "A",
+        "frame_material": "HM",
+        "frame_finish": "P-1C",
+        "hardware_set": "205",
+        "glass_film": "N/A",
+        "glass_type": "N/A",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N108",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N108",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 0\"",
+        "door_elevation_type": "F",
+        "door_material": "WD",
+        "door_finish": "WV-1",
+        "frame_elevation_type": "A",
+        "frame_material": "HM",
+        "frame_finish": "P-1C",
+        "hardware_set": "203",
+        "glass_film": "N/A",
+        "glass_type": "N/A",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N109",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N109",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 0\"",
+        "door_elevation_type": "F",
+        "door_material": "WD",
+        "door_finish": "WV-1",
+        "frame_elevation_type": "A",
+        "frame_material": "HM",
+        "frame_finish": "P-1C",
+        "hardware_set": "202",
+        "glass_film": "N/A",
+        "glass_type": "N/A",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N110",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N110",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 8\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-06",
+        "glass_film": "GLF-2",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N111",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N111",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 8\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-06",
+        "glass_film": "GLF-2",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N112A",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N112A",
+        "fire_rating_minutes": "45",
+        "width": "3' - 0\"",
+        "height": "7' - 8\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "DF",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-09",
+        "glass_film": "GLF-2",
+        "glass_type": "GL-6",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N112B",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N112B",
+        "fire_rating_minutes": "45",
+        "width": "3' - 0\"",
+        "height": "7' - 8\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "DF",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-09",
+        "glass_film": "GLF-2",
+        "glass_type": "GL-6",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N114",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N114",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-07",
+        "glass_film": "GLF-2",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N115",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N115",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-07",
+        "glass_film": "GLF-2",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N116",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N116",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-07",
+        "glass_film": "GLF-2",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N117",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N117",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-07",
+        "glass_film": "GLF-2",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N118",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N118",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-07",
+        "glass_film": "GLF-2",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N119",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N119",
+        "fire_rating_minutes": "",
+        "width": "6' - 0\"",
+        "height": "7' - 0\"",
+        "door_elevation_type": "F",
+        "door_material": "WD",
+        "door_finish": "WV-1",
+        "frame_elevation_type": "A",
+        "frame_material": "HM",
+        "frame_finish": "P-1C",
+        "hardware_set": "205",
+        "glass_film": "N/A",
+        "glass_type": "N/A",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N119B",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N119B",
+        "fire_rating_minutes": "",
+        "width": "6' - 0\"",
+        "height": "7' - 0\"",
+        "door_elevation_type": "F",
+        "door_material": "WD",
+        "door_finish": "WV-1",
+        "frame_elevation_type": "A",
+        "frame_material": "HM",
+        "frame_finish": "P-1C",
+        "hardware_set": "204",
+        "glass_film": "N/A",
+        "glass_type": "N/A",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N120",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N120",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 0\"",
+        "door_elevation_type": "F",
+        "door_material": "WD",
+        "door_finish": "WV-1",
+        "frame_elevation_type": "A",
+        "frame_material": "HM",
+        "frame_finish": "P-1C",
+        "hardware_set": "203",
+        "glass_film": "N/A",
+        "glass_type": "N/A",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N120A",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N120A",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-04",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N120C",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N120C",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-02",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N120CA",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N120CA",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-04",
+        "glass_film": "GL-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N120D",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N120D",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-04",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N120E",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N120E",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-04",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N120F",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N120F",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-04",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N120G",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N120G",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-04",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N120H",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N120H",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-04",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N120J",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N120J",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-04",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N120K",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N120K",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-04",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N121",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N121",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-04",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N123",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N123",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 0\"",
+        "door_elevation_type": "F",
+        "door_material": "WD",
+        "door_finish": "WV-1",
+        "frame_elevation_type": "A",
+        "frame_material": "HM",
+        "frame_finish": "P-1C",
+        "hardware_set": "201",
+        "glass_film": "N/A",
+        "glass_type": "N/A",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N124",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N124",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 0\"",
+        "door_elevation_type": "F",
+        "door_material": "WD",
+        "door_finish": "WV-1",
+        "frame_elevation_type": "A",
+        "frame_material": "HM",
+        "frame_finish": "P-1C",
+        "hardware_set": "207",
+        "glass_film": "N/A",
+        "glass_type": "N/A",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N138",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N138",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 0\"",
+        "door_elevation_type": "N",
+        "door_material": "WD",
+        "door_finish": "WV-1",
+        "frame_elevation_type": "A",
+        "frame_material": "HM",
+        "frame_finish": "P-1C",
+        "hardware_set": "200",
+        "glass_film": "N/A",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N140",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N140",
+        "fire_rating_minutes": "45",
+        "width": "3' - 0\"",
+        "height": "7' - 0\"",
+        "door_elevation_type": "F",
+        "door_material": "WD",
+        "door_finish": "WV-1",
+        "frame_elevation_type": "AF",
+        "frame_material": "HM",
+        "frame_finish": "P-1C",
+        "hardware_set": "203",
+        "glass_film": "N/A",
+        "glass_type": "N/A",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "NE180B",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "NE180B",
+        "fire_rating_minutes": "",
+        "width": "6' - 0\"",
+        "height": "7' - 0\"",
+        "door_elevation_type": "(E)",
+        "door_material": "(E)",
+        "door_finish": "(E)",
+        "frame_elevation_type": "(E)",
+        "frame_material": "(E)",
+        "frame_finish": "(E)",
+        "hardware_set": "EX-01",
+        "glass_film": "(E)",
+        "glass_type": "(E)",
+        "special_notes": "EXISTING DOOR. PROVIDE CARD READER."
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "S101",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "S101",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-12",
+        "glass_film": "GLF-2",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "S101A",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "S101A",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-03",
+        "glass_film": "GLF-2",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "S102A",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "S102A",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 0\"",
+        "door_elevation_type": "F",
+        "door_material": "PAINTED MASONITE",
+        "door_finish": "P-1C",
+        "frame_elevation_type": "A",
+        "frame_material": "HM",
+        "frame_finish": "P-1C",
+        "hardware_set": "206",
+        "glass_film": "N/A",
+        "glass_type": "N/A",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "S102B",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "S102B",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 0\"",
+        "door_elevation_type": "F",
+        "door_material": "PAINTED MASONITE",
+        "door_finish": "P-1C",
+        "frame_elevation_type": "A",
+        "frame_material": "HM",
+        "frame_finish": "P-1C",
+        "hardware_set": "200",
+        "glass_film": "N/A",
+        "glass_type": "N/A",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "S102C",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "S102C",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 0\"",
+        "door_elevation_type": "F",
+        "door_material": "PAINTED MASONITE",
+        "door_finish": "P-1C",
+        "frame_elevation_type": "A",
+        "frame_material": "HM",
+        "frame_finish": "P-1C",
+        "hardware_set": "206",
+        "glass_film": "N/A",
+        "glass_type": "N/A",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "S103",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "S103",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 0\"",
+        "door_elevation_type": "F",
+        "door_material": "PAINTED MASONITE",
+        "door_finish": "P-1C",
+        "frame_elevation_type": "A",
+        "frame_material": "HM",
+        "frame_finish": "P-1C",
+        "hardware_set": "206",
+        "glass_film": "N/A",
+        "glass_type": "N/A",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "S105",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "S105",
+        "fire_rating_minutes": "45",
+        "width": "3' - 0\"",
+        "height": "7' - 0\"",
+        "door_elevation_type": "F",
+        "door_material": "PAINTED MASONITE",
+        "door_finish": "P-1C",
+        "frame_elevation_type": "AF",
+        "frame_material": "HM",
+        "frame_finish": "P-1C",
+        "hardware_set": "203",
+        "glass_film": "N/A",
+        "glass_type": "N/A",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "S107A",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "S107A",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-08",
+        "glass_film": "GLF-2",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "S107B",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "S107B",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-08",
+        "glass_film": "GLF-2",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "S108",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "S108",
+        "fire_rating_minutes": "",
+        "width": "5' - 11\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "A",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-13",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "S108A",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "S108A",
+        "fire_rating_minutes": "",
+        "width": "6' - 0\"",
+        "height": "7' - 0\"",
+        "door_elevation_type": "F",
+        "door_material": "PAINTED MASONITE",
+        "door_finish": "P-1C",
+        "frame_elevation_type": "A",
+        "frame_material": "MTL",
+        "frame_finish": "P-1C",
+        "hardware_set": "208",
+        "glass_film": "N/A",
+        "glass_type": "N/A",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "S108B",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "S108B",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-04",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "S108C",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "S108C",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-04",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "S108D",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "S108D",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-04",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "S108E",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "S108E",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-04",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "S109",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "S109",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 0\"",
+        "door_elevation_type": "F",
+        "door_material": "PAINTED MASONITE",
+        "door_finish": "P-1C",
+        "frame_elevation_type": "A",
+        "frame_material": "HM",
+        "frame_finish": "P-1C",
+        "hardware_set": "209",
+        "glass_film": "N/A",
+        "glass_type": "N/A",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N101",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N101",
+        "room_name": "VESTIBULE",
+        "floor_finish": "CPT-7",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1/4/ MWP-1/2",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N102",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N102",
+        "room_name": "STUDENT LIVING ROOM",
+        "floor_finish": "CPT-3",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1/4",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N103",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N103",
+        "room_name": "CAFE",
+        "floor_finish": "CONC-2",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N104",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N104",
+        "room_name": "CIRCULATION",
+        "floor_finish": "CPT-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1/2",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N104A",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N104A",
+        "room_name": "OFFICE",
+        "floor_finish": "CPT-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N104B",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N104B",
+        "room_name": "OFFICE",
+        "floor_finish": "CPT-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N104C",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N104C",
+        "room_name": "OFFICE",
+        "floor_finish": "CPT-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N104D",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N104D",
+        "room_name": "OFFICE",
+        "floor_finish": "CPT-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N104E",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N104E",
+        "room_name": "OFFICE",
+        "floor_finish": "CPT-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N104F",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N104F",
+        "room_name": "OFFICE",
+        "floor_finish": "CPT-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N105",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N105",
+        "room_name": "EXECUTIVE CONFERENCE",
+        "floor_finish": "CPT-2/3",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1/4",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N106",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N106",
+        "room_name": "CLASSROOM (40)",
+        "floor_finish": "CPT-2/3",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1/4",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N107A",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N107A",
+        "room_name": "COLLAB.",
+        "floor_finish": "CONC-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N107B",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N107B",
+        "room_name": "COLLAB.",
+        "floor_finish": "CONC-1/CPT-3",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1/2/4",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N107C",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N107C",
+        "room_name": "COLLAB.",
+        "floor_finish": "CONC-1/CPT-3",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1/2/4",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N107D",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N107D",
+        "room_name": "COLLAB.",
+        "floor_finish": "CONC-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N107E",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N107E",
+        "room_name": "COLLAB.",
+        "floor_finish": "CONC-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N108",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N108",
+        "room_name": "JAN",
+        "floor_finish": "CONC-1",
+        "base_finish": "WB-2",
+        "wall_finish": "FRP-1/P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N109",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N109",
+        "room_name": "TOILET",
+        "floor_finish": "FTL-1",
+        "base_finish": "TWB-1",
+        "wall_finish": "TL-2/3",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N110",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N110",
+        "room_name": "GRAD LAB LARGE",
+        "floor_finish": "CPT-2/3",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N111",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N111",
+        "room_name": "CYBER RANGE LAB",
+        "floor_finish": "CPT-2/3",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N112",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N112",
+        "room_name": "COMPUTER LAB",
+        "floor_finish": "CPT-2/3",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1/4",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N113A",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N113A",
+        "room_name": "COLLAB.",
+        "floor_finish": "CONC-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N113B",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N113B",
+        "room_name": "GRAD COLLABORATION",
+        "floor_finish": "CPT-3",
+        "base_finish": "WB-2",
+        "wall_finish": "P-2",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N113C",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N113C",
+        "room_name": "GRAD COLLABORATION",
+        "floor_finish": "CPT-3",
+        "base_finish": "WB-2",
+        "wall_finish": "P-2",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N114",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N114",
+        "room_name": "GRAD LAB LARGE",
+        "floor_finish": "CPT-2/3",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N115",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N115",
+        "room_name": "GRAD LAB MEDIUM",
+        "floor_finish": "CPT-2/3",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N116",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N116",
+        "room_name": "GRAD LAB MEDIUM",
+        "floor_finish": "CPT-2/3",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N117",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N117",
+        "room_name": "GRAD LAB MEDIUM",
+        "floor_finish": "CPT-2/3",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N118",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N118",
+        "room_name": "GRAD LAB MEDIUM",
+        "floor_finish": "CPT-2/3",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N119",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N119",
+        "room_name": "CIRCULATION",
+        "floor_finish": "CONC-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N120",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N120",
+        "room_name": "CIRCULATION",
+        "floor_finish": "CPT-1/2",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1/2",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N120A",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N120A",
+        "room_name": "PROGRAM ASST.",
+        "floor_finish": "CPT-1/2",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N120B",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N120B",
+        "room_name": "COPY OFFICE SUPPLIES",
+        "floor_finish": "CPT-1/2",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N120C",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N120C",
+        "room_name": "SMALL CONFERENCE",
+        "floor_finish": "CPT-1/2",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N120D",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N120D",
+        "room_name": "OFFICE",
+        "floor_finish": "CPT-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N120E",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N120E",
+        "room_name": "OFFICE",
+        "floor_finish": "CPT-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N120F",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N120F",
+        "room_name": "OFFICE",
+        "floor_finish": "CPT-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N120G",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N120G",
+        "room_name": "OFFICE",
+        "floor_finish": "CPT-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N120H",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N120H",
+        "room_name": "OFFICE",
+        "floor_finish": "CPT-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N120J",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N120J",
+        "room_name": "OFFICE",
+        "floor_finish": "CPT-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N120K",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N120K",
+        "room_name": "OFFICE",
+        "floor_finish": "CPT-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N121",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N121",
+        "room_name": "FLEX OFFICE",
+        "floor_finish": "CPT-1/2",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N123",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N123",
+        "room_name": "ONLINE STUDIO",
+        "floor_finish": "CPT-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N124",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N124",
+        "room_name": "DATA ROOM",
+        "floor_finish": "CONC-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N138",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N138",
+        "room_name": "BREAK ROOM",
+        "floor_finish": "CONC-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1/T-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N139",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N139",
+        "room_name": "VENDING",
+        "floor_finish": "CONC-2",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1/4",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N140",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N140",
+        "room_name": "ELEC.",
+        "floor_finish": "CONC-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N141",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N141",
+        "room_name": "EXISTING WOMEN'S RESTROOM",
+        "floor_finish": "FLT-1",
+        "base_finish": "TWB-1",
+        "wall_finish": "P-1 / T-2/3",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N142",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N142",
+        "room_name": "EXISTING MEN'S RESTROOM",
+        "floor_finish": "FTL-1",
+        "base_finish": "TWB-1",
+        "wall_finish": "P-1/T-2/3",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "S100",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S100",
+        "room_name": "EAST CORRIDOR",
+        "floor_finish": "CONC-1",
+        "base_finish": "WB-1",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "S101",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S101",
+        "room_name": "SPACE ISAC RECEPTION",
+        "floor_finish": "CPT-4/6",
+        "base_finish": "WB-1",
+        "wall_finish": "P-1/3",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "S101A",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S101A",
+        "room_name": "SMALL CONFERENCE",
+        "floor_finish": "CPT-6",
+        "base_finish": "WB-1",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "S101B",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S101B",
+        "room_name": "CIRCULATION",
+        "floor_finish": "CONC-1",
+        "base_finish": "WB-1",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "S102",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S102",
+        "room_name": "CYBER VULNERABILITY LAB",
+        "floor_finish": "ESD-1",
+        "base_finish": "WB-1",
+        "wall_finish": "P-1C",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "S102A",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S102A",
+        "room_name": "CVL VESTIBULE",
+        "floor_finish": "ESD-1",
+        "base_finish": "WB-1",
+        "wall_finish": "P-1C",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "S103",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S103",
+        "room_name": "DATA/SERVER",
+        "floor_finish": "CONC-1",
+        "base_finish": "WB-1",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "S105",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S105",
+        "room_name": "ELEC.",
+        "floor_finish": "CONC-1",
+        "base_finish": "WB-1",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "S107",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S107",
+        "room_name": "WATCH CENTER",
+        "floor_finish": "CPT-5",
+        "base_finish": "WB-1",
+        "wall_finish": "P-3/5",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "S108",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S108",
+        "room_name": "CIRCULATION",
+        "floor_finish": "CPT-4",
+        "base_finish": "WB-1",
+        "wall_finish": "P-1/3",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "S108B",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S108B",
+        "room_name": "OFFICE",
+        "floor_finish": "CPT-6",
+        "base_finish": "WB-1",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "S108C",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S108C",
+        "room_name": "OFFICE",
+        "floor_finish": "CPT-6",
+        "base_finish": "WB-1",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "S108D",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S108D",
+        "room_name": "OFFICE",
+        "floor_finish": "CPT-6",
+        "base_finish": "WB-1",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "S108E",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S108E",
+        "room_name": "OFFICE",
+        "floor_finish": "CPT-6",
+        "base_finish": "WB-1",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "S109",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S109",
+        "room_name": "CIRCULATION",
+        "floor_finish": "CONC-1",
+        "base_finish": "WB-1",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "plumbing_fixture",
+      "shape": "catalog",
+      "mark": "WC-1",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "WATER CLOSET - WALL MOUNTED - ADA",
+      "attributes": {
+        "fixture_tag": "WC-1",
+        "description": "WATER CLOSET - WALL MOUNTED - ADA",
+        "fixture_type": "MANUAL",
+        "manufacturer": "AMERICAN STANDARD",
+        "model": "3351.101",
+        "remarks": "FIXTURE SHALL BE WATERSENSE LABELED. PROVIDE MANUFACTURER AND MODEL NUMBER AS LISTED OR APPROVED EQUAL."
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 58,
+        "schedule": "plumbing_fixture"
+      }
+    },
+    {
+      "schedule": "plumbing_fixture",
+      "shape": "catalog",
+      "mark": "WC-2",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "WATER CLOSET - WALL MOUNTED - ADA",
+      "attributes": {
+        "fixture_tag": "WC-2",
+        "description": "WATER CLOSET - WALL MOUNTED - ADA",
+        "fixture_type": "MANUAL",
+        "manufacturer": "AMERICAN STANDARD",
+        "model": "3351.101",
+        "remarks": "VITREOUS CHINA. PROVIDE MANUFACTURER AND MODEL NUMBER AS LISTED OR APPROVED EQUAL."
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 58,
+        "schedule": "plumbing_fixture"
+      }
+    },
+    {
+      "schedule": "plumbing_fixture",
+      "shape": "catalog",
+      "mark": "U-1",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "URINAL - WALL MOUNTED",
+      "attributes": {
+        "fixture_tag": "U-1",
+        "description": "URINAL - WALL MOUNTED",
+        "fixture_type": "MANUAL",
+        "manufacturer": "ZURN",
+        "model": "Z5755-U",
+        "remarks": "VITREOUS CHINA, WALL-MOUNT. PROVIDE MANUFACTURER AND MODEL NUMBER AS LISTED OR APPROVED EQUAL."
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 58,
+        "schedule": "plumbing_fixture"
+      }
+    },
+    {
+      "schedule": "plumbing_fixture",
+      "shape": "catalog",
+      "mark": "KS-1",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "KITCHEN SINK - UNDERMOUNT",
+      "attributes": {
+        "fixture_tag": "KS-1",
+        "description": "KITCHEN SINK - UNDERMOUNT",
+        "fixture_type": "MANUAL",
+        "manufacturer": "ELKAY",
+        "model": "ELUHAD211550",
+        "remarks": "WITHOUT PERFECT DRAIN. PROVIDE MANUFACTURER AND MODEL NUMBER AS LISTED OR APPROVED EQUAL."
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 58,
+        "schedule": "plumbing_fixture"
+      }
+    },
+    {
+      "schedule": "plumbing_fixture",
+      "shape": "catalog",
+      "mark": "L-1",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "LAVATORY - UNDERMOUNT",
+      "attributes": {
+        "fixture_tag": "L-1",
+        "description": "LAVATORY - UNDERMOUNT",
+        "fixture_type": "HARD-WIRED",
+        "manufacturer": "AMERICAN STANDARD",
+        "model": "0496.300",
+        "remarks": "PROVIDE ASSE 1070 DEVICE. PROVIDE MANUFACTURER AND MODEL NUMBER AS LISTED OR APPROVED EQUAL."
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 58,
+        "schedule": "plumbing_fixture"
+      }
+    },
+    {
+      "schedule": "plumbing_fixture",
+      "shape": "catalog",
+      "mark": "L-2",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "LAVATORY - UNDERMOUNT",
+      "attributes": {
+        "fixture_tag": "L-2",
+        "description": "LAVATORY - UNDERMOUNT",
+        "fixture_type": "HARD-WIRED",
+        "manufacturer": "AMERICAN STANDARD",
+        "model": "0496.300",
+        "remarks": "REFER TO ARCH SHEET G.2.4.0 MEN AND WOMEN RESTROOM ALTERNATES. PROVIDE ASSE 1070 DEVICE. PROVIDE MANUFACTURER AND MODEL NUMBER AS LISTED OR APPROVED EQUAL."
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 58,
+        "schedule": "plumbing_fixture"
+      }
+    },
+    {
+      "schedule": "plumbing_fixture",
+      "shape": "catalog",
+      "mark": "MS-1",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "MOP SINK - FLOOR MOUNTED (RELOCATED)",
+      "attributes": {
+        "fixture_tag": "MS-1",
+        "description": "MOP SINK - FLOOR MOUNTED (RELOCATED)",
+        "fixture_type": "MANUAL",
+        "manufacturer": "REFER TO ARCH PLANS",
+        "model": "N/A",
+        "remarks": "PROVIDE MANUFACTURER AND MODEL NUMBER AS LISTED OR APPROVED EQUAL."
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 58,
+        "schedule": "plumbing_fixture"
+      }
+    },
+    {
+      "schedule": "plumbing_fixture",
+      "shape": "catalog",
+      "mark": "GD-1",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "GARBAGE DISPOSAL",
+      "attributes": {
+        "fixture_tag": "GD-1",
+        "description": "GARBAGE DISPOSAL",
+        "manufacturer": "INSINKERATOR",
+        "model": "BADGER 5",
+        "remarks": "PROVIDE MANUFACTURER AND MODEL NUMBER AS LISTED OR APPROVED EQUAL."
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 58,
+        "schedule": "plumbing_fixture"
+      }
+    },
+    {
+      "schedule": "plumbing_fixture",
+      "shape": "catalog",
+      "mark": "DF-1",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "DRINKING FOUNTAIN WITH BOTTLE FILLER",
+      "attributes": {
+        "fixture_tag": "DF-1",
+        "description": "DRINKING FOUNTAIN WITH BOTTLE FILLER",
+        "manufacturer": "ELKAY",
+        "model": "EZSTLG8WSLK",
+        "remarks": "PROVIDE MANUFACTURER AND MODEL NUMBER AS LISTED OR APPROVED EQUAL."
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 58,
+        "schedule": "plumbing_fixture"
+      }
+    },
+    {
+      "schedule": "plumbing_fixture",
+      "shape": "catalog",
+      "mark": "DF-2",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "DRINKING FOUNTAIN",
+      "attributes": {
+        "fixture_tag": "DF-2",
+        "description": "DRINKING FOUNTAIN",
+        "manufacturer": "ELKAY",
+        "model": "EZSTLG8LC",
+        "remarks": "PROVIDE MANUFACTURER AND MODEL NUMBER AS LISTED OR APPROVED EQUAL."
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 58,
+        "schedule": "plumbing_fixture"
+      }
+    }
+  ],
+  "room_areas": [
+    {
+      "room_number": "N107C",
+      "area_sf": 219.0,
+      "confidence": 0.983,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N107B",
+      "area_sf": 212.0,
+      "confidence": 0.864,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N105",
+      "area_sf": 816.0,
+      "confidence": 0.741,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N139",
+      "area_sf": 160.0,
+      "confidence": 0.711,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N111",
+      "area_sf": 526.0,
+      "confidence": 0.614,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N138",
+      "area_sf": 1024.0,
+      "confidence": 0.561,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N104D",
+      "area_sf": 43.0,
+      "confidence": 0.555,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "S105",
+      "area_sf": 119.0,
+      "confidence": 0.547,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N113A",
+      "area_sf": 129.0,
+      "confidence": 0.531,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "S103",
+      "area_sf": 308.0,
+      "confidence": 0.472,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "S102",
+      "area_sf": 781.0,
+      "confidence": 0.464,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "S101A",
+      "area_sf": 218.0,
+      "confidence": 0.334,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N120H",
+      "area_sf": 2169.0,
+      "confidence": 0.325,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "S108D",
+      "area_sf": 1986.0,
+      "confidence": 0.322,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N106",
+      "area_sf": 1055.0,
+      "confidence": 0.298,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N124",
+      "area_sf": 141.0,
+      "confidence": 0.297,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N113B",
+      "area_sf": 118.0,
+      "confidence": 0.295,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N104C",
+      "area_sf": 484.0,
+      "confidence": 0.288,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N104F",
+      "area_sf": 937.0,
+      "confidence": 0.281,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N119",
+      "area_sf": 107.0,
+      "confidence": 0.275,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N108",
+      "area_sf": 71.0,
+      "confidence": 0.26,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N120C",
+      "area_sf": 248.0,
+      "confidence": 0.233,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N113C",
+      "area_sf": 118.0,
+      "confidence": 0.222,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N102",
+      "area_sf": 364.0,
+      "confidence": 0.189,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "S107",
+      "area_sf": 1806.0,
+      "confidence": 0.048,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    }
+  ]
+}

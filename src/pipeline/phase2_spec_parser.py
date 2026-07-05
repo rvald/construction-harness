@@ -25,7 +25,17 @@ from src.models.spec import SpecClause, SpecPart, SpecSection, SpecTOC
 _DASH = r"[-\u2012\u2013\u2014\u2015\u2212]"
 
 DIVISION_RE = re.compile(rf"^\s*DIVISION\s+(\d{{2}})\s*{_DASH}\s*(.+?)\s*$")
-SECTION_RE = re.compile(rf"^\s*SECTION\s+(\d{{6}}(?:\.\d{{2}})?)\s*{_DASH}\s*(.+?)\s*$")
+# Section lines vary by firm: UCCS is "SECTION 081113 - TITLE"; others drop the
+# SECTION keyword and the dash and space the MasterFormat number ("03 30 00 TITLE").
+# So the keyword and dash are optional, and the 6-digit number may be spaced; the
+# captured number is normalized (spaces stripped) before use.
+SECTION_RE = re.compile(
+    rf"^\s*(?:SECTION\s+)?(\d{{2}}\s?\d{{2}}\s?\d{{2}}(?:\.\d{{2}})?)\s*{_DASH}?\s*(.+?)\s*$"
+)
+
+
+def _section_number(raw: str) -> str:
+    return raw.replace(" ", "")
 _DATE_RE = re.compile(r"^\d{1,2}\s+[A-Za-z]+\s+\d{4}$")
 _FOOTER_RE = re.compile(r"^TABLE OF CONTENTS\s+TOC-\d+$")
 
@@ -99,7 +109,7 @@ def parse_spec_toc(pdf_path: str | pathlib.Path = _DEFAULT_PDF, start_page: int 
 
         m = SECTION_RE.match(raw)
         if m and current is not None:
-            last_section = {"number": m.group(1), "title": m.group(2).strip()}
+            last_section = {"number": _section_number(m.group(1)), "title": m.group(2).strip()}
             current["sections"].append(last_section)
             continue
 

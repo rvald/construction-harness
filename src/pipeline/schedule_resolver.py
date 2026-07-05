@@ -28,6 +28,18 @@ class ScheduleSchema:
     core_fields: list[str]                       # must resolve for a confident match
     group_tokens: set[str] = field(default_factory=set)
     ambiguous_labels: set[str] = field(default_factory=set)
+    # --- quantity metadata (Tier 1 generic parser; defaults keep existing schemas inert) ---
+    shape: str = "instance"                      # "instance" (row = one thing) | "catalog" (row = one type)
+    row_key: str = ""                            # canonical field that keys a data row; "" -> first core field
+    merge_rows: bool = False                     # row may pack N identical instances (door schedule)
+    qty_field: str | None = None                 # canonical field holding an explicit quantity, if any
+    qty_unit: str = "EA"                         # unit for row_count / qty_field quantities
+    title_signature: tuple[str, ...] = ()        # lowercase substrings a page's text must all contain
+                                                 # to be a parse candidate (page discovery, no constants)
+
+    @property
+    def key_field(self) -> str:
+        return self.row_key or (self.core_fields[0] if self.core_fields else "")
 
 
 # Canonical fields match the DoorEntry / FinishEntry model field names, so the
@@ -55,6 +67,10 @@ DOOR_SCHEMA = ScheduleSchema(
     core_fields=["door_mark", "width", "height", "door_material"],
     group_tokens={"door", "frame", "size"},
     ambiguous_labels={"material", "finish", "elevation"},
+    shape="instance",
+    row_key="door_mark",
+    merge_rows=True,                             # door rows can pack N identical doors
+    title_signature=("door", "schedule"),
 )
 
 FINISH_SCHEMA = ScheduleSchema(
@@ -69,6 +85,52 @@ FINISH_SCHEMA = ScheduleSchema(
         "comments": ["special notes and comments", "special notes", "notes", "comments", "remarks"],
     },
     core_fields=["room_number", "floor_finish", "base_finish", "wall_finish", "ceiling_finish"],
+    shape="instance",
+    row_key="room_number",
+    title_signature=("finish", "schedule"),
+)
+
+# A window schedule is keyed by a mark/type (one row = one window type), so it is a
+# CATALOG: it carries size + glazing areas per type, but the count of each type lives
+# on the elevations/plans (left as unknown_plan_count). Validated on Pinney (composite
+# window schedule: MARK, TYPE, SIZE, DAYLIGHT AREA (S.F.), VENTILATION AREA, NOTES).
+WINDOW_SCHEMA = ScheduleSchema(
+    name="window",
+    fields={
+        "mark": ["mark", "window mark", "window", "type mark"],
+        "window_type": ["type", "window type"],
+        "size": ["size", "size width x height", "dimensions"],
+        "daylight_area": ["daylight area", "glass area", "glazing area"],
+        "ventilation_area": ["ventilation area", "vent area", "operable area"],
+        "notes": ["notes", "remarks", "comments"],
+    },
+    core_fields=["mark", "window_type", "size"],
+    shape="catalog",
+    row_key="mark",
+    title_signature=("window", "schedule"),
+)
+
+# A plumbing fixture schedule is a catalog: one row per fixture TAG (WC-1, L-1, ...)
+# giving description + spec (manufacturer/model), but no instance count — that lives
+# on the plumbing plans. `qty_field` is declared so that a schedule variant which DOES
+# carry a real QUANTITY column yields basis "qty_column"; UCCS's does not, so its
+# fixtures resolve as unknown_plan_count. Validated on UCCS (p59).
+PLUMBING_FIXTURE_SCHEMA = ScheduleSchema(
+    name="plumbing_fixture",
+    fields={
+        "fixture_tag": ["fixture tag", "tag", "mark", "fixture"],
+        "description": ["description", "fixture description"],
+        "fixture_type": ["type"],
+        "manufacturer": ["manufacturer", "mfr", "manufacture"],
+        "model": ["model", "model no", "model number"],
+        "quantity": ["quantity", "qty", "count"],
+        "remarks": ["plumbing remarks", "remarks", "notes", "comments"],
+    },
+    core_fields=["fixture_tag", "description"],
+    shape="catalog",
+    row_key="fixture_tag",
+    qty_field="quantity",
+    title_signature=("plumbing", "fixture"),
 )
 
 

@@ -5,7 +5,7 @@ PartitionType land with the schedule parsers in Milestones 7-8.
 """
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from .base import JsonModel
 
@@ -16,6 +16,45 @@ class AbbreviationEntry(JsonModel):
 
     abbreviation: str           # e.g. "HM"
     definition: str             # e.g. "HOLLOW METAL"
+
+
+@dataclass
+class ScheduleItem(JsonModel):
+    """A uniform, quantity-bearing row from any schedule (Tier 1 quantity harness).
+
+    One record per data row, whatever the schedule. `quantity_basis` makes the
+    provenance of `quantity` explicit so downstream never mistakes a spec catalog
+    row for a real count:
+      * "row_count"          — an instance row; quantity == 1, aggregate = row count
+      * "qty_column"         — quantity read from an explicit QUANTITY column
+      * "unknown_plan_count" — a type/catalog row whose count lives on the drawings
+                               (deferred to plan-counting); quantity is None
+    """
+
+    schedule: str                               # canonical schedule name, e.g. "door"
+    shape: str                                  # "instance" | "catalog"
+    mark: str                                   # row key: door_mark / room / fixture tag
+    quantity: float | None                      # count or measured qty; None if unknown
+    unit: str | None                            # "EA" | "SF" | ...; None when quantity is None
+    quantity_basis: str                         # see class docstring
+    description: str = ""                        # schedule description, if any
+    attributes: dict = field(default_factory=dict)   # all resolved canonical field -> value
+    source: dict = field(default_factory=dict)       # provenance: {file_id, page_index, signature}
+
+
+@dataclass
+class RoomArea(JsonModel):
+    """An approximate per-room floor area harvested from SF text labels on the
+    area/floor plans (Tier 2). Deliberately approximate — occupancy/gross magnitude,
+    partial coverage — so it carries a confidence and an explicit basis; it is never
+    presented as an exact net area (that is Tier 3 geometry).
+    """
+
+    room_number: str
+    area_sf: float
+    confidence: float                            # 0..1, from label-to-room distance + uniqueness
+    basis: str = "area_label_join"               # provenance of the number
+    source: dict = field(default_factory=dict)   # {file_id, page_index}
 
 
 @dataclass
