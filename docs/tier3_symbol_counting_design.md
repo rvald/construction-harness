@@ -16,22 +16,23 @@ Success = a plumbing/lighting fixture's `quantity_basis` flips from `unknown_pla
 
 ---
 
-## 2. Why vision here (measured)
+## 2. What the M0 spike measured (2026-07-05) — extraction is TEXT, not vision
 
-The deterministic text/geometry layer cannot carry this (probed earlier this session):
-- Door marks: **0 recovered** from the floor-plan text layer — they're graphical/rotated fragments.
-- Fixture tags on plans: sparse and unreliable in text (`FAN:27, SD:4, L1:4`).
-- The binary layer is ~37k line segments with no clean per-symbol structure.
+The M0 spike (`scratchpad/countspike.py`, `spread.py`, `p58.py`) reshaped the counting approach:
 
-So instances of a fixture symbol are a **visual** pattern, not a text token. This is exactly the VLM-fallback the architecture always specified (inventory B5/B6) and never built.
+- **The architectural floor plan's graphical tags do NOT generalize to MEP.** Door marks were 0-recovered from that sheet's text — but that is an architectural-plan fact.
+- **On the PLUMBING sheets, fixture tags ARE in the text layer.** Counting our Tier 1 catalog (`WC-1…DF-2`) over the drawings: p58 (`P4.1 PLUMBING ENLARGED PLANS`) has 32 fixture-tag text spans arranged as real instances (rows of lavatories — `L-2` at x=587/648/710/771, y=388); p55 (`P2.1.A`) has 16 in a tight 158×373pt block (an embedded fixture schedule/legend, not scattered instances).
+- **So deterministic extraction is TEXT-TAG COUNTING, not vector/template symbol matching** — cheaper, robust, offline. (Symbol matching remains the fallback only for disciplines whose plans tag graphically.)
+
+But raw text-count ≠ instance count: tags recur on legends/schedules and across overall+enlarged views. The extractor must (a) target the authoritative sheet(s), (b) discriminate instance-tags from clustered legend/schedule blocks (spatial spread), (c) de-dup across views. Turning a candidate count into a trusted count is exactly the **VLM verifier's** job (§3): reconcile the deterministic text count against the plan image.
 
 ---
 
 ## 3. Design principle — deterministic extraction PRODUCES the count; VLM VERIFIES it
 
-Locked direction (user, 2026-07-05): **the VLM is a verifier that runs *after* deterministic extraction — it does not do the counting.** Deterministic vector/template matching produces the count and the boxes; the VLM then looks at the extracted result against the rendered sheet and confirms it, flags a discrepancy, or adjusts confidence. This mirrors the takeoff skill's own model ("vector extraction handles precision; vision verifies") and the section resolver's pluggable-tail pattern.
+Locked direction (user, 2026-07-05): **the VLM is a verifier that runs *after* deterministic extraction — it does not do the counting.** Deterministic **text-tag counting** produces the count and the boxes; the VLM then looks at the extracted result against the rendered sheet and confirms it, flags a discrepancy, or adjusts confidence. This mirrors the takeoff skill's own model ("vector extraction handles precision; vision verifies") and the section resolver's pluggable-tail pattern.
 
-- **Deterministic core is primary.** Vector/template matching over the sheet geometry yields a `CountResult` (count + boxes) — fast, offline, testable. This is the source of truth for the number.
+- **Deterministic core is primary.** Text-tag counting over the MEP sheets (fixture tags are in the text layer — §2), with spatial filtering + cross-view dedup, yields a `CountResult` (count + boxes) — fast, offline, testable. This is the source of truth for the number.
 - **VLM is the pluggable verifier.** A `CountVerifier` backend takes the extracted result + the rendered region and returns agreement / a corrected read / a confidence adjustment. Two implementations: a **stub** (canned verdicts — offline suite, never calls a model) and a **real VLM adapter** (opt-in, cached).
 - **The count survives without the VLM.** If no verifier runs, the deterministic count still stands (unverified, lower confidence). Verification raises confidence or flags for review — it is not on the critical path to *having* a number.
 - **Offline tests never call a model.** They validate extraction + aggregation + the basis flip, and the verify-merge logic against the stub.
@@ -44,16 +45,16 @@ Two stages: deterministic **extraction** (primary), then optional **verification
 
 ```python
 # --- Stage 1: deterministic extraction (primary, offline) ---
-def extract_counts(sheet, catalog) -> list["CountResult"]: ...   # vector/template matching
+def extract_counts(sheet, catalog) -> list["CountResult"]: ...   # text-tag counting + spatial filter/dedup
 
 @dataclass
 class CountResult:
     symbol_id: str          # catalog key from Tier 1, e.g. "WC-1"
     count: int              # PRODUCED by deterministic extraction
-    boxes: list[BBox]       # counted locations -> provenance
+    boxes: list[BBox]       # tag positions -> provenance
     confidence: float       # extraction confidence (pre-verification)
     sheet_page: int
-    source: str             # "vector_template"
+    source: str             # "text_tag" (or "vector_template" for graphical-tag disciplines)
     verified: bool = False  # set by stage 2
 
 # --- Stage 2: VLM verification (opt-in, pluggable, runs AFTER extraction) ---
@@ -132,8 +133,8 @@ We never do open-ended detection. We only ever answer "how many of *this known* 
 
 ## 9. Milestones (when built)
 
-- **M0 — one-symbol spike (probe).** On one plumbing fixture, measure the deterministic vector/template pass: does it find the instances on the real plan, and at what recall? Sizes what the verifier must catch.
-- **M1 — extraction core + basis flip.** `extract_counts` (vector/template) + `CountResult`; aggregate and flip `unknown_plan_count → plan_count` with count/boxes/confidence. Offline tests. **Delivers usable counts without any VLM.**
+- **M0 — spike (DONE 2026-07-05).** Result: fixture tags are in the text layer on plumbing sheets → extraction is **text-tag counting**, not vector/template symbol matching. But raw counts recur across legends/schedules and overall+enlarged views, so counting needs spatial discrimination + cross-view dedup; the true count is what the VLM verifier confirms. See §2.
+- **M1 — extraction core + basis flip.** `extract_counts` = locate MEP fixture-plan sheets (signature) → count catalog tags in the text layer → **filter clustered legend/schedule blocks by spatial spread** → **de-dup across overall/enlarged views** → `CountResult`; aggregate and flip `unknown_plan_count → plan_count` with count/boxes/confidence. Offline tests. **Delivers usable counts without any VLM.** Open question to resolve in M1: which sheet(s) are authoritative for instance counts (overall plan vs enlarged plans vs riser) and the dedup rule across them.
 - **M2 — legend extraction + one trade end-to-end.** `LegendRef` from the legend/catalog; plumbing fixtures counted deterministically into `schedule_items.json` with provenance.
 - **M3 — VLM verifier (opt-in).** `CountVerifier` protocol + stub (offline tests for the merge rule) + real cached VLM adapter; verification raises confidence / flags disagreements; suite stays offline.
 
