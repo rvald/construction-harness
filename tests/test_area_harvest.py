@@ -10,7 +10,8 @@ import pathlib
 import fitz
 
 from src.pipeline.area_harvest import (
-    locate_area_plans, positioned_tokens, room_tokens, sf_labels,
+    harvest_room_areas, join_areas, locate_area_plans, positioned_tokens,
+    room_tokens, sf_labels,
 )
 from src.pipeline.phase2_schedule_parser import parse_finish_schedule
 
@@ -42,3 +43,38 @@ def test_locate_area_plans_picks_the_area_sheet():
     # p4 (index 3) has SF labels + rooms; p15 (index 14) has rooms but no SF labels.
     pages = [(3, _tokens(3)), (14, _tokens(14))]
     assert locate_area_plans(pages, _KNOWN_ROOMS) == [3]
+
+
+# --- M2: filtered join + confidence --------------------------------------
+
+def test_join_filters_by_distance_and_magnitude():
+    rooms = [("A", 0.0, 0.0), ("B", 1000.0, 0.0)]
+    labels = [
+        (100.0, 10.0, 0.0),        # close to A -> binds
+        (44403.0, 5.0, 5.0),       # building total: exceeds max_sf -> dropped
+        (300.0, 1500.0, 0.0),      # 500pt from B (> max_dist) -> dropped
+    ]
+    out = {r.room_number: r for r in join_areas(rooms, labels)}
+    assert set(out) == {"A"}
+    assert out["A"].area_sf == 100.0
+    assert out["A"].confidence > 0.8              # ~10pt away of 100pt budget
+
+
+def test_join_one_label_binds_to_closest_room():
+    # a single label between two rooms goes to the nearer one only
+    rooms = [("A", 0.0, 0.0), ("B", 60.0, 0.0)]
+    labels = [(200.0, 10.0, 0.0)]
+    out = {r.room_number for r in join_areas(rooms, labels)}
+    assert out == {"A"}
+
+
+def test_harvest_room_areas_on_uccs_area_plan():
+    areas = harvest_room_areas(DRAWINGS, _KNOWN_ROOMS, page_range=range(3, 4))
+    by_room = {a.room_number: a for a in areas}
+    assert by_room["N105"].area_sf == 816.0
+    assert by_room["N138"].area_sf == 1024.0
+    assert by_room["S102"].area_sf == 781.0
+    assert all(0.0 <= a.confidence <= 1.0 for a in areas)
+    assert all(a.source["page_index"] == 3 for a in areas)
+    assert all(a.area_sf <= 20000.0 for a in areas)          # no building/zone totals
+    assert set(by_room) <= _KNOWN_ROOMS                      # only real rooms
