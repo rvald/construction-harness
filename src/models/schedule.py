@@ -43,6 +43,21 @@ class ScheduleItem(JsonModel):
 
 
 @dataclass
+class BidItem(JsonModel):
+    """A single Division 00/01 bid-structure item — an alternate, unit price, or
+    allowance (Tier: bid structure). These define HOW the bid is organized and
+    priced, sourced from the standard CSI Division-01 pricing sections in the
+    project manual. Absent sections are simply not emitted (degrade + flag), never
+    faked.
+    """
+
+    kind: str                                   # "alternate" | "unit_price" | "allowance"
+    number: str                                 # "1", "2", ... (as printed in the schedule)
+    title: str                                  # e.g. "Bench Millwork"
+    basis: str                                  # alternate: add|deduct|unknown ; unit_price: unit ; allowance: lump_sum
+    description: str = ""                        # base-bid / unit / allowance scope (first line)
+    unit: str | None = None                     # unit of measure for unit_price items
+    source: dict = field(default_factory=dict)  # {file_id, page, section}
 class CountResult(JsonModel):
     """A deterministic per-sheet fixture-tag count (Tier 3.1 extraction).
 

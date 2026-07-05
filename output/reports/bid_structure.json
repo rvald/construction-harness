@@ -1,0 +1,94 @@
+{
+  "summary": {
+    "located": {
+      "alternate": "found",
+      "unit_price": "found",
+      "allowance": "absent"
+    },
+    "counts": {
+      "alternate": 4,
+      "unit_price": 2
+    },
+    "total_items": 6
+  },
+  "items": [
+    {
+      "kind": "alternate",
+      "number": "1",
+      "title": "Bench Millwork",
+      "basis": "deduct",
+      "description": "Provide built-in millwork benches with incorporated electrical power at the North",
+      "unit": null,
+      "source": {
+        "file_id": "project_manual",
+        "page": 159,
+        "section": "012300"
+      }
+    },
+    {
+      "kind": "alternate",
+      "number": "2",
+      "title": "West Restroom Renovation",
+      "basis": "deduct",
+      "description": "Renovate sink areas in existing West Men’s and Women’s restrooms at the North",
+      "unit": null,
+      "source": {
+        "file_id": "project_manual",
+        "page": 159,
+        "section": "012300"
+      }
+    },
+    {
+      "kind": "alternate",
+      "number": "3",
+      "title": "Indirect Lighting",
+      "basis": "deduct",
+      "description": "Provide RGB tape light indirect lighting (fixture L14A) at soffits at the North Building",
+      "unit": null,
+      "source": {
+        "file_id": "project_manual",
+        "page": 159,
+        "section": "012300"
+      }
+    },
+    {
+      "kind": "alternate",
+      "number": "4",
+      "title": "Skylights",
+      "basis": "deduct",
+      "description": "Provide skylights at the North Building as shown and as specified in Section 086300 -",
+      "unit": null,
+      "source": {
+        "file_id": "project_manual",
+        "page": 159,
+        "section": "012300"
+      }
+    },
+    {
+      "kind": "unit_price",
+      "number": "1",
+      "title": "Moisture Vapor Emission Control",
+      "basis": "unit",
+      "description": "Provide Moisture Vapor Emission Control in accordance with Section 090561.13.",
+      "unit": "Square feet",
+      "source": {
+        "file_id": "project_manual",
+        "page": 157,
+        "section": "012200"
+      }
+    },
+    {
+      "kind": "unit_price",
+      "number": "2",
+      "title": "Resilient Tile Flooring",
+      "basis": "unit",
+      "description": "Provide Resilient Tile Flooring in accordance with Section 096519 and the Finish",
+      "unit": "Square feet",
+      "source": {
+        "file_id": "project_manual",
+        "page": 157,
+        "section": "012200"
+      }
+    }
+  ]
+}
