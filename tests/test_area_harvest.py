@@ -68,6 +68,20 @@ def test_join_one_label_binds_to_closest_room():
     assert out == {"A"}
 
 
+def test_assemble_reports_area_coverage():
+    from src.models.schedule import RoomArea, ScheduleItem
+    from src.pipeline.build_schedule_items import assemble
+    items = [
+        ScheduleItem("finish", "instance", "N105", 1.0, "EA", "row_count"),
+        ScheduleItem("finish", "instance", "N138", 1.0, "EA", "row_count"),
+        ScheduleItem("door", "instance", "D1", 1.0, "EA", "row_count"),
+    ]
+    areas = [RoomArea("N105", 816.0, 0.9)]
+    report = assemble(items, areas, finish_rooms={"N105", "N138"})
+    assert report["area_coverage"] == {"finish_rooms": 2, "rooms_with_area": 1, "coverage": 0.5}
+    assert report["room_areas"][0]["area_sf"] == 816.0
+
+
 def test_harvest_room_areas_on_uccs_area_plan():
     areas = harvest_room_areas(DRAWINGS, _KNOWN_ROOMS, page_range=range(3, 4))
     by_room = {a.room_number: a for a in areas}

@@ -13,6 +13,11 @@
     "known_quantity_total": 125.0,
     "count_pending_items": 10
   },
+  "area_coverage": {
+    "finish_rooms": 65,
+    "rooms_with_area": 25,
+    "coverage": 0.385
+  },
   "items": [
     {
       "schedule": "door",
@@ -3524,6 +3529,258 @@
         "file_id": "drawings",
         "page_index": 58,
         "schedule": "plumbing_fixture"
+      }
+    }
+  ],
+  "room_areas": [
+    {
+      "room_number": "N107C",
+      "area_sf": 219.0,
+      "confidence": 0.983,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N107B",
+      "area_sf": 212.0,
+      "confidence": 0.864,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N105",
+      "area_sf": 816.0,
+      "confidence": 0.741,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N139",
+      "area_sf": 160.0,
+      "confidence": 0.711,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N111",
+      "area_sf": 526.0,
+      "confidence": 0.614,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N138",
+      "area_sf": 1024.0,
+      "confidence": 0.561,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N104D",
+      "area_sf": 43.0,
+      "confidence": 0.555,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "S105",
+      "area_sf": 119.0,
+      "confidence": 0.547,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N113A",
+      "area_sf": 129.0,
+      "confidence": 0.531,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "S103",
+      "area_sf": 308.0,
+      "confidence": 0.472,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "S102",
+      "area_sf": 781.0,
+      "confidence": 0.464,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "S101A",
+      "area_sf": 218.0,
+      "confidence": 0.334,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N120H",
+      "area_sf": 2169.0,
+      "confidence": 0.325,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "S108D",
+      "area_sf": 1986.0,
+      "confidence": 0.322,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N106",
+      "area_sf": 1055.0,
+      "confidence": 0.298,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N124",
+      "area_sf": 141.0,
+      "confidence": 0.297,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N113B",
+      "area_sf": 118.0,
+      "confidence": 0.295,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N104C",
+      "area_sf": 484.0,
+      "confidence": 0.288,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N104F",
+      "area_sf": 937.0,
+      "confidence": 0.281,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N119",
+      "area_sf": 107.0,
+      "confidence": 0.275,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N108",
+      "area_sf": 71.0,
+      "confidence": 0.26,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N120C",
+      "area_sf": 248.0,
+      "confidence": 0.233,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N113C",
+      "area_sf": 118.0,
+      "confidence": 0.222,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N102",
+      "area_sf": 364.0,
+      "confidence": 0.189,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "S107",
+      "area_sf": 1806.0,
+      "confidence": 0.048,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
       }
     }
   ]

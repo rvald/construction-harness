@@ -71,7 +71,17 @@ Deterministic throughout — offline-testable. Reuses the firm-agnostic room gra
 
 - **M1 — model + extraction.** `RoomArea`; `positioned_tokens` / `sf_labels` / `room_tokens`; `locate_area_plans`. Test: UCCS area plan (p4) is located by signature; SF labels + room tokens extracted with positions.
 - **M2 — filtered join + confidence.** `join_areas` constrained to known rooms, with distance/magnitude filtering and confidence. Test: UCCS p4 yields the known pairs (`N105≈816`, `N138≈1024`, `S102≈781`); coverage reported; gross totals rejected.
-- **M3 — integrate + generalize.** `harvest_room_areas` wired into `build_schedule_items` (adds `room_areas` + coverage metric to `schedule_items.json`, not the golden report). Pinney smoke test proves cross-firm harvest.
+- **M3 — integrate + generalize.** ✅ `harvest_room_areas` wired into `build_schedule_items`
+  (adds `room_areas` + `area_coverage` to `schedule_items.json`, not the golden report).
+  UCCS: 25 room areas, **38.5% coverage** (25/65 finish rooms) — the honest partial ceiling
+  of one occupancy plan. Pure `assemble`/`area_coverage` unit-tested.
+
+  **Pinney generalization — documented dependency, not faked.** The harvest is
+  room-set-driven and firm-agnostic *by construction* (proven by synthetic join tests +
+  real UCCS). Proving it end-to-end on Pinney needs Pinney's real room-number set, which
+  isn't wired yet (its finish/room schedule isn't parsed). A loose room grammar is unsafe
+  here — on Pinney it matched the area numbers themselves. So Pinney harvest is deferred to
+  the finish-schedule fan-out that supplies its room set; no Pinney value-test was fabricated.
 
 ---
 
