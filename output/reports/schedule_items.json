@@ -1,17 +1,19 @@
 {
   "summary": {
-    "total_items": 177,
+    "total_items": 195,
     "by_schedule": {
       "door": 60,
       "finish": 65,
       "plumbing_fixture": 10,
-      "lighting_fixture": 42
+      "lighting_fixture": 42,
+      "camera": 13,
+      "security_device": 5
     },
     "by_basis": {
-      "row_count": 125,
+      "row_count": 143,
       "unknown_plan_count": 52
     },
-    "known_quantity_total": 125.0,
+    "known_quantity_total": 143.0,
     "count_pending_items": 52
   },
   "area_coverage": {
@@ -4943,6 +4945,402 @@
         "file_id": "drawings",
         "page_index": 105,
         "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "camera",
+      "shape": "instance",
+      "mark": "C-EXTERIOR-1",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "",
+        "room_name": "",
+        "device_number": "C-EXTERIOR-1",
+        "camera_type": "FIX",
+        "make_model": "4MP EXTERIOR",
+        "reference": "7/Y8.1.1"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 128,
+        "schedule": "camera"
+      }
+    },
+    {
+      "schedule": "camera",
+      "shape": "instance",
+      "mark": "C-EXTERIOR-2",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "",
+        "room_name": "",
+        "device_number": "C-EXTERIOR-2",
+        "camera_type": "FIX",
+        "make_model": "4MP EXTERIOR",
+        "reference": "7/Y8.1.1"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 128,
+        "schedule": "camera"
+      }
+    },
+    {
+      "schedule": "camera",
+      "shape": "instance",
+      "mark": "C-E-180B-1",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "E-180B",
+        "room_name": "VEST",
+        "device_number": "C-E-180B-1",
+        "camera_type": "FIX",
+        "make_model": "1080P",
+        "reference": "6/Y8.1.1"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 128,
+        "schedule": "camera"
+      }
+    },
+    {
+      "schedule": "camera",
+      "shape": "instance",
+      "mark": "C-N103-1",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N103",
+        "room_name": "CAFE",
+        "device_number": "C-N103-1",
+        "camera_type": "360",
+        "make_model": "FISHEYE 360",
+        "reference": "6/Y8.1.1"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 128,
+        "schedule": "camera"
+      }
+    },
+    {
+      "schedule": "camera",
+      "shape": "instance",
+      "mark": "C-N119-1",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N119",
+        "room_name": "CIRCULATION",
+        "device_number": "C-N119-1",
+        "camera_type": "360",
+        "make_model": "FISHEYE 360",
+        "reference": "6/Y8.1.1"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 128,
+        "schedule": "camera"
+      }
+    },
+    {
+      "schedule": "camera",
+      "shape": "instance",
+      "mark": "C-N119-2",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N119",
+        "room_name": "CIRCULATION",
+        "device_number": "C-N119-2",
+        "camera_type": "360",
+        "make_model": "FISHEYE 360",
+        "reference": "5/Y8.1.1"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 128,
+        "schedule": "camera"
+      }
+    },
+    {
+      "schedule": "camera",
+      "shape": "instance",
+      "mark": "C-N119-3",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N122",
+        "room_name": "Space",
+        "device_number": "C-N119-3",
+        "camera_type": "180",
+        "make_model": "FISHEYE 180",
+        "reference": "6/Y8.1.1"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 128,
+        "schedule": "camera"
+      }
+    },
+    {
+      "schedule": "camera",
+      "shape": "instance",
+      "mark": "C-S100-1",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S100",
+        "room_name": "EAST CORRIDOR",
+        "device_number": "C-S100-1",
+        "camera_type": "180",
+        "make_model": "FISHEYE 180",
+        "reference": "4/Y8.1.1"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 128,
+        "schedule": "camera"
+      }
+    },
+    {
+      "schedule": "camera",
+      "shape": "instance",
+      "mark": "C-S101-1",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S101",
+        "room_name": "SPACE ISAC RECEPTION",
+        "device_number": "C-S101-1",
+        "camera_type": "FIX",
+        "make_model": "1080P",
+        "reference": "4/Y8.1.1"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 128,
+        "schedule": "camera"
+      }
+    },
+    {
+      "schedule": "camera",
+      "shape": "instance",
+      "mark": "C-S102-1",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S102",
+        "room_name": "CYBER VULNERABILITY LAB",
+        "device_number": "C-S102-1",
+        "camera_type": "FIX",
+        "make_model": "1080P",
+        "reference": "4/Y8.1.1"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 128,
+        "schedule": "camera"
+      }
+    },
+    {
+      "schedule": "camera",
+      "shape": "instance",
+      "mark": "C-S103-1",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S103",
+        "room_name": "DATA/SERVER",
+        "device_number": "C-S103-1",
+        "camera_type": "FIX",
+        "make_model": "1080P",
+        "reference": "4/Y8.1.1"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 128,
+        "schedule": "camera"
+      }
+    },
+    {
+      "schedule": "camera",
+      "shape": "instance",
+      "mark": "C-S107-1",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S107",
+        "room_name": "WATCH CENTER",
+        "device_number": "C-S107-1",
+        "camera_type": "FIX",
+        "make_model": "1080P",
+        "reference": "5/Y8.1.1"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 128,
+        "schedule": "camera"
+      }
+    },
+    {
+      "schedule": "camera",
+      "shape": "instance",
+      "mark": "C-S108-1",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S108",
+        "room_name": "CIRCULATION",
+        "device_number": "C-S108-1",
+        "camera_type": "FIX",
+        "make_model": "1080P",
+        "reference": "5/Y8.1.1"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 128,
+        "schedule": "camera"
+      }
+    },
+    {
+      "schedule": "security_device",
+      "shape": "instance",
+      "mark": "ACP-N124-1",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N124",
+        "room_name": "DATA ROOM",
+        "device_number": "ACP-N124-1",
+        "device_type": "ACP",
+        "make": "-",
+        "reference": "-"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 128,
+        "schedule": "security_device"
+      }
+    },
+    {
+      "schedule": "security_device",
+      "shape": "instance",
+      "mark": "NVR-N124-1",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N124",
+        "room_name": "DATA ROOM",
+        "device_number": "NVR-N124-1",
+        "device_type": "NVR",
+        "make": "-",
+        "reference": "-"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 128,
+        "schedule": "security_device"
+      }
+    },
+    {
+      "schedule": "security_device",
+      "shape": "instance",
+      "mark": "PS-N124-1",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N124",
+        "room_name": "DATA ROOM",
+        "device_number": "PS-N124-1",
+        "device_type": "PS",
+        "make": "-",
+        "reference": "-"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 128,
+        "schedule": "security_device"
+      }
+    },
+    {
+      "schedule": "security_device",
+      "shape": "instance",
+      "mark": "ACP-S103-1",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S103",
+        "room_name": "DATA/SERVER",
+        "device_number": "ACP-S103-1",
+        "device_type": "ACP",
+        "make": "-",
+        "reference": "-"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 128,
+        "schedule": "security_device"
+      }
+    },
+    {
+      "schedule": "security_device",
+      "shape": "instance",
+      "mark": "PS-S103-1",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S103",
+        "room_name": "DATA/SERVER",
+        "device_number": "PS-S103-1",
+        "device_type": "PS",
+        "make": "-",
+        "reference": "-"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 128,
+        "schedule": "security_device"
       }
     }
   ],

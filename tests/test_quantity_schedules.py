@@ -141,6 +141,20 @@ def test_lighting_fixture_catalog():
     assert all(i.shape == "catalog" for i in items)
 
 
+# --- security: instance-schedule counting (free-form device IDs) ---------
+
+def test_security_camera_and_device_counts():
+    from src.pipeline.quantity_schedules import extract_schedule_items
+    items = extract_schedule_items(DRAWINGS, page_range=range(128, 130))    # p129 security schedules
+    cams = [i for i in items if i.schedule == "camera"]
+    devs = [i for i in items if i.schedule == "security_device"]
+    assert len(cams) == 13 and len(devs) == 5                # direct row counts
+    assert cams[0].shape == "instance" and cams[0].quantity == 1.0
+    assert cams[0].quantity_basis == "row_count"
+    assert cams[0].mark.startswith("C-")                    # free-form device number
+    assert devs[0].mark.startswith(("ACP", "NVR", "PS"))
+
+
 # --- M4 driver: multi-table, signature-gated extraction, summary ---------
 
 def test_parse_page_captures_multiple_tables():

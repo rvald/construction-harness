@@ -24,8 +24,9 @@ from src.pipeline.phase2_schedule_parser import (
     _clean, _select_door_rows_auto, _select_finish_rows_auto,
 )
 from src.pipeline.schedule_resolver import (
-    DOOR_SCHEMA, FINISH_SCHEMA, LIGHTING_FIXTURE_SCHEMA, PLUMBING_FIXTURE_SCHEMA,
-    WINDOW_SCHEMA, ColumnMap, ScheduleSchema, resolve_columns,
+    CAMERA_SCHEDULE, DOOR_SCHEMA, FINISH_SCHEMA, LIGHTING_FIXTURE_SCHEMA,
+    PLUMBING_FIXTURE_SCHEMA, SECURITY_DEVICE_SCHEMA, WINDOW_SCHEMA,
+    ColumnMap, ScheduleSchema, resolve_columns,
 )
 
 # A catalog/type tag: a single mark letter (window "A") or a coded tag with a digit
@@ -64,11 +65,20 @@ def _select_catalog_rows(table: list[list], key_col: int) -> list[list]:
     return out
 
 
+def _select_free_rows(table: list[list], cm: ColumnMap, key_col: int) -> list[list]:
+    """Every data row (after the header band) whose key cell is non-empty — for
+    instance schedules with free-form IDs (device numbers) that fit no mark grammar."""
+    return [row for row in table[cm.data_start:]
+            if key_col < len(row) and _clean(row[key_col])]
+
+
 def select_rows(table: list[list], cm: ColumnMap, schema: ScheduleSchema) -> list[list]:
     """Pick data rows using the row selector appropriate to the schedule's shape."""
     key_col = cm.by_field.get(schema.key_field, 0)
     if schema.shape == "catalog":
         return _select_catalog_rows(table, key_col)
+    if schema.row_grammar == "free":                        # instance, free-form key (security devices)
+        return _select_free_rows(table, cm, key_col)
     if schema.merge_rows:                                    # instance, may pack N (doors)
         return _select_door_rows_auto(table, key_col)
     return _select_finish_rows_auto(table, key_col)          # instance, one key per row
@@ -128,6 +138,7 @@ def parse_page(tables: list[list[list]], schema: ScheduleSchema, source: dict,
 # a single unified quantity view; their DoorEntry/FinishEntry parsers are untouched.
 SCHEDULE_REGISTRY: list[ScheduleSchema] = [
     DOOR_SCHEMA, FINISH_SCHEMA, WINDOW_SCHEMA, PLUMBING_FIXTURE_SCHEMA, LIGHTING_FIXTURE_SCHEMA,
+    CAMERA_SCHEDULE, SECURITY_DEVICE_SCHEMA,
 ]
 
 
