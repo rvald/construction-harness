@@ -49,16 +49,35 @@ def assemble(items: list[ScheduleItem], room_areas: list[RoomArea], finish_rooms
     }
 
 
+# catalog schedules whose tags get counted on the plans (each is text-tagged there)
+_COUNTED_CATALOGS = ("plumbing_fixture", "lighting_fixture")
+
+
+def count_fixtures(drawings_path, items, page_range=None) -> list[CountResult]:
+    """Count each counted-catalog schedule's tags on the plans. The catalog and the
+    schedule's own page(s) come from the extracted schedule items, so the fixture
+    SCHEDULE sheet is excluded from the plan scan (it scatters the same tags)."""
+    counts: list[CountResult] = []
+    for kind in _COUNTED_CATALOGS:
+        cat = [i for i in items if i.schedule == kind]
+        if not cat:
+            continue
+        tags = [i.mark for i in cat]
+        schedule_pages = {i.source.get("page_index") for i in cat if "page_index" in i.source}
+        counts += extract_counts(drawings_path, tags, page_range=page_range,
+                                 exclude_pages=schedule_pages)
+    return counts
+
+
 def build_schedule_items(drawings_path=_DEFAULT_PDF, page_range=None) -> dict:
     """Extract schedule items + harvest floor areas + count fixture tags -> the artifact.
 
     Floor areas join only to the finish schedule's rooms; fixture counts are per-sheet
-    candidates over the plumbing catalog (deduped total pending verification)."""
+    candidates over the plumbing + lighting catalogs (deduped total pending verification)."""
     items = extract_schedule_items(drawings_path, page_range=page_range)
     finish_rooms = {i.mark for i in items if i.schedule == "finish"}
     room_areas = harvest_room_areas(drawings_path, finish_rooms, page_range=page_range)
-    plumbing_tags = [i.mark for i in items if i.schedule == "plumbing_fixture"]
-    fixture_counts = extract_counts(drawings_path, plumbing_tags, page_range=page_range)
+    fixture_counts = count_fixtures(drawings_path, items, page_range=page_range)
     return assemble(items, room_areas, finish_rooms, fixture_counts)
 
 

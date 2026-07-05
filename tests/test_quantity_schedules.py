@@ -19,8 +19,8 @@ from src.pipeline.quantity_schedules import (
     parse_schedule, summarize,
 )
 from src.pipeline.schedule_resolver import (
-    DOOR_SCHEMA, FINISH_SCHEMA, PLUMBING_FIXTURE_SCHEMA, WINDOW_SCHEMA,
-    select_schedule_table,
+    DOOR_SCHEMA, FINISH_SCHEMA, LIGHTING_FIXTURE_SCHEMA, PLUMBING_FIXTURE_SCHEMA,
+    WINDOW_SCHEMA, select_schedule_table,
 )
 
 DATA = pathlib.Path(__file__).resolve().parents[1] / "data" / "uccs"
@@ -128,6 +128,17 @@ def test_plumbing_items_are_catalog_with_descriptions():
     # UCCS plumbing schedule has no real takeoff-count column -> count-pending
     assert all(i.quantity is None and i.quantity_basis == "unknown_plan_count"
                for i in items.values())
+
+
+# --- lighting fixture catalog (A1 fan-out) -------------------------------
+
+def test_lighting_fixture_catalog():
+    with pdfplumber.open(DRAWINGS) as pdf:
+        table = select_schedule_table(pdf.pages[105].extract_tables(), LIGHTING_FIXTURE_SCHEMA)
+    items = parse_schedule(table, LIGHTING_FIXTURE_SCHEMA)          # E7.1 lighting fixture schedule
+    marks = {i.mark for i in items}
+    assert {"L2A", "L20K"} <= marks                                # header "TYPE" -> fixture_tag
+    assert all(i.shape == "catalog" for i in items)
 
 
 # --- M4 driver: multi-table, signature-gated extraction, summary ---------

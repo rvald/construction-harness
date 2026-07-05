@@ -42,3 +42,22 @@ def test_summarize_counts_flags_dedup_pending():
     assert s["dedup_status"] == "pending_verification"
     assert s["instance_sheets"] == [58]
     assert s["by_symbol"]["L-2"]["candidate_total"] >= 6
+
+
+def test_exclude_pages_drops_a_sheet():
+    with_p58 = extract_counts(DRAWINGS, _TAGS, page_range=range(57, 58))
+    excluded = extract_counts(DRAWINGS, _TAGS, page_range=range(57, 58), exclude_pages={57})
+    assert with_p58 and excluded == []                            # the only instance sheet was skipped
+
+
+# --- A1: lighting counting excludes the fixture schedule sheet ------------
+
+def test_lighting_counts_exclude_schedule_sheet():
+    from src.pipeline.build_schedule_items import count_fixtures
+    from src.pipeline.quantity_schedules import extract_schedule_items
+
+    items = extract_schedule_items(DRAWINGS, page_range=range(99, 107))
+    counts = count_fixtures(DRAWINGS, items, page_range=range(99, 107))
+    lit = [c for c in counts if c.symbol_id.startswith("L")]
+    assert lit                                                    # lighting tags counted on the plans
+    assert all(c.sheet_page != 106 for c in counts)              # E7.1 schedule sheet excluded

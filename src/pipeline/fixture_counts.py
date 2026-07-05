@@ -43,15 +43,22 @@ def classify_page(points: list[tuple[float, float]], width: float, height: float
     return "instance_plan" if _spread_fraction(points, width, height) >= _SPREAD_THRESHOLD else "legend_block"
 
 
-def extract_counts(pdf_path, tags, page_range=None) -> list[CountResult]:
-    """Per-sheet fixture-tag counts over a page range (instance plans only)."""
+def extract_counts(pdf_path, tags, page_range=None, exclude_pages=None) -> list[CountResult]:
+    """Per-sheet fixture-tag counts over a page range (instance plans only).
+
+    `exclude_pages` (0-indexed) drops sheets that carry the catalog's own tags but are
+    not plan instances — chiefly the fixture SCHEDULE sheet, which scatters the tags in
+    its table and would otherwise be miscounted as a plan (A0 finding for lighting)."""
     import fitz
 
     tagset = set(tags)
+    skip = set(exclude_pages or ())
     out: list[CountResult] = []
     with fitz.open(str(pdf_path)) as doc:
         rng = page_range if page_range is not None else range(doc.page_count)
         for i in rng:
+            if i in skip:
+                continue
             page = doc[i]
             spans = tag_spans(page, tagset)
             points = [p for pts in spans.values() for p in pts]

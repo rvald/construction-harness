@@ -24,8 +24,8 @@ from src.pipeline.phase2_schedule_parser import (
     _clean, _select_door_rows_auto, _select_finish_rows_auto,
 )
 from src.pipeline.schedule_resolver import (
-    DOOR_SCHEMA, FINISH_SCHEMA, PLUMBING_FIXTURE_SCHEMA, WINDOW_SCHEMA,
-    ColumnMap, ScheduleSchema, resolve_columns,
+    DOOR_SCHEMA, FINISH_SCHEMA, LIGHTING_FIXTURE_SCHEMA, PLUMBING_FIXTURE_SCHEMA,
+    WINDOW_SCHEMA, ColumnMap, ScheduleSchema, resolve_columns,
 )
 
 # A catalog/type tag: a single mark letter (window "A") or a coded tag with a digit
@@ -127,7 +127,7 @@ def parse_page(tables: list[list[list]], schema: ScheduleSchema, source: dict,
 # The registry the driver walks. Door/finish are included so schedule_items.json is
 # a single unified quantity view; their DoorEntry/FinishEntry parsers are untouched.
 SCHEDULE_REGISTRY: list[ScheduleSchema] = [
-    DOOR_SCHEMA, FINISH_SCHEMA, WINDOW_SCHEMA, PLUMBING_FIXTURE_SCHEMA,
+    DOOR_SCHEMA, FINISH_SCHEMA, WINDOW_SCHEMA, PLUMBING_FIXTURE_SCHEMA, LIGHTING_FIXTURE_SCHEMA,
 ]
 
 

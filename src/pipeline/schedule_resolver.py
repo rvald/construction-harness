@@ -133,6 +133,27 @@ PLUMBING_FIXTURE_SCHEMA = ScheduleSchema(
     title_signature=("plumbing", "fixture"),
 )
 
+# A lighting fixture schedule is a catalog keyed by luminaire TYPE (L2A, L20K, ...).
+# Its tag column header is "TYPE" (validated on UCCS E7.1). Like plumbing, the count of
+# each type lives on the plans (the lighting plans, where the tags ARE in the text layer
+# — A0 spike). Feeds both the schedule catalog and the fixture-count catalog.
+LIGHTING_FIXTURE_SCHEMA = ScheduleSchema(
+    name="lighting_fixture",
+    fields={
+        "fixture_tag": ["type", "fixture type", "tag", "mark", "symbol", "fixture"],
+        "description": ["description", "fixture description", "luminaire"],
+        "manufacturer": ["manufacturer", "mfr", "manufacture"],
+        "model": ["model", "catalog", "catalog number", "catalog no"],
+        "lamp": ["lamp", "lamps", "lamp type", "load"],
+        "driver": ["driver", "ballast"],
+        "remarks": ["remarks", "notes", "comments"],
+    },
+    core_fields=["fixture_tag", "description"],
+    shape="catalog",
+    row_key="fixture_tag",
+    title_signature=("lighting", "fixture"),
+)
+
 
 @dataclass
 class ColumnMap:
