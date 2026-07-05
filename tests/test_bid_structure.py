@@ -7,7 +7,9 @@ from __future__ import annotations
 
 import pathlib
 
-from src.pipeline.bid_structure import extract_bid_structure, parse_alternates
+from src.pipeline.bid_structure import (
+    extract_bid_structure, parse_alternates, parse_unit_prices,
+)
 
 MANUAL = pathlib.Path(__file__).resolve().parents[1] / "data" / "uccs" / "project_manual.pdf"
 
@@ -40,6 +42,33 @@ def test_parse_alternates_shape():
     assert items[1].title == "West Restroom Renovation"
 
 
+_UP_SAMPLE = """PART 3 - EXECUTION
+3.1
+SCHEDULE OF UNIT PRICES
+A.
+Unit Price No. 1: Moisture Vapor Emission Control
+1.
+Description: Provide Moisture Vapor Emission Control in accordance with Section 090561.13.
+2.
+Unit of Measurement: Square feet.
+B.
+Unit Price No. 2: Resilient Tile Flooring
+1.
+Description: Provide Resilient Tile Flooring in accordance with Section 096519.
+2.
+Unit of Measurement: Square feet.
+"""
+
+
+def test_parse_unit_prices_shape():
+    items = parse_unit_prices(_UP_SAMPLE, {"section": "012200"})
+    assert [i.number for i in items] == ["1", "2"]
+    assert items[0].kind == "unit_price" and items[0].basis == "unit"
+    assert items[0].title == "Moisture Vapor Emission Control"
+    assert items[0].unit == "Square feet"
+    assert "090561.13" in items[0].description
+
+
 def test_extract_alternates_from_real_manual():
     items, located = extract_bid_structure(MANUAL)
     assert located["alternate"] == "found"
@@ -50,3 +79,20 @@ def test_extract_alternates_from_real_manual():
     assert by_num["2"].title == "West Restroom Renovation"
     assert all(i.source["section"] == "012300" for i in alts)
     assert all(i.source["page"] for i in alts)                # provenance recorded
+
+
+def test_extract_unit_prices_from_real_manual():
+    items, located = extract_bid_structure(MANUAL)
+    assert located["unit_price"] == "found"
+    ups = [i for i in items if i.kind == "unit_price"]
+    assert len(ups) >= 2
+    by_num = {i.number: i for i in ups}
+    assert by_num["1"].title == "Moisture Vapor Emission Control"
+    assert by_num["1"].unit and "square feet" in by_num["1"].unit.lower()
+    assert all(i.source["section"] == "012200" for i in ups)
+
+
+def test_allowances_absent_flagged():
+    # UCCS has no 012100 Allowances section -> degrade + flag, never faked.
+    _, located = extract_bid_structure(MANUAL)
+    assert located["allowance"] == "absent"

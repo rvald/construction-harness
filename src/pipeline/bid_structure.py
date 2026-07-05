@@ -26,9 +26,24 @@ from src.models.schedule import BidItem
 
 _SECTION_HEADER = re.compile(r"SECTION\s+(\d{6})\s*[-–]")
 _ALT = re.compile(r"Alternate\s+No\.?\s*(\d+)\s*:\s*([^\n]+)", re.I)
+_UP = re.compile(r"Unit Price\s+No\.?\s*(\d+)\s*:\s*([^\n]+)", re.I)
+_ALLOW = re.compile(r"Allowance\s+No\.?\s*(\d+)\s*:\s*([^\n]+)", re.I)
 _BASE_BID = re.compile(r"Base Bid\s*:\s*([^\n]+)", re.I)
+_DESC = re.compile(r"Description\s*:\s*([^\n]+)", re.I)
+_UOM = re.compile(r"Unit of Measurement\s*:\s*([^\n]+)", re.I)
 _DEDUCT = re.compile(r"Deductive\s+Alternate", re.I)
 _ADD = re.compile(r"Add(itive)?\s+Alternate", re.I)
+
+
+def _spans(marks: list, text: str):
+    """Yield (match, body_text_until_next_match) for enumerated 'X No. N:' items."""
+    for idx, m in enumerate(marks):
+        end = marks[idx + 1].start() if idx + 1 < len(marks) else len(text)
+        yield m, text[m.end():end]
+
+
+def _clean(s: str) -> str:
+    return re.sub(r"\s+", " ", s).strip()
 
 
 def section_text(doc, section_number: str, max_pages: int = 6) -> tuple[str | None, int | None]:
@@ -62,21 +77,43 @@ def section_text(doc, section_number: str, max_pages: int = 6) -> tuple[str | No
 def parse_alternates(text: str, source: dict | None = None) -> list[BidItem]:
     """Parse the 'Schedule of Alternates' into BidItems (number, title, add/deduct)."""
     src = source or {}
-    marks = list(_ALT.finditer(text))
     out: list[BidItem] = []
-    for idx, m in enumerate(marks):
-        end = marks[idx + 1].start() if idx + 1 < len(marks) else len(text)
-        body = text[m.end():end]
+    for m, body in _spans(list(_ALT.finditer(text)), text):
         basis = "deduct" if _DEDUCT.search(body) else ("add" if _ADD.search(body) else "unknown")
         bm = _BASE_BID.search(body)
-        desc = re.sub(r"\s+", " ", bm.group(1)).strip() if bm else ""
         out.append(BidItem(
-            kind="alternate",
-            number=m.group(1),
-            title=m.group(2).strip().rstrip("."),
-            basis=basis,
-            description=desc[:300],
-            source=dict(src),
+            kind="alternate", number=m.group(1), title=m.group(2).strip().rstrip("."),
+            basis=basis, description=_clean(bm.group(1))[:300] if bm else "", source=dict(src),
+        ))
+    return out
+
+
+def parse_unit_prices(text: str, source: dict | None = None) -> list[BidItem]:
+    """Parse the 'Schedule of Unit Prices' into BidItems (number, title, unit of measure)."""
+    src = source or {}
+    out: list[BidItem] = []
+    for m, body in _spans(list(_UP.finditer(text)), text):
+        dm = _DESC.search(body)
+        um = _UOM.search(body)
+        out.append(BidItem(
+            kind="unit_price", number=m.group(1), title=m.group(2).strip().rstrip("."),
+            basis="unit", description=_clean(dm.group(1))[:300] if dm else "",
+            unit=_clean(um.group(1)).rstrip(".") if um else None, source=dict(src),
+        ))
+    return out
+
+
+def parse_allowances(text: str, source: dict | None = None) -> list[BidItem]:
+    """Parse the 'Schedule of Allowances' (same MasterSpec pattern). Unvalidated on
+    real data — UCCS has no 012100 and Pinney no Div-01 sections — so this exists for
+    the found path if a future project carries it; the absent path is what's tested."""
+    src = source or {}
+    out: list[BidItem] = []
+    for m, body in _spans(list(_ALLOW.finditer(text)), text):
+        dm = _DESC.search(body)
+        out.append(BidItem(
+            kind="allowance", number=m.group(1), title=m.group(2).strip().rstrip("."),
+            basis="lump_sum", description=_clean(dm.group(1))[:300] if dm else "", source=dict(src),
         ))
     return out
 
@@ -84,6 +121,8 @@ def parse_alternates(text: str, source: dict | None = None) -> list[BidItem]:
 # section number -> (kind, parser)
 _REGISTRY = {
     "012300": ("alternate", parse_alternates),
+    "012200": ("unit_price", parse_unit_prices),
+    "012100": ("allowance", parse_allowances),
 }
 
 
