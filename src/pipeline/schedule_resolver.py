@@ -28,6 +28,16 @@ class ScheduleSchema:
     core_fields: list[str]                       # must resolve for a confident match
     group_tokens: set[str] = field(default_factory=set)
     ambiguous_labels: set[str] = field(default_factory=set)
+    # --- quantity metadata (Tier 1 generic parser; defaults keep existing schemas inert) ---
+    shape: str = "instance"                      # "instance" (row = one thing) | "catalog" (row = one type)
+    row_key: str = ""                            # canonical field that keys a data row; "" -> first core field
+    merge_rows: bool = False                     # row may pack N identical instances (door schedule)
+    qty_field: str | None = None                 # canonical field holding an explicit quantity, if any
+    qty_unit: str = "EA"                         # unit for row_count / qty_field quantities
+
+    @property
+    def key_field(self) -> str:
+        return self.row_key or (self.core_fields[0] if self.core_fields else "")
 
 
 # Canonical fields match the DoorEntry / FinishEntry model field names, so the
@@ -55,6 +65,9 @@ DOOR_SCHEMA = ScheduleSchema(
     core_fields=["door_mark", "width", "height", "door_material"],
     group_tokens={"door", "frame", "size"},
     ambiguous_labels={"material", "finish", "elevation"},
+    shape="instance",
+    row_key="door_mark",
+    merge_rows=True,                             # door rows can pack N identical doors
 )
 
 FINISH_SCHEMA = ScheduleSchema(
@@ -69,6 +82,8 @@ FINISH_SCHEMA = ScheduleSchema(
         "comments": ["special notes and comments", "special notes", "notes", "comments", "remarks"],
     },
     core_fields=["room_number", "floor_finish", "base_finish", "wall_finish", "ceiling_finish"],
+    shape="instance",
+    row_key="room_number",
 )
 
 
