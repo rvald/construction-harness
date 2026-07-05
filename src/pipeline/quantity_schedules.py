@@ -23,7 +23,10 @@ from src.models.schedule import ScheduleItem
 from src.pipeline.phase2_schedule_parser import (
     _clean, _select_door_rows_auto, _select_finish_rows_auto,
 )
-from src.pipeline.schedule_resolver import ColumnMap, ScheduleSchema, resolve_columns
+from src.pipeline.schedule_resolver import (
+    DOOR_SCHEMA, FINISH_SCHEMA, PLUMBING_FIXTURE_SCHEMA, WINDOW_SCHEMA,
+    ColumnMap, ScheduleSchema, resolve_columns,
+)
 
 # A catalog/type tag: a single mark letter (window "A") or a coded tag with a digit
 # ("WC-1", "L1", "GPO-2"). Requiring a digit for multi-letter tags rejects header
@@ -103,3 +106,97 @@ def parse_schedule(table: list[list], schema: ScheduleSchema, source: dict | Non
     cm = resolve_columns(table, schema)
     src = source or {"schedule": schema.name}
     return [build_item(r, cm, schema, src) for r in select_rows(table, cm, schema)]
+
+
+def parse_page(tables: list[list[list]], schema: ScheduleSchema, source: dict,
+               min_coverage: float = 0.75, min_cols: int = 6) -> list[ScheduleItem]:
+    """Parse EVERY table on a page that resolves to `schema` (schedules can span
+    several tables — the finish schedule is two, plumbing fixtures several)."""
+    out: list[ScheduleItem] = []
+    for t in tables:
+        if not t or len(t[0]) < min_cols:
+            continue
+        if resolve_columns(t, schema).coverage < min_coverage:
+            continue
+        out.extend(parse_schedule(t, schema, source))
+    return out
+
+
+# --- driver: signature-gated extraction across a page range ------------------
+
+# The registry the driver walks. Door/finish are included so schedule_items.json is
+# a single unified quantity view; their DoorEntry/FinishEntry parsers are untouched.
+SCHEDULE_REGISTRY: list[ScheduleSchema] = [
+    DOOR_SCHEMA, FINISH_SCHEMA, WINDOW_SCHEMA, PLUMBING_FIXTURE_SCHEMA,
+]
+
+
+def _page_matches(text: str, schema: ScheduleSchema) -> bool:
+    t = text.lower()
+    return bool(schema.title_signature) and all(tok in t for tok in schema.title_signature)
+
+
+def extract_schedule_items(
+    pdf_path, page_range=None, schemas: list[ScheduleSchema] | None = None,
+    file_id: str | None = None,
+) -> list[ScheduleItem]:
+    """Find and parse schedules across a page range, keyed by title signature.
+
+    Page discovery is by signature + header coverage (no page constants): a page is
+    a candidate for a schema only if its text carries the schema's title tokens, and
+    only tables that actually resolve to the schema are parsed. The cheap text gate
+    uses fitz (fast on vector-heavy drawing pages); the expensive pdfplumber
+    extract_tables runs only on candidate pages. Items are de-duplicated by
+    (schedule, mark) so a schedule referenced on several pages isn't double-counted.
+    """
+    import pathlib
+
+    import fitz
+    import pdfplumber
+
+    schemas = schemas or SCHEDULE_REGISTRY
+    fid = file_id or pathlib.Path(str(pdf_path)).stem
+
+    # 1) Fast fitz pass: which pages are candidates for which schemas.
+    candidates: dict[int, list[ScheduleSchema]] = {}
+    with fitz.open(str(pdf_path)) as doc:
+        rng = page_range if page_range is not None else range(doc.page_count)
+        for i in rng:
+            text = doc[i].get_text()
+            matched = [s for s in schemas if _page_matches(text, s)]
+            if matched:
+                candidates[i] = matched
+
+    # 2) pdfplumber only on candidate pages: extract_tables + parse.
+    seen: set[tuple[str, str]] = set()
+    items: list[ScheduleItem] = []
+    if candidates:
+        with pdfplumber.open(pdf_path) as pdf:
+            for i in sorted(candidates):
+                tables = pdf.pages[i].extract_tables()
+                for schema in candidates[i]:
+                    src = {"file_id": fid, "page_index": i, "schedule": schema.name}
+                    for it in parse_page(tables, schema, src):
+                        key = (it.schedule, it.mark)
+                        if not it.mark or key in seen:
+                            continue
+                        seen.add(key)
+                        items.append(it)
+    return items
+
+
+def summarize(items: list[ScheduleItem]) -> dict:
+    """Reported metrics: item counts by schedule and by quantity basis, plus the
+    summed known quantity (instances + explicit qty columns; catalog-only excluded)."""
+    from collections import Counter
+
+    by_schedule = dict(Counter(i.schedule for i in items))
+    by_basis = dict(Counter(i.quantity_basis for i in items))
+    known_qty = round(sum(i.quantity for i in items if i.quantity is not None), 2)
+    return {
+        "total_items": len(items),
+        "by_schedule": by_schedule,
+        "by_basis": by_basis,
+        "known_quantity_total": known_qty,
+        "count_pending_items": by_basis.get(BASIS_UNKNOWN, 0),
+    }

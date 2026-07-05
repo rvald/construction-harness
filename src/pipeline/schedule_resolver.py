@@ -34,6 +34,8 @@ class ScheduleSchema:
     merge_rows: bool = False                     # row may pack N identical instances (door schedule)
     qty_field: str | None = None                 # canonical field holding an explicit quantity, if any
     qty_unit: str = "EA"                         # unit for row_count / qty_field quantities
+    title_signature: tuple[str, ...] = ()        # lowercase substrings a page's text must all contain
+                                                 # to be a parse candidate (page discovery, no constants)
 
     @property
     def key_field(self) -> str:
@@ -68,6 +70,7 @@ DOOR_SCHEMA = ScheduleSchema(
     shape="instance",
     row_key="door_mark",
     merge_rows=True,                             # door rows can pack N identical doors
+    title_signature=("door", "schedule"),
 )
 
 FINISH_SCHEMA = ScheduleSchema(
@@ -84,6 +87,7 @@ FINISH_SCHEMA = ScheduleSchema(
     core_fields=["room_number", "floor_finish", "base_finish", "wall_finish", "ceiling_finish"],
     shape="instance",
     row_key="room_number",
+    title_signature=("finish", "schedule"),
 )
 
 # A window schedule is keyed by a mark/type (one row = one window type), so it is a
@@ -103,6 +107,7 @@ WINDOW_SCHEMA = ScheduleSchema(
     core_fields=["mark", "window_type", "size"],
     shape="catalog",
     row_key="mark",
+    title_signature=("window", "schedule"),
 )
 
 # A plumbing fixture schedule is a catalog: one row per fixture TAG (WC-1, L-1, ...)
@@ -125,6 +130,7 @@ PLUMBING_FIXTURE_SCHEMA = ScheduleSchema(
     shape="catalog",
     row_key="fixture_tag",
     qty_field="quantity",
+    title_signature=("plumbing", "fixture"),
 )
 
 

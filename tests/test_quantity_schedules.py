@@ -13,8 +13,10 @@ import pdfplumber
 from src.pipeline.phase2_schedule_parser import (
     _select_schedule_table, parse_door_schedule, parse_finish_schedule,
 )
+from src.models.schedule import ScheduleItem
 from src.pipeline.quantity_schedules import (
-    BASIS_ROW_COUNT, _looks_like_tag, _num, parse_schedule,
+    BASIS_ROW_COUNT, _looks_like_tag, _num, extract_schedule_items, parse_page,
+    parse_schedule, summarize,
 )
 from src.pipeline.schedule_resolver import (
     DOOR_SCHEMA, FINISH_SCHEMA, PLUMBING_FIXTURE_SCHEMA, WINDOW_SCHEMA,
@@ -126,6 +128,40 @@ def test_plumbing_items_are_catalog_with_descriptions():
     # UCCS plumbing schedule has no real takeoff-count column -> count-pending
     assert all(i.quantity is None and i.quantity_basis == "unknown_plan_count"
                for i in items.values())
+
+
+# --- M4 driver: multi-table, signature-gated extraction, summary ---------
+
+def test_parse_page_captures_multiple_tables():
+    # The plumbing schedule spans several tables on the page; parse_page aggregates
+    # all that resolve, so both water closets (WC-1) and sinks (KS-1) are captured.
+    with pdfplumber.open(DRAWINGS) as pdf:
+        tables = pdf.pages[58].extract_tables()
+    items = parse_page(tables, PLUMBING_FIXTURE_SCHEMA, {"schedule": "plumbing_fixture"})
+    marks = {i.mark for i in items}
+    assert {"WC-1", "KS-1"} <= marks                          # from different tables on the page
+
+
+def test_extract_driver_finds_and_tags_source():
+    # Signature gate + pdfplumber parse over just the plumbing page (fast, 1 page).
+    items = extract_schedule_items(DRAWINGS, page_range=range(58, 59))
+    assert items and all(i.schedule == "plumbing_fixture" for i in items)
+    assert all(i.source["page_index"] == 58 for i in items)   # provenance recorded
+    assert all(i.source["file_id"] == "drawings" for i in items)
+    assert all(i.quantity_basis == "unknown_plan_count" for i in items)
+
+
+def test_summarize_reports_metrics():
+    items = [
+        ScheduleItem("door", "instance", "D1", 1.0, "EA", BASIS_ROW_COUNT),
+        ScheduleItem("door", "instance", "D2", 1.0, "EA", BASIS_ROW_COUNT),
+        ScheduleItem("plumbing_fixture", "catalog", "WC-1", None, None, "unknown_plan_count"),
+    ]
+    s = summarize(items)
+    assert s["total_items"] == 3
+    assert s["by_schedule"] == {"door": 2, "plumbing_fixture": 1}
+    assert s["known_quantity_total"] == 2.0                    # catalog item excluded
+    assert s["count_pending_items"] == 1
 
 
 # --- unit helpers --------------------------------------------------------

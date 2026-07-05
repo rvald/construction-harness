@@ -132,4 +132,17 @@ Structural schedules (footing/pier/beam/column, Pinney) are a natural **Tier 1b*
 - **M1 — generic parser + data model** ✅ committed. `ScheduleItem`, `parse_schedule`, door/finish parity (60 doors, finish room set). Golden byte-identical.
 - **M2 — window schedule** ✅ committed. Catalog path proven on Pinney; count-pending; size + daylight area captured.
 - **M3 — plumbing fixture** ✅ committed. Catalog path proven on UCCS; fixtures + descriptions; count-pending.
-- **M4 — artifact + reported metrics** ⏸ pending approval. Emits `schedule_items.json` (no golden touch) and adds schedule-item counts as *reported metrics* in the validation report (intentional, documented re-baseline).
+- **M4 — schedule_items.json artifact** ✅ committed. Signature-gated driver
+  (`extract_schedule_items`) finds schedules by title signature + header coverage
+  (no page constants), parses every resolving table per page (schedules span
+  several), de-dupes by (schedule, mark), and records provenance. `build_schedule_items`
+  writes `output/reports/schedule_items.json` = {summary, items}. On UCCS: 135 items
+  (60 doors, 65 rooms, 10 plumbing fixtures), summary reports counts by schedule/basis
+  and the known-quantity total.
+
+  **Deviation from §5/§6 (intentional):** the reported-metrics summary lives *inside*
+  `schedule_items.json`, NOT in `validation_report.json`. Measured reason: the fitz-gated
+  full-drawings scan is ~90s; wiring it into `run_all` (exercised by two tests) would add
+  minutes to every gates run. Keeping the artifact standalone leaves the golden report
+  **byte-identical** (no re-baseline) and keeps the graph/gates run fast. The cheap text
+  gate uses fitz; pdfplumber's expensive `extract_tables` runs only on candidate pages.
