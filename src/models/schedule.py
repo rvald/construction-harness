@@ -43,6 +43,25 @@ class ScheduleItem(JsonModel):
 
 
 @dataclass
+class CountResult(JsonModel):
+    """A deterministic per-sheet fixture-tag count (Tier 3.1 extraction).
+
+    The count is per SHEET, not a deduped building total: the same fixture is tagged
+    on the overall plan and re-tagged on enlarged plans, so the true total is resolved
+    later by the VLM verifier. `source="text_tag"` (tags live in the plumbing sheets'
+    text layer); `verified` is set only after verification.
+    """
+
+    symbol_id: str                              # catalog key, e.g. "WC-1"
+    sheet_page: int                             # 1-indexed page the count is from
+    count: int                                  # tag occurrences on this sheet (candidate)
+    confidence: float = 0.7                     # deterministic, pre-verification, pre-dedup
+    source: str = "text_tag"
+    verified: bool = False
+    boxes: list = field(default_factory=list)   # [[x, y], ...] tag centers -> provenance
+
+
+@dataclass
 class RoomArea(JsonModel):
     """An approximate per-room floor area harvested from SF text labels on the
     area/floor plans (Tier 2). Deliberately approximate — occupancy/gross magnitude,
