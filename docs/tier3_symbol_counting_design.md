@@ -135,7 +135,7 @@ We never do open-ended detection. We only ever answer "how many of *this known* 
 
 - **M0 — spike (DONE 2026-07-05).** Result: fixture tags are in the text layer on plumbing sheets → extraction is **text-tag counting**, not vector/template symbol matching. But raw counts recur across legends/schedules and overall+enlarged views, so counting needs spatial discrimination + cross-view dedup; the true count is what the VLM verifier confirms. See §2.
 - **M1 — extraction core + basis flip.** `extract_counts` = locate MEP fixture-plan sheets (signature) → count catalog tags in the text layer → **filter clustered legend/schedule blocks by spatial spread** → **de-dup across overall/enlarged views** → `CountResult`; aggregate and flip `unknown_plan_count → plan_count` with count/boxes/confidence. Offline tests. **Delivers usable counts without any VLM.** Open question to resolve in M1: which sheet(s) are authoritative for instance counts (overall plan vs enlarged plans vs riser) and the dedup rule across them.
-- **M2 — legend extraction + one trade end-to-end.** `LegendRef` from the legend/catalog; plumbing fixtures counted deterministically into `schedule_items.json` with provenance.
+- ~~**M2 — legend extraction + one trade end-to-end.**~~ **Largely obviated by the text-tag pivot:** counting text tags needs no legend glyph (`LegendRef` was for symbol matching), and plumbing is already end-to-end in `schedule_items.json` (M1). Legend-glyph extraction only returns if a graphical-tag discipline forces vector matching later.
 - **M3 — VLM verifier (opt-in).** `CountVerifier` protocol + stub (offline tests for the merge rule) + real cached VLM adapter; verification raises confidence / flags disagreements; suite stays offline.
 
 ---
