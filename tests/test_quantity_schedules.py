@@ -19,8 +19,8 @@ from src.pipeline.quantity_schedules import (
     parse_schedule, summarize,
 )
 from src.pipeline.schedule_resolver import (
-    DOOR_SCHEMA, FINISH_SCHEMA, PLUMBING_FIXTURE_SCHEMA, WINDOW_SCHEMA,
-    select_schedule_table,
+    DOOR_SCHEMA, FINISH_SCHEMA, LIGHTING_FIXTURE_SCHEMA, PLUMBING_FIXTURE_SCHEMA,
+    WINDOW_SCHEMA, select_schedule_table,
 )
 
 DATA = pathlib.Path(__file__).resolve().parents[1] / "data" / "uccs"
@@ -128,6 +128,31 @@ def test_plumbing_items_are_catalog_with_descriptions():
     # UCCS plumbing schedule has no real takeoff-count column -> count-pending
     assert all(i.quantity is None and i.quantity_basis == "unknown_plan_count"
                for i in items.values())
+
+
+# --- lighting fixture catalog (A1 fan-out) -------------------------------
+
+def test_lighting_fixture_catalog():
+    with pdfplumber.open(DRAWINGS) as pdf:
+        table = select_schedule_table(pdf.pages[105].extract_tables(), LIGHTING_FIXTURE_SCHEMA)
+    items = parse_schedule(table, LIGHTING_FIXTURE_SCHEMA)          # E7.1 lighting fixture schedule
+    marks = {i.mark for i in items}
+    assert {"L2A", "L20K"} <= marks                                # header "TYPE" -> fixture_tag
+    assert all(i.shape == "catalog" for i in items)
+
+
+# --- security: instance-schedule counting (free-form device IDs) ---------
+
+def test_security_camera_and_device_counts():
+    from src.pipeline.quantity_schedules import extract_schedule_items
+    items = extract_schedule_items(DRAWINGS, page_range=range(128, 130))    # p129 security schedules
+    cams = [i for i in items if i.schedule == "camera"]
+    devs = [i for i in items if i.schedule == "security_device"]
+    assert len(cams) == 13 and len(devs) == 5                # direct row counts
+    assert cams[0].shape == "instance" and cams[0].quantity == 1.0
+    assert cams[0].quantity_basis == "row_count"
+    assert cams[0].mark.startswith("C-")                    # free-form device number
+    assert devs[0].mark.startswith(("ACP", "NVR", "PS"))
 
 
 # --- M4 driver: multi-table, signature-gated extraction, summary ---------
