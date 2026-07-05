@@ -43,6 +43,21 @@ class ScheduleItem(JsonModel):
 
 
 @dataclass
+class RoomArea(JsonModel):
+    """An approximate per-room floor area harvested from SF text labels on the
+    area/floor plans (Tier 2). Deliberately approximate — occupancy/gross magnitude,
+    partial coverage — so it carries a confidence and an explicit basis; it is never
+    presented as an exact net area (that is Tier 3 geometry).
+    """
+
+    room_number: str
+    area_sf: float
+    confidence: float                            # 0..1, from label-to-room distance + uniqueness
+    basis: str = "area_label_join"               # provenance of the number
+    source: dict = field(default_factory=dict)   # {file_id, page_index}
+
+
+@dataclass
 class FinishEntry(JsonModel):
     """A single row from the room finish schedule (sheet AF2.4)."""
 
