@@ -105,6 +105,28 @@ WINDOW_SCHEMA = ScheduleSchema(
     row_key="mark",
 )
 
+# A plumbing fixture schedule is a catalog: one row per fixture TAG (WC-1, L-1, ...)
+# giving description + spec (manufacturer/model), but no instance count — that lives
+# on the plumbing plans. `qty_field` is declared so that a schedule variant which DOES
+# carry a real QUANTITY column yields basis "qty_column"; UCCS's does not, so its
+# fixtures resolve as unknown_plan_count. Validated on UCCS (p59).
+PLUMBING_FIXTURE_SCHEMA = ScheduleSchema(
+    name="plumbing_fixture",
+    fields={
+        "fixture_tag": ["fixture tag", "tag", "mark", "fixture"],
+        "description": ["description", "fixture description"],
+        "fixture_type": ["type"],
+        "manufacturer": ["manufacturer", "mfr", "manufacture"],
+        "model": ["model", "model no", "model number"],
+        "quantity": ["quantity", "qty", "count"],
+        "remarks": ["plumbing remarks", "remarks", "notes", "comments"],
+    },
+    core_fields=["fixture_tag", "description"],
+    shape="catalog",
+    row_key="fixture_tag",
+    qty_field="quantity",
+)
+
 
 @dataclass
 class ColumnMap:

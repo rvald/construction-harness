@@ -17,7 +17,8 @@ from src.pipeline.quantity_schedules import (
     BASIS_ROW_COUNT, _looks_like_tag, _num, parse_schedule,
 )
 from src.pipeline.schedule_resolver import (
-    DOOR_SCHEMA, FINISH_SCHEMA, WINDOW_SCHEMA, select_schedule_table,
+    DOOR_SCHEMA, FINISH_SCHEMA, PLUMBING_FIXTURE_SCHEMA, WINDOW_SCHEMA,
+    select_schedule_table,
 )
 
 DATA = pathlib.Path(__file__).resolve().parents[1] / "data" / "uccs"
@@ -104,6 +105,27 @@ def test_window_captures_size_and_glazing_area():
     assert a.attributes.get("size")                           # size resolved
     assert a.attributes.get("daylight_area")                  # DAYLIGHT AREA (S.F.) resolved
     assert a.attributes.get("window_type")                    # TYPE resolved
+
+
+# --- plumbing fixture: catalog path (UCCS) -------------------------------
+
+def _uccs_plumbing_table():
+    with pdfplumber.open(DRAWINGS) as pdf:
+        return select_schedule_table(pdf.pages[58].extract_tables(), PLUMBING_FIXTURE_SCHEMA)
+
+
+def test_plumbing_table_discovered():
+    assert _uccs_plumbing_table() is not None
+
+
+def test_plumbing_items_are_catalog_with_descriptions():
+    items = {i.mark: i for i in parse_schedule(_uccs_plumbing_table(), PLUMBING_FIXTURE_SCHEMA)}
+    assert {"L-1", "MS-1"} <= set(items)                      # fixture tags resolved
+    assert all(i.shape == "catalog" for i in items.values())
+    assert items["MS-1"].description                          # DESCRIPTION carried onto the item
+    # UCCS plumbing schedule has no real takeoff-count column -> count-pending
+    assert all(i.quantity is None and i.quantity_basis == "unknown_plan_count"
+               for i in items.values())
 
 
 # --- unit helpers --------------------------------------------------------

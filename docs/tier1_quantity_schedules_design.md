@@ -120,9 +120,16 @@ Structural schedules (footing/pier/beam/column, Pinney) are a natural **Tier 1b*
 
 ---
 
-## 10. Open decisions to confirm
+## 10. Decisions (resolved 2026-07-05)
 
-1. **Scope of Tier 1 targets** — do all five §7 schedules now, or start with window + plumbing_fixture and add the rest once the generic path is proven?
-2. **Structural schedules (Pinney)** — fold in as Tier 1b now, or defer until the architectural set is solid?
-3. **Catalog items with no count** — is `unknown_plan_count` the right contract (surface them as spec catalog + explicit count-pending), or should catalog-only schedules be excluded from the quantity artifact entirely until Tier 3?
-4. **Description enrichment** — resolve descriptions against the abbreviation/legend map and code→section graph now, or keep raw schedule text in Tier 1 and enrich later?
+1. **Scope** — *prove narrow first*: build the generic parser + data model, reproduce door/finish exactly, then add **window + plumbing_fixture** only. Fan-out to the rest after the generic path is proven.
+2. **Structural schedules (Pinney)** — deferred (follows from "prove narrow").
+3. **Catalog items with no count** — **include, marked `unknown_plan_count`**: surface them as spec catalog + explicit count-pending, never a silent zero.
+4. **Description enrichment** — keep raw schedule text in Tier 1; enrich against the abbreviation/legend map + code→section graph later.
+
+## 11. Build status
+
+- **M1 — generic parser + data model** ✅ committed. `ScheduleItem`, `parse_schedule`, door/finish parity (60 doors, finish room set). Golden byte-identical.
+- **M2 — window schedule** ✅ committed. Catalog path proven on Pinney; count-pending; size + daylight area captured.
+- **M3 — plumbing fixture** ✅ committed. Catalog path proven on UCCS; fixtures + descriptions; count-pending.
+- **M4 — artifact + reported metrics** ⏸ pending approval. Emits `schedule_items.json` (no golden touch) and adds schedule-item counts as *reported metrics* in the validation report (intentional, documented re-baseline).
