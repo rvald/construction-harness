@@ -6,9 +6,28 @@ Milestone 10 is exploratory and doesn't populate symbols.
 """
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from .base import JsonModel
+
+
+@dataclass
+class SheetScale(JsonModel):
+    """The drawing scale of a sheet (Tier 2.1). `factor` is real inches per paper
+    inch, so a drawn distance of P points -> real inches = (P/72) * factor.
+
+    A sheet with one scale resolves confidently; a sheet mixing scales (detail views
+    at different scales) is flagged `ambiguous` with `factor` unresolved — per-viewport
+    association is deferred, and the plan sheets that measurement needs first are
+    single-scale anyway.
+    """
+
+    pdf_page_number: int
+    factor: float | None                        # real inches per paper inch; None if none/ambiguous
+    scale_text: str = ""                         # the chosen scale string ("" if none/ambiguous)
+    confidence: float = 0.0                      # 1.0 single, ~0.4 ambiguous, 0.0 none
+    ambiguous: bool = False                      # more than one distinct scale on the sheet
+    all_scales: list[str] = field(default_factory=list)   # every distinct scale string found
 
 
 @dataclass

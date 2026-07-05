@@ -31,6 +31,8 @@ class ScheduleSchema:
     # --- quantity metadata (Tier 1 generic parser; defaults keep existing schemas inert) ---
     shape: str = "instance"                      # "instance" (row = one thing) | "catalog" (row = one type)
     row_key: str = ""                            # canonical field that keys a data row; "" -> first core field
+    row_grammar: str = "mark"                    # "mark" (door/room-shaped key) | "free" (any non-empty key cell,
+                                                 # for instance schedules with free-form IDs like C-EXTERIOR-1)
     merge_rows: bool = False                     # row may pack N identical instances (door schedule)
     qty_field: str | None = None                 # canonical field holding an explicit quantity, if any
     qty_unit: str = "EA"                         # unit for row_count / qty_field quantities
@@ -131,6 +133,61 @@ PLUMBING_FIXTURE_SCHEMA = ScheduleSchema(
     row_key="fixture_tag",
     qty_field="quantity",
     title_signature=("plumbing", "fixture"),
+)
+
+# A lighting fixture schedule is a catalog keyed by luminaire TYPE (L2A, L20K, ...).
+# Its tag column header is "TYPE" (validated on UCCS E7.1). Like plumbing, the count of
+# each type lives on the plans (the lighting plans, where the tags ARE in the text layer
+# — A0 spike). Feeds both the schedule catalog and the fixture-count catalog.
+LIGHTING_FIXTURE_SCHEMA = ScheduleSchema(
+    name="lighting_fixture",
+    fields={
+        "fixture_tag": ["type", "fixture type", "tag", "mark", "symbol", "fixture"],
+        "description": ["description", "fixture description", "luminaire"],
+        "manufacturer": ["manufacturer", "mfr", "manufacture"],
+        "model": ["model", "catalog", "catalog number", "catalog no"],
+        "lamp": ["lamp", "lamps", "lamp type", "load"],
+        "driver": ["driver", "ballast"],
+        "remarks": ["remarks", "notes", "comments"],
+    },
+    core_fields=["fixture_tag", "description"],
+    shape="catalog",
+    row_key="fixture_tag",
+    title_signature=("lighting", "fixture"),
+)
+
+# Security schedules are INSTANCE schedules — one row per physical device, keyed by a
+# free-form DEVICE NUMBER (C-EXTERIOR-1, ACP-N124-1). So devices/cameras are counted from
+# the schedule (row count), not by counting tags on plans (A0 finding). `row_grammar="free"`
+# accepts any non-empty key cell (device numbers don't fit the door/room mark grammar).
+CAMERA_SCHEDULE = ScheduleSchema(
+    name="camera",
+    fields={
+        "device_number": ["device number", "camera number", "number"],
+        "room_number": ["room number", "room"],
+        "room_name": ["room name", "name"],
+        "camera_type": ["camera type"],
+        "make_model": ["make model", "make & model", "make"],
+        "reference": ["reference detail", "reference"],
+    },
+    core_fields=["device_number", "camera_type"],
+    shape="instance", row_key="device_number", row_grammar="free",
+    title_signature=("camera", "schedule"),
+)
+
+SECURITY_DEVICE_SCHEMA = ScheduleSchema(
+    name="security_device",
+    fields={
+        "device_number": ["device number", "number"],
+        "room_number": ["room number", "room"],
+        "room_name": ["room name", "name"],
+        "device_type": ["device type"],
+        "make": ["make", "model"],
+        "reference": ["reference detail", "reference"],
+    },
+    core_fields=["device_number", "device_type"],
+    shape="instance", row_key="device_number", row_grammar="free",
+    title_signature=("security", "device"),
 )
 
 

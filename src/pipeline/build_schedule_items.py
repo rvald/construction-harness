@@ -15,8 +15,9 @@ from __future__ import annotations
 import json
 import pathlib
 
-from src.models.schedule import RoomArea, ScheduleItem
+from src.models.schedule import CountResult, RoomArea, ScheduleItem
 from src.pipeline.area_harvest import harvest_room_areas
+from src.pipeline.fixture_counts import extract_counts, summarize_counts
 from src.pipeline.quantity_schedules import extract_schedule_items, summarize
 
 _DEFAULT_PDF = pathlib.Path(__file__).resolve().parents[2] / "data" / "uccs" / "drawings.pdf"
@@ -34,25 +35,50 @@ def area_coverage(room_areas: list[RoomArea], finish_rooms: set[str]) -> dict:
     }
 
 
-def assemble(items: list[ScheduleItem], room_areas: list[RoomArea], finish_rooms: set[str]) -> dict:
+def assemble(items: list[ScheduleItem], room_areas: list[RoomArea], finish_rooms: set[str],
+             fixture_counts: list[CountResult] | None = None) -> dict:
     """Assemble the artifact dict from already-computed parts (pure — unit-testable)."""
+    fixture_counts = fixture_counts or []
     return {
         "summary": summarize(items),
         "area_coverage": area_coverage(room_areas, finish_rooms),
+        "fixture_count_summary": summarize_counts(fixture_counts),
         "items": [it.to_dict() for it in items],
         "room_areas": [a.to_dict() for a in room_areas],
+        "fixture_counts": [c.to_dict() for c in fixture_counts],
     }
 
 
-def build_schedule_items(drawings_path=_DEFAULT_PDF, page_range=None) -> dict:
-    """Extract schedule items + harvest per-room floor areas -> the full artifact.
+# catalog schedules whose tags get counted on the plans (each is text-tagged there)
+_COUNTED_CATALOGS = ("plumbing_fixture", "lighting_fixture")
 
-    Floor areas are joined only to the finish schedule's rooms (the known-room set),
-    so the harvest never invents rooms and stays firm-agnostic."""
+
+def count_fixtures(drawings_path, items, page_range=None) -> list[CountResult]:
+    """Count each counted-catalog schedule's tags on the plans. The catalog and the
+    schedule's own page(s) come from the extracted schedule items, so the fixture
+    SCHEDULE sheet is excluded from the plan scan (it scatters the same tags)."""
+    counts: list[CountResult] = []
+    for kind in _COUNTED_CATALOGS:
+        cat = [i for i in items if i.schedule == kind]
+        if not cat:
+            continue
+        tags = [i.mark for i in cat]
+        schedule_pages = {i.source.get("page_index") for i in cat if "page_index" in i.source}
+        counts += extract_counts(drawings_path, tags, page_range=page_range,
+                                 exclude_pages=schedule_pages)
+    return counts
+
+
+def build_schedule_items(drawings_path=_DEFAULT_PDF, page_range=None) -> dict:
+    """Extract schedule items + harvest floor areas + count fixture tags -> the artifact.
+
+    Floor areas join only to the finish schedule's rooms; fixture counts are per-sheet
+    candidates over the plumbing + lighting catalogs (deduped total pending verification)."""
     items = extract_schedule_items(drawings_path, page_range=page_range)
     finish_rooms = {i.mark for i in items if i.schedule == "finish"}
     room_areas = harvest_room_areas(drawings_path, finish_rooms, page_range=page_range)
-    return assemble(items, room_areas, finish_rooms)
+    fixture_counts = count_fixtures(drawings_path, items, page_range=page_range)
+    return assemble(items, room_areas, finish_rooms, fixture_counts)
 
 
 if __name__ == "__main__":
@@ -61,7 +87,9 @@ if __name__ == "__main__":
     print(json.dumps(report["summary"], indent=2))
     print("area coverage:")
     print(json.dumps(report["area_coverage"], indent=2))
+    print("fixture count summary:")
+    print(json.dumps(report["fixture_count_summary"], indent=2))
     _OUT.parent.mkdir(parents=True, exist_ok=True)
     _OUT.write_text(json.dumps(report, indent=2, ensure_ascii=False))
     print(f"\nwrote {_OUT}  ({report['summary']['total_items']} items, "
-          f"{len(report['room_areas'])} room areas)")
+          f"{len(report['room_areas'])} room areas, {len(report['fixture_counts'])} fixture counts)")
