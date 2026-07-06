@@ -3,49 +3,42 @@
   "gates": [
     {
       "phase": "phase2",
-      "name": "toc_section_count",
+      "name": "spec_toc_parsed",
       "passed": true,
-      "detail": "124 sections (expected >= 100)",
+      "detail": "24 divisions, 124 sections",
       "metric": 124
     },
     {
       "phase": "phase2",
-      "name": "all_divisions_present",
+      "name": "door_schedule_parsed",
       "passed": true,
-      "detail": "24 divisions (expected 24)",
-      "metric": 24
-    },
-    {
-      "phase": "phase2",
-      "name": "door_schedule_size",
-      "passed": true,
-      "detail": "60 doors (expected > 50)",
+      "detail": "60 doors",
       "metric": 60
     },
     {
       "phase": "phase2",
-      "name": "finish_schedule_size",
+      "name": "finish_schedule_parsed",
       "passed": true,
-      "detail": "65 rooms (expected > 25)",
+      "detail": "65 rooms",
       "metric": 65
     },
     {
       "phase": "phase2",
-      "name": "abbreviation_list_size",
+      "name": "abbreviations_parsed",
       "passed": true,
-      "detail": "410 abbreviations (expected > 100)",
+      "detail": "410 abbreviations",
       "metric": 410
     },
     {
       "phase": "phase3",
-      "name": "sheet_count",
+      "name": "sheets_registered",
       "passed": true,
-      "detail": "133 sheets (expected 133)",
+      "detail": "133 sheets",
       "metric": 133
     },
     {
       "phase": "phase3",
-      "name": "all_disciplines_present",
+      "name": "disciplines_identified",
       "passed": true,
       "detail": "9 disciplines represented",
       "metric": 9

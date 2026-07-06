@@ -33,18 +33,16 @@ def _g(name: str, passed: bool, detail: str, metric=None) -> GateResult:
 # --- Phase 2 -------------------------------------------------------------
 
 def check_phase2(toc, door_count: int, room_count: int, abbrev_count: int) -> list[GateResult]:
+    # Structural invariants (project-agnostic): each phase produced content. The exact
+    # magnitudes are reported as `metric`, not asserted against UCCS counts (C11) — so
+    # these gates don't invert on a differently-sized project.
     divisions = [d["number"] for d in toc.divisions]
     return [
-        _g("toc_section_count", toc.total_sections >= 100,
-           f"{toc.total_sections} sections (expected >= 100)", toc.total_sections),
-        _g("all_divisions_present", len(divisions) == 24,
-           f"{len(divisions)} divisions (expected 24)", len(divisions)),
-        _g("door_schedule_size", door_count > 50,
-           f"{door_count} doors (expected > 50)", door_count),
-        _g("finish_schedule_size", room_count > 25,
-           f"{room_count} rooms (expected > 25)", room_count),
-        _g("abbreviation_list_size", abbrev_count > 100,
-           f"{abbrev_count} abbreviations (expected > 100)", abbrev_count),
+        _g("spec_toc_parsed", len(divisions) > 0,
+           f"{len(divisions)} divisions, {toc.total_sections} sections", toc.total_sections),
+        _g("door_schedule_parsed", door_count > 0, f"{door_count} doors", door_count),
+        _g("finish_schedule_parsed", room_count > 0, f"{room_count} rooms", room_count),
+        _g("abbreviations_parsed", abbrev_count > 0, f"{abbrev_count} abbreviations", abbrev_count),
     ]
 
 
@@ -55,9 +53,9 @@ def check_phase3(registry, reconciliation: list[dict]) -> list[GateResult]:
     all_found = all(r["in_registry"] for r in reconciliation)
     pages_ok = all(r["page_matches"] for r in reconciliation)
     return [
-        _g("sheet_count", len(registry) == 133,
-           f"{len(registry)} sheets (expected 133)", len(registry)),
-        _g("all_disciplines_present", len(disciplines) >= 9,
+        _g("sheets_registered", len(registry) > 0,
+           f"{len(registry)} sheets", len(registry)),
+        _g("disciplines_identified", len(disciplines) > 0,
            f"{len(disciplines)} disciplines represented", len(disciplines)),
         _g("sample_sheets_classified", all_found,
            f"{sum(r['in_registry'] for r in reconciliation)}/{len(reconciliation)} sample sheets in registry"),
@@ -144,8 +142,13 @@ def build_report(kg, toc, registry, doors, rooms, abbrev_count, reconciliation) 
     }
 
 
-def run_all(manual_path, drawings_path) -> dict:
-    """Parse every phase, build the graph, run all gates, and return the report."""
+def run_all(manual_path, drawings_path, doc_map=None) -> dict:
+    """Parse every phase, build the graph, run all gates, and return the report.
+
+    Pages come from the document map (discovered by signature), not hardcoded
+    indices; the same map is threaded into build_graph so the two agree.
+    """
+    from src.pipeline.build_document_map import build_document_map, extraction_pages
     from src.pipeline.phase2_abbreviation_parser import parse_abbreviations
     from src.pipeline.phase2_drawing_index import parse_drawing_index
     from src.pipeline.phase2_schedule_parser import parse_door_schedule, parse_finish_schedule
@@ -153,13 +156,21 @@ def run_all(manual_path, drawings_path) -> dict:
     from src.pipeline.phase3_sheet_classifier import classify_sheets, reconcile
     from src.pipeline.phase5_graph_builder import build_graph
 
-    toc = parse_spec_toc(manual_path)
-    registry = parse_drawing_index(drawings_path)
-    doors = parse_door_schedule(drawings_path)
-    rooms = parse_finish_schedule(drawings_path)
-    abbrev_count = len(parse_abbreviations(drawings_path))
+    if doc_map is None:
+        doc_map = build_document_map([drawings_path, manual_path])
+    pg = extraction_pages(doc_map)
+
+    toc = parse_spec_toc(manual_path, start_page=pg["toc_start"] or 0)
+    registry = parse_drawing_index(drawings_path, page_index=pg["drawing_index"]) \
+        if pg["drawing_index"] is not None else []
+    doors = parse_door_schedule(drawings_path, page_index=pg["door_schedule"]) \
+        if pg["door_schedule"] is not None else []
+    rooms = parse_finish_schedule(drawings_path, page_index=pg["finish_schedule"]) \
+        if pg["finish_schedule"] is not None else []
+    abbrev_count = len(parse_abbreviations(drawings_path, page_index=pg["abbreviations"])) \
+        if pg["abbreviations"] is not None else 0
     reconciliation = reconcile(classify_sheets(drawings_path), registry)
-    kg = build_graph(manual_path, drawings_path)
+    kg = build_graph(manual_path, drawings_path, doc_map=doc_map)
 
     return build_report(kg, toc, registry, doors, rooms, abbrev_count, reconciliation)
 

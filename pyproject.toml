@@ -9,3 +9,8 @@ dependencies = [
     "pdfplumber>=0.11.10",
     "pymupdf>=1.28.0",
 ]
+
+# Optional: the LLM backend for the semantic section resolver (B9). Lazily imported
+# by src/pipeline/section_llm.py so core pipeline + tests run without it.
+[project.optional-dependencies]
+llm = ["anthropic>=0.40"]

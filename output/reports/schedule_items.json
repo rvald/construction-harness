@@ -1,0 +1,6811 @@
+{
+  "summary": {
+    "total_items": 195,
+    "by_schedule": {
+      "door": 60,
+      "finish": 65,
+      "plumbing_fixture": 10,
+      "lighting_fixture": 42,
+      "camera": 13,
+      "security_device": 5
+    },
+    "by_basis": {
+      "row_count": 143,
+      "unknown_plan_count": 52
+    },
+    "known_quantity_total": 143.0,
+    "count_pending_items": 52
+  },
+  "area_coverage": {
+    "finish_rooms": 65,
+    "rooms_with_area": 25,
+    "coverage": 0.385
+  },
+  "fixture_count_summary": {
+    "symbols_counted": 46,
+    "instance_sheets": [
+      58,
+      99,
+      100,
+      102,
+      104
+    ],
+    "dedup_status": "pending_verification",
+    "by_symbol": {
+      "MS-1": {
+        "candidate_total": 2,
+        "sheets": [
+          {
+            "page": 58,
+            "count": 2
+          }
+        ]
+      },
+      "WC-2": {
+        "candidate_total": 4,
+        "sheets": [
+          {
+            "page": 58,
+            "count": 4
+          }
+        ]
+      },
+      "L-1": {
+        "candidate_total": 6,
+        "sheets": [
+          {
+            "page": 58,
+            "count": 6
+          }
+        ]
+      },
+      "WC-1": {
+        "candidate_total": 3,
+        "sheets": [
+          {
+            "page": 58,
+            "count": 3
+          }
+        ]
+      },
+      "U-1": {
+        "candidate_total": 3,
+        "sheets": [
+          {
+            "page": 58,
+            "count": 3
+          }
+        ]
+      },
+      "L-2": {
+        "candidate_total": 15,
+        "sheets": [
+          {
+            "page": 58,
+            "count": 15
+          }
+        ]
+      },
+      "L2A": {
+        "candidate_total": 2,
+        "sheets": [
+          {
+            "page": 99,
+            "count": 2
+          }
+        ]
+      },
+      "L18A": {
+        "candidate_total": 1,
+        "sheets": [
+          {
+            "page": 99,
+            "count": 1
+          }
+        ]
+      },
+      "L16A": {
+        "candidate_total": 19,
+        "sheets": [
+          {
+            "page": 99,
+            "count": 16
+          },
+          {
+            "page": 102,
+            "count": 3
+          }
+        ]
+      },
+      "L16C": {
+        "candidate_total": 2,
+        "sheets": [
+          {
+            "page": 99,
+            "count": 2
+          }
+        ]
+      },
+      "L5A": {
+        "candidate_total": 18,
+        "sheets": [
+          {
+            "page": 99,
+            "count": 14
+          },
+          {
+            "page": 102,
+            "count": 4
+          }
+        ]
+      },
+      "L5B": {
+        "candidate_total": 9,
+        "sheets": [
+          {
+            "page": 99,
+            "count": 9
+          }
+        ]
+      },
+      "L10A": {
+        "candidate_total": 1,
+        "sheets": [
+          {
+            "page": 99,
+            "count": 1
+          }
+        ]
+      },
+      "L9A": {
+        "candidate_total": 4,
+        "sheets": [
+          {
+            "page": 99,
+            "count": 3
+          },
+          {
+            "page": 102,
+            "count": 1
+          }
+        ]
+      },
+      "L12A": {
+        "candidate_total": 1,
+        "sheets": [
+          {
+            "page": 99,
+            "count": 1
+          }
+        ]
+      },
+      "L7B": {
+        "candidate_total": 1,
+        "sheets": [
+          {
+            "page": 99,
+            "count": 1
+          }
+        ]
+      },
+      "L7G": {
+        "candidate_total": 1,
+        "sheets": [
+          {
+            "page": 99,
+            "count": 1
+          }
+        ]
+      },
+      "L7H": {
+        "candidate_total": 2,
+        "sheets": [
+          {
+            "page": 99,
+            "count": 2
+          }
+        ]
+      },
+      "L7K": {
+        "candidate_total": 2,
+        "sheets": [
+          {
+            "page": 99,
+            "count": 2
+          }
+        ]
+      },
+      "L7J": {
+        "candidate_total": 1,
+        "sheets": [
+          {
+            "page": 99,
+            "count": 1
+          }
+        ]
+      },
+      "L7L": {
+        "candidate_total": 1,
+        "sheets": [
+          {
+            "page": 99,
+            "count": 1
+          }
+        ]
+      },
+      "L16B": {
+        "candidate_total": 4,
+        "sheets": [
+          {
+            "page": 99,
+            "count": 4
+          }
+        ]
+      },
+      "L3A": {
+        "candidate_total": 1,
+        "sheets": [
+          {
+            "page": 99,
+            "count": 1
+          }
+        ]
+      },
+      "L4A": {
+        "candidate_total": 6,
+        "sheets": [
+          {
+            "page": 99,
+            "count": 6
+          }
+        ]
+      },
+      "L4B": {
+        "candidate_total": 2,
+        "sheets": [
+          {
+            "page": 99,
+            "count": 2
+          }
+        ]
+      },
+      "L8A": {
+        "candidate_total": 6,
+        "sheets": [
+          {
+            "page": 99,
+            "count": 6
+          }
+        ]
+      },
+      "L20D": {
+        "candidate_total": 1,
+        "sheets": [
+          {
+            "page": 99,
+            "count": 1
+          }
+        ]
+      },
+      "L6A": {
+        "candidate_total": 1,
+        "sheets": [
+          {
+            "page": 99,
+            "count": 1
+          }
+        ]
+      },
+      "L7N": {
+        "candidate_total": 3,
+        "sheets": [
+          {
+            "page": 99,
+            "count": 2
+          },
+          {
+            "page": 102,
+            "count": 1
+          }
+        ]
+      },
+      "L20B": {
+        "candidate_total": 1,
+        "sheets": [
+          {
+            "page": 99,
+            "count": 1
+          }
+        ]
+      },
+      "L20K": {
+        "candidate_total": 2,
+        "sheets": [
+          {
+            "page": 99,
+            "count": 2
+          }
+        ]
+      },
+      "L20A": {
+        "candidate_total": 1,
+        "sheets": [
+          {
+            "page": 99,
+            "count": 1
+          }
+        ]
+      },
+      "L20H": {
+        "candidate_total": 9,
+        "sheets": [
+          {
+            "page": 99,
+            "count": 9
+          }
+        ]
+      },
+      "L7R": {
+        "candidate_total": 3,
+        "sheets": [
+          {
+            "page": 99,
+            "count": 3
+          }
+        ]
+      },
+      "L19A": {
+        "candidate_total": 1,
+        "sheets": [
+          {
+            "page": 99,
+            "count": 1
+          }
+        ]
+      },
+      "L14A": {
+        "candidate_total": 14,
+        "sheets": [
+          {
+            "page": 100,
+            "count": 7
+          },
+          {
+            "page": 104,
+            "count": 7
+          }
+        ]
+      },
+      "L13A": {
+        "candidate_total": 8,
+        "sheets": [
+          {
+            "page": 100,
+            "count": 8
+          }
+        ]
+      },
+      "L7A": {
+        "candidate_total": 2,
+        "sheets": [
+          {
+            "page": 102,
+            "count": 2
+          }
+        ]
+      },
+      "L11A": {
+        "candidate_total": 3,
+        "sheets": [
+          {
+            "page": 102,
+            "count": 3
+          }
+        ]
+      },
+      "L7D": {
+        "candidate_total": 1,
+        "sheets": [
+          {
+            "page": 102,
+            "count": 1
+          }
+        ]
+      },
+      "L2B": {
+        "candidate_total": 1,
+        "sheets": [
+          {
+            "page": 102,
+            "count": 1
+          }
+        ]
+      },
+      "L7E": {
+        "candidate_total": 2,
+        "sheets": [
+          {
+            "page": 102,
+            "count": 2
+          }
+        ]
+      },
+      "L3B": {
+        "candidate_total": 1,
+        "sheets": [
+          {
+            "page": 102,
+            "count": 1
+          }
+        ]
+      },
+      "L7P": {
+        "candidate_total": 1,
+        "sheets": [
+          {
+            "page": 102,
+            "count": 1
+          }
+        ]
+      },
+      "L15A": {
+        "candidate_total": 2,
+        "sheets": [
+          {
+            "page": 102,
+            "count": 2
+          }
+        ]
+      },
+      "L7C": {
+        "candidate_total": 1,
+        "sheets": [
+          {
+            "page": 102,
+            "count": 1
+          }
+        ]
+      }
+    }
+  },
+  "items": [
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N101A",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N101A",
+        "fire_rating_minutes": "",
+        "width": "6' - 0\"",
+        "height": "8' - 9 1/2\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-11",
+        "glass_film": "N/A",
+        "glass_type": "GL-3",
+        "special_notes": "EXTERIOR STOREFRONT SYSTEM - REFER TO ELEVATIONS"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N101B",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N101B",
+        "fire_rating_minutes": "",
+        "width": "6' - 0\"",
+        "height": "7' - 9 1/2\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-10",
+        "glass_film": "GL-1",
+        "glass_type": "GL-1",
+        "special_notes": "INTERIOR STOREFRONT SYSTEM - REFER TO ELEVATIONS"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N104",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N104",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 8\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-01",
+        "glass_film": "GLF-2",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N104A",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N104A",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-04",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N104B",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N104B",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-04",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N104C",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N104C",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-04",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N104D",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N104D",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-05",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N104E",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N104E",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-04",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N104F",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N104F",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-05",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N105A",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N105A",
+        "fire_rating_minutes": "45",
+        "width": "3' - 0\"",
+        "height": "7' - 8\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "DF",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-09",
+        "glass_film": "GLF-2",
+        "glass_type": "GL-6",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N105B",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N105B",
+        "fire_rating_minutes": "45",
+        "width": "3' - 0\"",
+        "height": "7' - 8\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "DF",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-09",
+        "glass_film": "GLF-2",
+        "glass_type": "GL-6",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N106A",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N106A",
+        "fire_rating_minutes": "45",
+        "width": "3' - 0\"",
+        "height": "7' - 8\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "DF",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-09",
+        "glass_film": "GLF-2",
+        "glass_type": "GL-6",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N106B",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N106B",
+        "fire_rating_minutes": "45",
+        "width": "3' - 0\"",
+        "height": "7' - 8\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "DF",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-09",
+        "glass_film": "GLF-2",
+        "glass_type": "GL-6",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N107B",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N107B",
+        "fire_rating_minutes": "",
+        "width": "6' - 0\"",
+        "height": "7' - 0\"",
+        "door_elevation_type": "F",
+        "door_material": "WD",
+        "door_finish": "WV-1",
+        "frame_elevation_type": "A",
+        "frame_material": "HM",
+        "frame_finish": "P-1C",
+        "hardware_set": "205",
+        "glass_film": "N/A",
+        "glass_type": "N/A",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N108",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N108",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 0\"",
+        "door_elevation_type": "F",
+        "door_material": "WD",
+        "door_finish": "WV-1",
+        "frame_elevation_type": "A",
+        "frame_material": "HM",
+        "frame_finish": "P-1C",
+        "hardware_set": "203",
+        "glass_film": "N/A",
+        "glass_type": "N/A",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N109",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N109",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 0\"",
+        "door_elevation_type": "F",
+        "door_material": "WD",
+        "door_finish": "WV-1",
+        "frame_elevation_type": "A",
+        "frame_material": "HM",
+        "frame_finish": "P-1C",
+        "hardware_set": "202",
+        "glass_film": "N/A",
+        "glass_type": "N/A",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N110",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N110",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 8\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-06",
+        "glass_film": "GLF-2",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N111",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N111",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 8\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-06",
+        "glass_film": "GLF-2",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N112A",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N112A",
+        "fire_rating_minutes": "45",
+        "width": "3' - 0\"",
+        "height": "7' - 8\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "DF",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-09",
+        "glass_film": "GLF-2",
+        "glass_type": "GL-6",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N112B",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N112B",
+        "fire_rating_minutes": "45",
+        "width": "3' - 0\"",
+        "height": "7' - 8\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "DF",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-09",
+        "glass_film": "GLF-2",
+        "glass_type": "GL-6",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N114",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N114",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-07",
+        "glass_film": "GLF-2",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N115",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N115",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-07",
+        "glass_film": "GLF-2",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N116",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N116",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-07",
+        "glass_film": "GLF-2",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N117",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N117",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-07",
+        "glass_film": "GLF-2",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N118",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N118",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-07",
+        "glass_film": "GLF-2",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N119",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N119",
+        "fire_rating_minutes": "",
+        "width": "6' - 0\"",
+        "height": "7' - 0\"",
+        "door_elevation_type": "F",
+        "door_material": "WD",
+        "door_finish": "WV-1",
+        "frame_elevation_type": "A",
+        "frame_material": "HM",
+        "frame_finish": "P-1C",
+        "hardware_set": "205",
+        "glass_film": "N/A",
+        "glass_type": "N/A",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N119B",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N119B",
+        "fire_rating_minutes": "",
+        "width": "6' - 0\"",
+        "height": "7' - 0\"",
+        "door_elevation_type": "F",
+        "door_material": "WD",
+        "door_finish": "WV-1",
+        "frame_elevation_type": "A",
+        "frame_material": "HM",
+        "frame_finish": "P-1C",
+        "hardware_set": "204",
+        "glass_film": "N/A",
+        "glass_type": "N/A",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N120",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N120",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 0\"",
+        "door_elevation_type": "F",
+        "door_material": "WD",
+        "door_finish": "WV-1",
+        "frame_elevation_type": "A",
+        "frame_material": "HM",
+        "frame_finish": "P-1C",
+        "hardware_set": "203",
+        "glass_film": "N/A",
+        "glass_type": "N/A",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N120A",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N120A",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-04",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N120C",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N120C",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-02",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N120CA",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N120CA",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-04",
+        "glass_film": "GL-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N120D",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N120D",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-04",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N120E",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N120E",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-04",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N120F",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N120F",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-04",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N120G",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N120G",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-04",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N120H",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N120H",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-04",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N120J",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N120J",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-04",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N120K",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N120K",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-04",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N121",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N121",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-04",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N123",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N123",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 0\"",
+        "door_elevation_type": "F",
+        "door_material": "WD",
+        "door_finish": "WV-1",
+        "frame_elevation_type": "A",
+        "frame_material": "HM",
+        "frame_finish": "P-1C",
+        "hardware_set": "201",
+        "glass_film": "N/A",
+        "glass_type": "N/A",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N124",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N124",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 0\"",
+        "door_elevation_type": "F",
+        "door_material": "WD",
+        "door_finish": "WV-1",
+        "frame_elevation_type": "A",
+        "frame_material": "HM",
+        "frame_finish": "P-1C",
+        "hardware_set": "207",
+        "glass_film": "N/A",
+        "glass_type": "N/A",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N138",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N138",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 0\"",
+        "door_elevation_type": "N",
+        "door_material": "WD",
+        "door_finish": "WV-1",
+        "frame_elevation_type": "A",
+        "frame_material": "HM",
+        "frame_finish": "P-1C",
+        "hardware_set": "200",
+        "glass_film": "N/A",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "N140",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "N140",
+        "fire_rating_minutes": "45",
+        "width": "3' - 0\"",
+        "height": "7' - 0\"",
+        "door_elevation_type": "F",
+        "door_material": "WD",
+        "door_finish": "WV-1",
+        "frame_elevation_type": "AF",
+        "frame_material": "HM",
+        "frame_finish": "P-1C",
+        "hardware_set": "203",
+        "glass_film": "N/A",
+        "glass_type": "N/A",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "NE180B",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "NE180B",
+        "fire_rating_minutes": "",
+        "width": "6' - 0\"",
+        "height": "7' - 0\"",
+        "door_elevation_type": "(E)",
+        "door_material": "(E)",
+        "door_finish": "(E)",
+        "frame_elevation_type": "(E)",
+        "frame_material": "(E)",
+        "frame_finish": "(E)",
+        "hardware_set": "EX-01",
+        "glass_film": "(E)",
+        "glass_type": "(E)",
+        "special_notes": "EXISTING DOOR. PROVIDE CARD READER."
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "S101",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "S101",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-12",
+        "glass_film": "GLF-2",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "S101A",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "S101A",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-03",
+        "glass_film": "GLF-2",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "S102A",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "S102A",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 0\"",
+        "door_elevation_type": "F",
+        "door_material": "PAINTED MASONITE",
+        "door_finish": "P-1C",
+        "frame_elevation_type": "A",
+        "frame_material": "HM",
+        "frame_finish": "P-1C",
+        "hardware_set": "206",
+        "glass_film": "N/A",
+        "glass_type": "N/A",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "S102B",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "S102B",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 0\"",
+        "door_elevation_type": "F",
+        "door_material": "PAINTED MASONITE",
+        "door_finish": "P-1C",
+        "frame_elevation_type": "A",
+        "frame_material": "HM",
+        "frame_finish": "P-1C",
+        "hardware_set": "200",
+        "glass_film": "N/A",
+        "glass_type": "N/A",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "S102C",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "S102C",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 0\"",
+        "door_elevation_type": "F",
+        "door_material": "PAINTED MASONITE",
+        "door_finish": "P-1C",
+        "frame_elevation_type": "A",
+        "frame_material": "HM",
+        "frame_finish": "P-1C",
+        "hardware_set": "206",
+        "glass_film": "N/A",
+        "glass_type": "N/A",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "S103",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "S103",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 0\"",
+        "door_elevation_type": "F",
+        "door_material": "PAINTED MASONITE",
+        "door_finish": "P-1C",
+        "frame_elevation_type": "A",
+        "frame_material": "HM",
+        "frame_finish": "P-1C",
+        "hardware_set": "206",
+        "glass_film": "N/A",
+        "glass_type": "N/A",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "S105",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "S105",
+        "fire_rating_minutes": "45",
+        "width": "3' - 0\"",
+        "height": "7' - 0\"",
+        "door_elevation_type": "F",
+        "door_material": "PAINTED MASONITE",
+        "door_finish": "P-1C",
+        "frame_elevation_type": "AF",
+        "frame_material": "HM",
+        "frame_finish": "P-1C",
+        "hardware_set": "203",
+        "glass_film": "N/A",
+        "glass_type": "N/A",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "S107A",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "S107A",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-08",
+        "glass_film": "GLF-2",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "S107B",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "S107B",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-08",
+        "glass_film": "GLF-2",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "S108",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "S108",
+        "fire_rating_minutes": "",
+        "width": "5' - 11\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "A",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-13",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "S108A",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "S108A",
+        "fire_rating_minutes": "",
+        "width": "6' - 0\"",
+        "height": "7' - 0\"",
+        "door_elevation_type": "F",
+        "door_material": "PAINTED MASONITE",
+        "door_finish": "P-1C",
+        "frame_elevation_type": "A",
+        "frame_material": "MTL",
+        "frame_finish": "P-1C",
+        "hardware_set": "208",
+        "glass_film": "N/A",
+        "glass_type": "N/A",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "S108B",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "S108B",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-04",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "S108C",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "S108C",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-04",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "S108D",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "S108D",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-04",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "S108E",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "S108E",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 10\"",
+        "door_elevation_type": "FG",
+        "door_material": "AL & G",
+        "door_finish": "AL - Clear Anodized",
+        "frame_elevation_type": "D1",
+        "frame_material": "AL",
+        "frame_finish": "AL - Clear Anodized",
+        "hardware_set": "AL-04",
+        "glass_film": "GLF-1",
+        "glass_type": "GL-5",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "door",
+      "shape": "instance",
+      "mark": "S109",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "door_mark": "S109",
+        "fire_rating_minutes": "",
+        "width": "3' - 0\"",
+        "height": "7' - 0\"",
+        "door_elevation_type": "F",
+        "door_material": "PAINTED MASONITE",
+        "door_finish": "P-1C",
+        "frame_elevation_type": "A",
+        "frame_material": "HM",
+        "frame_finish": "P-1C",
+        "hardware_set": "209",
+        "glass_film": "N/A",
+        "glass_type": "N/A",
+        "special_notes": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 37,
+        "schedule": "door"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N101",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N101",
+        "room_name": "VESTIBULE",
+        "floor_finish": "CPT-7",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1/4/ MWP-1/2",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N102",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N102",
+        "room_name": "STUDENT LIVING ROOM",
+        "floor_finish": "CPT-3",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1/4",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N103",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N103",
+        "room_name": "CAFE",
+        "floor_finish": "CONC-2",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N104",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N104",
+        "room_name": "CIRCULATION",
+        "floor_finish": "CPT-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1/2",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N104A",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N104A",
+        "room_name": "OFFICE",
+        "floor_finish": "CPT-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N104B",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N104B",
+        "room_name": "OFFICE",
+        "floor_finish": "CPT-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N104C",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N104C",
+        "room_name": "OFFICE",
+        "floor_finish": "CPT-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N104D",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N104D",
+        "room_name": "OFFICE",
+        "floor_finish": "CPT-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N104E",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N104E",
+        "room_name": "OFFICE",
+        "floor_finish": "CPT-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N104F",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N104F",
+        "room_name": "OFFICE",
+        "floor_finish": "CPT-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N105",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N105",
+        "room_name": "EXECUTIVE CONFERENCE",
+        "floor_finish": "CPT-2/3",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1/4",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N106",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N106",
+        "room_name": "CLASSROOM (40)",
+        "floor_finish": "CPT-2/3",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1/4",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N107A",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N107A",
+        "room_name": "COLLAB.",
+        "floor_finish": "CONC-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N107B",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N107B",
+        "room_name": "COLLAB.",
+        "floor_finish": "CONC-1/CPT-3",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1/2/4",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N107C",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N107C",
+        "room_name": "COLLAB.",
+        "floor_finish": "CONC-1/CPT-3",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1/2/4",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N107D",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N107D",
+        "room_name": "COLLAB.",
+        "floor_finish": "CONC-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N107E",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N107E",
+        "room_name": "COLLAB.",
+        "floor_finish": "CONC-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N108",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N108",
+        "room_name": "JAN",
+        "floor_finish": "CONC-1",
+        "base_finish": "WB-2",
+        "wall_finish": "FRP-1/P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N109",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N109",
+        "room_name": "TOILET",
+        "floor_finish": "FTL-1",
+        "base_finish": "TWB-1",
+        "wall_finish": "TL-2/3",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N110",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N110",
+        "room_name": "GRAD LAB LARGE",
+        "floor_finish": "CPT-2/3",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N111",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N111",
+        "room_name": "CYBER RANGE LAB",
+        "floor_finish": "CPT-2/3",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N112",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N112",
+        "room_name": "COMPUTER LAB",
+        "floor_finish": "CPT-2/3",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1/4",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N113A",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N113A",
+        "room_name": "COLLAB.",
+        "floor_finish": "CONC-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N113B",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N113B",
+        "room_name": "GRAD COLLABORATION",
+        "floor_finish": "CPT-3",
+        "base_finish": "WB-2",
+        "wall_finish": "P-2",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N113C",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N113C",
+        "room_name": "GRAD COLLABORATION",
+        "floor_finish": "CPT-3",
+        "base_finish": "WB-2",
+        "wall_finish": "P-2",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N114",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N114",
+        "room_name": "GRAD LAB LARGE",
+        "floor_finish": "CPT-2/3",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N115",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N115",
+        "room_name": "GRAD LAB MEDIUM",
+        "floor_finish": "CPT-2/3",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N116",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N116",
+        "room_name": "GRAD LAB MEDIUM",
+        "floor_finish": "CPT-2/3",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N117",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N117",
+        "room_name": "GRAD LAB MEDIUM",
+        "floor_finish": "CPT-2/3",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N118",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N118",
+        "room_name": "GRAD LAB MEDIUM",
+        "floor_finish": "CPT-2/3",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N119",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N119",
+        "room_name": "CIRCULATION",
+        "floor_finish": "CONC-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N120",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N120",
+        "room_name": "CIRCULATION",
+        "floor_finish": "CPT-1/2",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1/2",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N120A",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N120A",
+        "room_name": "PROGRAM ASST.",
+        "floor_finish": "CPT-1/2",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N120B",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N120B",
+        "room_name": "COPY OFFICE SUPPLIES",
+        "floor_finish": "CPT-1/2",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N120C",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N120C",
+        "room_name": "SMALL CONFERENCE",
+        "floor_finish": "CPT-1/2",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N120D",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N120D",
+        "room_name": "OFFICE",
+        "floor_finish": "CPT-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N120E",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N120E",
+        "room_name": "OFFICE",
+        "floor_finish": "CPT-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N120F",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N120F",
+        "room_name": "OFFICE",
+        "floor_finish": "CPT-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N120G",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N120G",
+        "room_name": "OFFICE",
+        "floor_finish": "CPT-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N120H",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N120H",
+        "room_name": "OFFICE",
+        "floor_finish": "CPT-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N120J",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N120J",
+        "room_name": "OFFICE",
+        "floor_finish": "CPT-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N120K",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N120K",
+        "room_name": "OFFICE",
+        "floor_finish": "CPT-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N121",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N121",
+        "room_name": "FLEX OFFICE",
+        "floor_finish": "CPT-1/2",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N123",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N123",
+        "room_name": "ONLINE STUDIO",
+        "floor_finish": "CPT-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N124",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N124",
+        "room_name": "DATA ROOM",
+        "floor_finish": "CONC-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N138",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N138",
+        "room_name": "BREAK ROOM",
+        "floor_finish": "CONC-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1/T-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N139",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N139",
+        "room_name": "VENDING",
+        "floor_finish": "CONC-2",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1/4",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N140",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N140",
+        "room_name": "ELEC.",
+        "floor_finish": "CONC-1",
+        "base_finish": "WB-2",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N141",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N141",
+        "room_name": "EXISTING WOMEN'S RESTROOM",
+        "floor_finish": "FLT-1",
+        "base_finish": "TWB-1",
+        "wall_finish": "P-1 / T-2/3",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "N142",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N142",
+        "room_name": "EXISTING MEN'S RESTROOM",
+        "floor_finish": "FTL-1",
+        "base_finish": "TWB-1",
+        "wall_finish": "P-1/T-2/3",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "S100",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S100",
+        "room_name": "EAST CORRIDOR",
+        "floor_finish": "CONC-1",
+        "base_finish": "WB-1",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "S101",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S101",
+        "room_name": "SPACE ISAC RECEPTION",
+        "floor_finish": "CPT-4/6",
+        "base_finish": "WB-1",
+        "wall_finish": "P-1/3",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "S101A",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S101A",
+        "room_name": "SMALL CONFERENCE",
+        "floor_finish": "CPT-6",
+        "base_finish": "WB-1",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "S101B",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S101B",
+        "room_name": "CIRCULATION",
+        "floor_finish": "CONC-1",
+        "base_finish": "WB-1",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "S102",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S102",
+        "room_name": "CYBER VULNERABILITY LAB",
+        "floor_finish": "ESD-1",
+        "base_finish": "WB-1",
+        "wall_finish": "P-1C",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "S102A",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S102A",
+        "room_name": "CVL VESTIBULE",
+        "floor_finish": "ESD-1",
+        "base_finish": "WB-1",
+        "wall_finish": "P-1C",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "S103",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S103",
+        "room_name": "DATA/SERVER",
+        "floor_finish": "CONC-1",
+        "base_finish": "WB-1",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "S105",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S105",
+        "room_name": "ELEC.",
+        "floor_finish": "CONC-1",
+        "base_finish": "WB-1",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "S107",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S107",
+        "room_name": "WATCH CENTER",
+        "floor_finish": "CPT-5",
+        "base_finish": "WB-1",
+        "wall_finish": "P-3/5",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "S108",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S108",
+        "room_name": "CIRCULATION",
+        "floor_finish": "CPT-4",
+        "base_finish": "WB-1",
+        "wall_finish": "P-1/3",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "S108B",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S108B",
+        "room_name": "OFFICE",
+        "floor_finish": "CPT-6",
+        "base_finish": "WB-1",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "S108C",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S108C",
+        "room_name": "OFFICE",
+        "floor_finish": "CPT-6",
+        "base_finish": "WB-1",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "S108D",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S108D",
+        "room_name": "OFFICE",
+        "floor_finish": "CPT-6",
+        "base_finish": "WB-1",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "S108E",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S108E",
+        "room_name": "OFFICE",
+        "floor_finish": "CPT-6",
+        "base_finish": "WB-1",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "finish",
+      "shape": "instance",
+      "mark": "S109",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S109",
+        "room_name": "CIRCULATION",
+        "floor_finish": "CONC-1",
+        "base_finish": "WB-1",
+        "wall_finish": "P-1",
+        "ceiling_finish": "",
+        "comments": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 48,
+        "schedule": "finish"
+      }
+    },
+    {
+      "schedule": "plumbing_fixture",
+      "shape": "catalog",
+      "mark": "WC-1",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "WATER CLOSET - WALL MOUNTED - ADA",
+      "attributes": {
+        "fixture_tag": "WC-1",
+        "description": "WATER CLOSET - WALL MOUNTED - ADA",
+        "fixture_type": "MANUAL",
+        "manufacturer": "AMERICAN STANDARD",
+        "model": "3351.101",
+        "remarks": "FIXTURE SHALL BE WATERSENSE LABELED. PROVIDE MANUFACTURER AND MODEL NUMBER AS LISTED OR APPROVED EQUAL."
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 58,
+        "schedule": "plumbing_fixture"
+      }
+    },
+    {
+      "schedule": "plumbing_fixture",
+      "shape": "catalog",
+      "mark": "WC-2",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "WATER CLOSET - WALL MOUNTED - ADA",
+      "attributes": {
+        "fixture_tag": "WC-2",
+        "description": "WATER CLOSET - WALL MOUNTED - ADA",
+        "fixture_type": "MANUAL",
+        "manufacturer": "AMERICAN STANDARD",
+        "model": "3351.101",
+        "remarks": "VITREOUS CHINA. PROVIDE MANUFACTURER AND MODEL NUMBER AS LISTED OR APPROVED EQUAL."
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 58,
+        "schedule": "plumbing_fixture"
+      }
+    },
+    {
+      "schedule": "plumbing_fixture",
+      "shape": "catalog",
+      "mark": "U-1",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "URINAL - WALL MOUNTED",
+      "attributes": {
+        "fixture_tag": "U-1",
+        "description": "URINAL - WALL MOUNTED",
+        "fixture_type": "MANUAL",
+        "manufacturer": "ZURN",
+        "model": "Z5755-U",
+        "remarks": "VITREOUS CHINA, WALL-MOUNT. PROVIDE MANUFACTURER AND MODEL NUMBER AS LISTED OR APPROVED EQUAL."
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 58,
+        "schedule": "plumbing_fixture"
+      }
+    },
+    {
+      "schedule": "plumbing_fixture",
+      "shape": "catalog",
+      "mark": "KS-1",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "KITCHEN SINK - UNDERMOUNT",
+      "attributes": {
+        "fixture_tag": "KS-1",
+        "description": "KITCHEN SINK - UNDERMOUNT",
+        "fixture_type": "MANUAL",
+        "manufacturer": "ELKAY",
+        "model": "ELUHAD211550",
+        "remarks": "WITHOUT PERFECT DRAIN. PROVIDE MANUFACTURER AND MODEL NUMBER AS LISTED OR APPROVED EQUAL."
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 58,
+        "schedule": "plumbing_fixture"
+      }
+    },
+    {
+      "schedule": "plumbing_fixture",
+      "shape": "catalog",
+      "mark": "L-1",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "LAVATORY - UNDERMOUNT",
+      "attributes": {
+        "fixture_tag": "L-1",
+        "description": "LAVATORY - UNDERMOUNT",
+        "fixture_type": "HARD-WIRED",
+        "manufacturer": "AMERICAN STANDARD",
+        "model": "0496.300",
+        "remarks": "PROVIDE ASSE 1070 DEVICE. PROVIDE MANUFACTURER AND MODEL NUMBER AS LISTED OR APPROVED EQUAL."
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 58,
+        "schedule": "plumbing_fixture"
+      }
+    },
+    {
+      "schedule": "plumbing_fixture",
+      "shape": "catalog",
+      "mark": "L-2",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "LAVATORY - UNDERMOUNT",
+      "attributes": {
+        "fixture_tag": "L-2",
+        "description": "LAVATORY - UNDERMOUNT",
+        "fixture_type": "HARD-WIRED",
+        "manufacturer": "AMERICAN STANDARD",
+        "model": "0496.300",
+        "remarks": "REFER TO ARCH SHEET G.2.4.0 MEN AND WOMEN RESTROOM ALTERNATES. PROVIDE ASSE 1070 DEVICE. PROVIDE MANUFACTURER AND MODEL NUMBER AS LISTED OR APPROVED EQUAL."
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 58,
+        "schedule": "plumbing_fixture"
+      }
+    },
+    {
+      "schedule": "plumbing_fixture",
+      "shape": "catalog",
+      "mark": "MS-1",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "MOP SINK - FLOOR MOUNTED (RELOCATED)",
+      "attributes": {
+        "fixture_tag": "MS-1",
+        "description": "MOP SINK - FLOOR MOUNTED (RELOCATED)",
+        "fixture_type": "MANUAL",
+        "manufacturer": "REFER TO ARCH PLANS",
+        "model": "N/A",
+        "remarks": "PROVIDE MANUFACTURER AND MODEL NUMBER AS LISTED OR APPROVED EQUAL."
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 58,
+        "schedule": "plumbing_fixture"
+      }
+    },
+    {
+      "schedule": "plumbing_fixture",
+      "shape": "catalog",
+      "mark": "GD-1",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "GARBAGE DISPOSAL",
+      "attributes": {
+        "fixture_tag": "GD-1",
+        "description": "GARBAGE DISPOSAL",
+        "manufacturer": "INSINKERATOR",
+        "model": "BADGER 5",
+        "remarks": "PROVIDE MANUFACTURER AND MODEL NUMBER AS LISTED OR APPROVED EQUAL."
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 58,
+        "schedule": "plumbing_fixture"
+      }
+    },
+    {
+      "schedule": "plumbing_fixture",
+      "shape": "catalog",
+      "mark": "DF-1",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "DRINKING FOUNTAIN WITH BOTTLE FILLER",
+      "attributes": {
+        "fixture_tag": "DF-1",
+        "description": "DRINKING FOUNTAIN WITH BOTTLE FILLER",
+        "manufacturer": "ELKAY",
+        "model": "EZSTLG8WSLK",
+        "remarks": "PROVIDE MANUFACTURER AND MODEL NUMBER AS LISTED OR APPROVED EQUAL."
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 58,
+        "schedule": "plumbing_fixture"
+      }
+    },
+    {
+      "schedule": "plumbing_fixture",
+      "shape": "catalog",
+      "mark": "DF-2",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "DRINKING FOUNTAIN",
+      "attributes": {
+        "fixture_tag": "DF-2",
+        "description": "DRINKING FOUNTAIN",
+        "manufacturer": "ELKAY",
+        "model": "EZSTLG8LC",
+        "remarks": "PROVIDE MANUFACTURER AND MODEL NUMBER AS LISTED OR APPROVED EQUAL."
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 58,
+        "schedule": "plumbing_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L2A",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "4\"x22' LINEAR PENDANT, DIRECT/INDIRECT, LED, 810/910 LUMEN PF, 4000K, DIM TO 1%",
+      "attributes": {
+        "fixture_tag": "L2A",
+        "description": "4\"x22' LINEAR PENDANT, DIRECT/INDIRECT, LED, 810/910 LUMEN PF, 4000K, DIM TO 1%",
+        "manufacturer": "PEERLESS LIGHTING",
+        "model": "OPM4 LLP 22FT MSL8 80CRI 40K I910LMF 810LMF DARK ZT 277 DCT F1/",
+        "lamp": "299 VA",
+        "driver": "1% 0-10V DIMMING",
+        "remarks": "MOUNT @ 10'-0\" AFF TO BOTTOM OF FIXTURE"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L2B",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "4\"x16' LINEAR PENDANT, DIRECT/INDIRECT, LED, 810/910 LUMEN PF, 4000K, DIM TO 1%",
+      "attributes": {
+        "fixture_tag": "L2B",
+        "description": "4\"x16' LINEAR PENDANT, DIRECT/INDIRECT, LED, 810/910 LUMEN PF, 4000K, DIM TO 1%",
+        "manufacturer": "PEERLESS LIGHTING",
+        "model": "OPM4 LLP 16FT MSL8 80CRI 40K I910LMF 810LMF DARK ZT 277 DCT F1/",
+        "lamp": "218 VA",
+        "driver": "1% 0-10V DIMMING",
+        "remarks": "MOUNT @ 10'-0\" AFF TO BOTTOM OF FIXTURE"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L3A",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "4\" SQUARE DOWNLIGHT, LED, 1500 LUMEN, 4000K, DIM TO 1%",
+      "attributes": {
+        "fixture_tag": "L3A",
+        "description": "4\" SQUARE DOWNLIGHT, LED, 1500 LUMEN, 4000K, DIM TO 1%",
+        "manufacturer": "GOTHAM LIGHTING",
+        "model": "EVO4SQ 40/15 AR LSS MVOLT GZ1",
+        "lamp": "14 VA",
+        "driver": "1% 0-10V DIMMING",
+        "remarks": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L3B",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "6\" SQUARE DOWNLIGHT, LED, 2500 LUMEN, 4000K, DIM TO 1%",
+      "attributes": {
+        "fixture_tag": "L3B",
+        "description": "6\" SQUARE DOWNLIGHT, LED, 2500 LUMEN, 4000K, DIM TO 1%",
+        "manufacturer": "GOTHAM LIGHTING",
+        "model": "EVO4SQ 40/25 AR LSS MVOLT GZ1",
+        "lamp": "26 VA",
+        "driver": "1% 0-10V DIMMING",
+        "remarks": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L4A",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "4\" WIDE PERIMETER WALL-TO-WALL LINEAR RECESSED, ASSYMETRIC, LED, 875 LUMEN PF, 4000K, DIM TO 1%",
+      "attributes": {
+        "fixture_tag": "L4A",
+        "description": "4\" WIDE PERIMETER WALL-TO-WALL LINEAR RECESSED, ASSYMETRIC, LED, 875 LUMEN PF, 4000K, DIM TO 1%",
+        "manufacturer": "PRUDENTIAL LIGHTING",
+        "model": "P43-PSTD FLSH LED4 SO R(PER PLANS) TMW AWL D1R WTW SC X3B UNV DM01",
+        "lamp": "",
+        "driver": "1% 0-10V DIMMING",
+        "remarks": "REFER TO LIGHTING PLANS FOR REQUIRED LENGTH"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L4B",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "4\" WIDE PERIMETER WALL-TO-POCKET LINEAR RECESSED, ASSYMETRIC, LED, 875 LUMEN PF, 4000K, DIM TO 1%",
+      "attributes": {
+        "fixture_tag": "L4B",
+        "description": "4\" WIDE PERIMETER WALL-TO-POCKET LINEAR RECESSED, ASSYMETRIC, LED, 875 LUMEN PF, 4000K, DIM TO 1%",
+        "manufacturer": "PRUDENTIAL LIGHTING",
+        "model": "P43-PSTD FLSH LED4 SO R(PER PLANS) TMW AWL D1R WTW/LP SC X3B UNV DM01",
+        "lamp": "",
+        "driver": "1% 0-10V DIMMING",
+        "remarks": "REFER TO LIGHTING PLANS FOR REQUIRED LENGTH"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L5A",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "2'x4' ARCHITECTURAL RECESSED TROFFER, LED, 3000 LUMEN, 4000K, DIM TO 1%",
+      "attributes": {
+        "fixture_tag": "L5A",
+        "description": "2'x4' ARCHITECTURAL RECESSED TROFFER, LED, 3000 LUMEN, 4000K, DIM TO 1%",
+        "manufacturer": "MARK ARCHITECTURAL LIGHTING",
+        "model": "WHSPR LCTR 2X4 80CRI 40K 3000LM MIN1 277 SWC ZT",
+        "lamp": "30 VA",
+        "driver": "1% 0-10V DIMMING",
+        "remarks": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L5B",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "2'x4' ARCHITECTURAL RECESSED TROFFER, LED, 4000 LUMEN, 4000K, DIM TO 1%",
+      "attributes": {
+        "fixture_tag": "L5B",
+        "description": "2'x4' ARCHITECTURAL RECESSED TROFFER, LED, 4000 LUMEN, 4000K, DIM TO 1%",
+        "manufacturer": "MARK ARCHITECTURAL LIGHTING",
+        "model": "WHSPR LCTR 2X4 80CRI 40K 4000LM MIN1 277 SWC ZT",
+        "lamp": "34 VA",
+        "driver": "1% 0-10V DIMMING",
+        "remarks": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L6A",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "2'x2' ARCHITECTURAL FLAT PANEL RECESSED TROFFER, LED, 5000 LUMEN, 4000K, 90 CRI, DIM TO 1%",
+      "attributes": {
+        "fixture_tag": "L6A",
+        "description": "2'x2' ARCHITECTURAL FLAT PANEL RECESSED TROFFER, LED, 5000 LUMEN, 4000K, 90 CRI, DIM TO 1%",
+        "manufacturer": "PEERLESS LIGHTING",
+        "model": "VMMRA G 90CRI 40K 5000LM DARK ZT 277 C110",
+        "lamp": "51 VA",
+        "driver": "1% 0-10V DIMMING",
+        "remarks": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L7A",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "4\"x8' RECESSED HARD-LID LINEAR, LED, 720 LUMEN PF, 4000K, DIM TO 1%",
+      "attributes": {
+        "fixture_tag": "L7A",
+        "description": "4\"x8' RECESSED HARD-LID LINEAR, LED, 720 LUMEN PF, 4000K, DIM TO 1%",
+        "manufacturer": "PRUDENTIAL LIGHTING",
+        "model": "BPRO4-REC FLSH LED4 MO R8 TMW BTW SC UNV X3 DM01",
+        "lamp": "48 VA",
+        "driver": "1% 0-10V DIMMING",
+        "remarks": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L7B",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "4\"x12' RECESSED LINEAR, LED, 1000 LUMEN PF, 4000K, DIM TO 1%, SEPARATELY CONTROLLED 6' SECTIONS",
+      "attributes": {
+        "fixture_tag": "L7B",
+        "description": "4\"x12' RECESSED LINEAR, LED, 1000 LUMEN PF, 4000K, DIM TO 1%, SEPARATELY CONTROLLED 6' SECTIONS",
+        "manufacturer": "PRUDENTIAL LIGHTING",
+        "model": "BPRO4-REC FLSH LED4 SO R12 TMW BTW SC UNV X1 DM01",
+        "lamp": "96 VA",
+        "driver": "1% 0-10V DIMMING",
+        "remarks": "FIXTURE SHALL BE CONFIGURED SO THAT (2) 6' SECTIONS ARE INDEPENDENTLY CONTROLLED, IN A SINGLE SEAMLESS FIXTURE HOUSING"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L7C",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "4\"x20' RECESSED LINEAR, LED, 1000 LUMEN PF, 4000K, DIM TO 1%, SEPARATELY CONTROLLED 10' SECTIONS",
+      "attributes": {
+        "fixture_tag": "L7C",
+        "description": "4\"x20' RECESSED LINEAR, LED, 1000 LUMEN PF, 4000K, DIM TO 1%, SEPARATELY CONTROLLED 10' SECTIONS",
+        "manufacturer": "PRUDENTIAL LIGHTING",
+        "model": "BPRO4-REC FLSH LED4 SO R20 TMW BTW SC UNV X1 DM01",
+        "lamp": "160 VA",
+        "driver": "1% 0-10V DIMMING",
+        "remarks": "FIXTURE SHALL BE CONFIGURED SO THAT (2) 10' SECTIONS ARE INDEPENDENTLY CONTROLLED, IN A SINGLE SEAMLESS FIXTURE HOUSING"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L7D",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "4\"x4' RECESSED LINEAR, LED, 1000 LUMEN PF, 4000K, DIM TO 1%",
+      "attributes": {
+        "fixture_tag": "L7D",
+        "description": "4\"x4' RECESSED LINEAR, LED, 1000 LUMEN PF, 4000K, DIM TO 1%",
+        "manufacturer": "PRUDENTIAL LIGHTING",
+        "model": "BPRO4-REC FLSH LED4 SO R4 TMW BTW SC UNV X1 DM01",
+        "lamp": "32 VA",
+        "driver": "1% 0-10V DIMMING",
+        "remarks": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L7E",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "4\"x4' RECESSED HARD-LID LINEAR, LED, 720 LUMEN PF, 4000K, DIM TO 1%",
+      "attributes": {
+        "fixture_tag": "L7E",
+        "description": "4\"x4' RECESSED HARD-LID LINEAR, LED, 720 LUMEN PF, 4000K, DIM TO 1%",
+        "manufacturer": "PRUDENTIAL LIGHTING",
+        "model": "BPRO4-REC FLSH LED4 MO R4 TMW BTW SC UNV X3 DM01",
+        "lamp": "24 VA",
+        "driver": "1% 0-10V DIMMING",
+        "remarks": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L7G",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "4\"x6' RECESSED SPECIALTY CEILING HARD-LID LINEAR, LED, 720 LUMEN PF, 4000K, DIM TO 1%",
+      "attributes": {
+        "fixture_tag": "L7G",
+        "description": "4\"x6' RECESSED SPECIALTY CEILING HARD-LID LINEAR, LED, 720 LUMEN PF, 4000K, DIM TO 1%",
+        "manufacturer": "PRUDENTIAL LIGHTING",
+        "model": "BPRO4-REC FLSH LED4 MO R14 TMW BTW SC UNV X9 DM01",
+        "lamp": "36 VA",
+        "driver": "1% 0-10V DIMMING",
+        "remarks": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L7H",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "4\"x15' RECESSED SPECIALTY CEILING HARD-LID LINEAR, LED, 720 LUMEN PF, 4000K, DIM TO 1%",
+      "attributes": {
+        "fixture_tag": "L7H",
+        "description": "4\"x15' RECESSED SPECIALTY CEILING HARD-LID LINEAR, LED, 720 LUMEN PF, 4000K, DIM TO 1%",
+        "manufacturer": "PRUDENTIAL LIGHTING",
+        "model": "BPRO4-REC FLSH LED4 MO R23 TMW BTW SC UNV X9 DM01",
+        "lamp": "90 VA",
+        "driver": "1% 0-10V DIMMING",
+        "remarks": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L7J",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "4\"x11' RECESSED SPECIALTY CEILING HARD-LID LINEAR, LED, 720 LUMEN PF, 4000K, DIM TO 1%",
+      "attributes": {
+        "fixture_tag": "L7J",
+        "description": "4\"x11' RECESSED SPECIALTY CEILING HARD-LID LINEAR, LED, 720 LUMEN PF, 4000K, DIM TO 1%",
+        "manufacturer": "PRUDENTIAL LIGHTING",
+        "model": "BPRO4-REC FLSH LED4 MO R19 TMW BTW SC UNV X9 DM01",
+        "lamp": "66 VA",
+        "driver": "1% 0-10V DIMMING",
+        "remarks": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L7K",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "4\"x20' RECESSED SPECIALTY CEILING HARD-LID LINEAR, LED, 720 LUMEN PF, 4000K, DIM TO 1%",
+      "attributes": {
+        "fixture_tag": "L7K",
+        "description": "4\"x20' RECESSED SPECIALTY CEILING HARD-LID LINEAR, LED, 720 LUMEN PF, 4000K, DIM TO 1%",
+        "manufacturer": "PRUDENTIAL LIGHTING",
+        "model": "BPRO4-REC FLSH LED4 MO R28 TMW BTW SC UNV X9 DM01",
+        "lamp": "120 VA",
+        "driver": "1% 0-10V DIMMING",
+        "remarks": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L7L",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "4\"x3' RECESSED SPECIALTY CEILING HARD-LID LINEAR, LED, 720 LUMEN PF, 4000K, DIM TO 1%",
+      "attributes": {
+        "fixture_tag": "L7L",
+        "description": "4\"x3' RECESSED SPECIALTY CEILING HARD-LID LINEAR, LED, 720 LUMEN PF, 4000K, DIM TO 1%",
+        "manufacturer": "PRUDENTIAL LIGHTING",
+        "model": "BPRO4-REC FLSH LED4 MO R3 TMW BTW SC UNV X9 DM01",
+        "lamp": "18 VA",
+        "driver": "1% 0-10V DIMMING",
+        "remarks": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L7N",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "4\"x4' RECESSED LINEAR, LED, 1000 LUMEN PF, 4000K, DIM TO 1%",
+      "attributes": {
+        "fixture_tag": "L7N",
+        "description": "4\"x4' RECESSED LINEAR, LED, 1000 LUMEN PF, 4000K, DIM TO 1%",
+        "manufacturer": "PRUDENTIAL LIGHTING",
+        "model": "BPRO4-REC FLSH LED4 SO R4 TMW BTW SC UNV X1 DM01",
+        "lamp": "40 VA",
+        "driver": "1% 0-10V DIMMING",
+        "remarks": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L7P",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "4\"x14' RECESSED LINEAR, LED, 1000 LUMEN PF, 4000K, DIM TO 1%, SEPARATELY CONTROLLED 6' SECTIONS",
+      "attributes": {
+        "fixture_tag": "L7P",
+        "description": "4\"x14' RECESSED LINEAR, LED, 1000 LUMEN PF, 4000K, DIM TO 1%, SEPARATELY CONTROLLED 6' SECTIONS",
+        "manufacturer": "PRUDENTIAL LIGHTING",
+        "model": "BPRO4-REC FLSH LED4 SO R12 TMW BTW SC UNV X1 DM01",
+        "lamp": "112 VA",
+        "driver": "1% 0-10V DIMMING",
+        "remarks": "FIXTURE SHALL BE CONFIGURED SO THAT (2) 7' SECTIONS ARE INDEPENDENTLY CONTROLLED, IN A SINGLE SEAMLESS FIXTURE HOUSING"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L7R",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "4\"x5' RECESSED HARD-LID LINEAR MUD-OVER FLANGE, LED, 720 LUMEN PF, 4000K, DIM TO 1%",
+      "attributes": {
+        "fixture_tag": "L7R",
+        "description": "4\"x5' RECESSED HARD-LID LINEAR MUD-OVER FLANGE, LED, 720 LUMEN PF, 4000K, DIM TO 1%",
+        "manufacturer": "PRUDENTIAL LIGHTING",
+        "model": "BPRO4-REC FLSH LED4 SO R5 TMW BTW SC UNV X7 DM01",
+        "lamp": "40 VA",
+        "driver": "1% 0-10V DIMMING",
+        "remarks": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L8A",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "2'x2' ARCHITECTURAL RECESSED TROFFER, LED, 3300 LUMEN, 4000K, DIM TO 1%",
+      "attributes": {
+        "fixture_tag": "L8A",
+        "description": "2'x2' ARCHITECTURAL RECESSED TROFFER, LED, 3300 LUMEN, 4000K, DIM TO 1%",
+        "manufacturer": "MARK ARCHITECTURAL LIGHTING",
+        "model": "WHSPR LCTR 2X2 80CRI 40K 3300LM MIN1 277 SWC ZT",
+        "lamp": "30 VA",
+        "driver": "1% 0-10V DIMMING",
+        "remarks": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L9A",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "4' STRIP, LED, 4000 LUMEN, 4000K",
+      "attributes": {
+        "fixture_tag": "L9A",
+        "description": "4' STRIP, LED, 4000 LUMEN, 4000K",
+        "manufacturer": "LITHONIA LIGHTING",
+        "model": "CSS L48 MVOLT 40K 80CRI ZACVH",
+        "lamp": "35 VA",
+        "driver": "FIXED OUTPUT",
+        "remarks": "MOUNT @ 10'-0\" AFF TO BOTTOM OF FIXTURE"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L10A",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "4\"x3' WALL MOUNTED LINEAR, LED, 675 LUMEN PF, 4000K",
+      "attributes": {
+        "fixture_tag": "L10A",
+        "description": "4\"x3' WALL MOUNTED LINEAR, LED, 675 LUMEN PF, 4000K",
+        "manufacturer": "PRUDENTIAL LIGHTING",
+        "model": "BIO-LIN LED4 MO R3 TMW AWL D1R NU SC UNV WS ND",
+        "lamp": "21 VA",
+        "driver": "FIXED OUTPUT",
+        "remarks": "MOUNT @ 7'-0\" AFF TO BOTTOM OF FIXTURE, CENTERED OVER MIRROR"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L11A",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "2'x4' FLAT PANEL RECESSED TROFFER, LED, 4800 LUMEN, 4000K, DIM TO 1%",
+      "attributes": {
+        "fixture_tag": "L11A",
+        "description": "2'x4' FLAT PANEL RECESSED TROFFER, LED, 4800 LUMEN, 4000K, DIM TO 1%",
+        "manufacturer": "LITHONIA LIGHTING",
+        "model": "EPANL 2X4 4800LMHE 80CRI 40K MIN1 ZT MVOLT",
+        "lamp": "37 VA",
+        "driver": "1% 0-10V DIMMING",
+        "remarks": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L12A",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "2\"x24' RECESSED HARD LID LINEAR MUD-OVER FLANGE, LED, 390 LUMEN PF, 4000K, DIM TO 1%",
+      "attributes": {
+        "fixture_tag": "L12A",
+        "description": "2\"x24' RECESSED HARD LID LINEAR MUD-OVER FLANGE, LED, 390 LUMEN PF, 4000K, DIM TO 1%",
+        "manufacturer": "PRUDENTIAL LIGHTING",
+        "model": "BPRO2-REC LED4 LP R24 TMW SAL SC UNV X7 DM01",
+        "lamp": "96 VA",
+        "driver": "1% 0-10V DIMMING",
+        "remarks": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L13A",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "3' SURFACE MOUNTED LINEAR WITH ADJUSTABLE OPTIC, LED, 5596 LUMEN, 4000K, DIM TO 1%",
+      "attributes": {
+        "fixture_tag": "L13A",
+        "description": "3' SURFACE MOUNTED LINEAR WITH ADJUSTABLE OPTIC, LED, 5596 LUMEN, 4000K, DIM TO 1%",
+        "manufacturer": "ELLIPTIPAR",
+        "model": "S 315 R03M S 00 M 0K 0 840 TD",
+        "lamp": "41 VA",
+        "driver": "1% 0-10V DIMMING",
+        "remarks": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L14A",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "RGBW COLOR CHANGING TAPE LIGHT, LED, 425 LUMEN PF, WITH ALUMINUM MOUNTING CHANNEL",
+      "attributes": {
+        "fixture_tag": "L14A",
+        "description": "RGBW COLOR CHANGING TAPE LIGHT, LED, 425 LUMEN PF, WITH ALUMINUM MOUNTING CHANNEL",
+        "manufacturer": "KELVIX",
+        "model": "RGBW 1 24V / CH-502-A 2 CL CP EC",
+        "lamp": "",
+        "driver": "1% 0-10V DIMMING",
+        "remarks": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L15A",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "2'x2' FLAT PANEL RECESSED TROFFER, LED, 3400 LUMEN, 4000K, DIM TO 1%",
+      "attributes": {
+        "fixture_tag": "L15A",
+        "description": "2'x2' FLAT PANEL RECESSED TROFFER, LED, 3400 LUMEN, 4000K, DIM TO 1%",
+        "manufacturer": "LITHONIA LIGHTING",
+        "model": "EPANL 2X2 3400LMHE 80CRI 40K MIN1 ZT MVOLT",
+        "lamp": "26 VA",
+        "driver": "1% 0-10V DIMMING",
+        "remarks": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L16A",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "4\" DIAMETER ROUND DOWNLIGHT, LED, 1500 LUMEN, 4000K, DIM TO 1%",
+      "attributes": {
+        "fixture_tag": "L16A",
+        "description": "4\" DIAMETER ROUND DOWNLIGHT, LED, 1500 LUMEN, 4000K, DIM TO 1%",
+        "manufacturer": "GOTHAM LIGHTING",
+        "model": "EVO4 40/1500 AR MWD LSS MVOLT GZ1",
+        "lamp": "14 VA",
+        "driver": "1% 0-10V DIMMING",
+        "remarks": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L16B",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "4\" DIAMETER ROUND DOWNLIGHT, LED, 2500 LUMEN, 4000K, DIM TO 1%",
+      "attributes": {
+        "fixture_tag": "L16B",
+        "description": "4\" DIAMETER ROUND DOWNLIGHT, LED, 2500 LUMEN, 4000K, DIM TO 1%",
+        "manufacturer": "GOTHAM LIGHTING",
+        "model": "EVO4 40/2500 AR WD LSS MVOLT GZ1",
+        "lamp": "26 VA",
+        "driver": "1% 0-10V DIMMING",
+        "remarks": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L16C",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "4\" DIAMETER ROUND DOWNLIGHT, LED, 2000 LUMEN, 4000K, DIM TO 1%",
+      "attributes": {
+        "fixture_tag": "L16C",
+        "description": "4\" DIAMETER ROUND DOWNLIGHT, LED, 2000 LUMEN, 4000K, DIM TO 1%",
+        "manufacturer": "GOTHAM LIGHTING",
+        "model": "EVO4 40/2000 AR WD LSS MVOLT GZ1",
+        "lamp": "20 VA",
+        "driver": "1% 0-10V DIMMING",
+        "remarks": ""
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L18A",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "4\"x22' LINEAR PENDANT, DIRECT/INDIRECT, LED, 843/281 LUMEN PF, 4000K, DIM TO 1%",
+      "attributes": {
+        "fixture_tag": "L18A",
+        "description": "4\"x22' LINEAR PENDANT, DIRECT/INDIRECT, LED, 843/281 LUMEN PF, 4000K, DIM TO 1%",
+        "manufacturer": "FLUXWERX LIGHTING",
+        "model": "APS R A C 40 B 22 G E1 M 03",
+        "lamp": "187 VA",
+        "driver": "1% 0-10V DIMMING",
+        "remarks": "MOUNT @ 10'-0\" AFF TO BOTTOM OF FIXTURE"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L19A",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "26' MICRO WALL WASH, LED, 469 LUMEN PF, 4000K",
+      "attributes": {
+        "fixture_tag": "L19A",
+        "description": "26' MICRO WALL WASH, LED, 469 LUMEN PF, 4000K",
+        "manufacturer": "PRUDENTIAL LIGHTING",
+        "model": "MWR LED4 LO R26 TMW SC UNV WRM20\" WRM1 TMW ND",
+        "lamp": "120 VA",
+        "driver": "1% 0-10V DIMMING",
+        "remarks": "MOUNT @ 18\" ABOVE TOP EDGE OF GRAPHIC TO BOTTOM OF FIXTURE"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L20A",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "5\"x20' LINEAR PENDANT, DIRECT/INDIRECT, LED, 1025/575 LUMEN PF, 4000K, DIM TO 1%",
+      "attributes": {
+        "fixture_tag": "L20A",
+        "description": "5\"x20' LINEAR PENDANT, DIRECT/INDIRECT, LED, 1025/575 LUMEN PF, 4000K, DIM TO 1%",
+        "manufacturer": "PRUDENTIAL LIGHTING",
+        "model": "BPRO5-LIN FLSH LED4 SO/LO R20 TMW BTW SCW ADC SC UNV CA48 DM01",
+        "lamp": "240 VA",
+        "driver": "1% 0-10V DIMMING",
+        "remarks": "BOTTOM OF FIXTURE SHALL BE FLUSH WITH BOTTOM OF DOUBLE T STRUCTURE"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L20B",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "5\"x26' LINEAR PENDANT, DIRECT/INDIRECT, LED, 1025/575 LUMEN PF, 4000K, DIM TO 1%",
+      "attributes": {
+        "fixture_tag": "L20B",
+        "description": "5\"x26' LINEAR PENDANT, DIRECT/INDIRECT, LED, 1025/575 LUMEN PF, 4000K, DIM TO 1%",
+        "manufacturer": "PRUDENTIAL LIGHTING",
+        "model": "BPRO5-LIN FLSH LED4 SO/LO R26 TMW BTW SCW ADC SC UNV CA48 DM01",
+        "lamp": "312 VA",
+        "driver": "1% 0-10V DIMMING",
+        "remarks": "BOTTOM OF FIXTURE SHALL BE FLUSH WITH BOTTOM OF DOUBLE T STRUCTURE"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L20D",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "5\"x14' LINEAR PENDANT, DIRECT/INDIRECT, LED, 1025/575 LUMEN PF, 4000K, DIM TO 1%",
+      "attributes": {
+        "fixture_tag": "L20D",
+        "description": "5\"x14' LINEAR PENDANT, DIRECT/INDIRECT, LED, 1025/575 LUMEN PF, 4000K, DIM TO 1%",
+        "manufacturer": "PRUDENTIAL LIGHTING",
+        "model": "BPRO5-LIN FLSH LED4 SO/LO R14 TMW BTW SCW ADC SC UNV CA48 DM01",
+        "lamp": "168 VA",
+        "driver": "1% 0-10V DIMMING",
+        "remarks": "BOTTOM OF FIXTURE SHALL BE FLUSH WITH BOTTOM OF DOUBLE T STRUCTURE"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L20F",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "5\"x4' LINEAR PENDANT, DIRECT/INDIRECT, LED, 1025/575 LUMEN PF, 4000K, DIM TO 1%",
+      "attributes": {
+        "fixture_tag": "L20F",
+        "description": "5\"x4' LINEAR PENDANT, DIRECT/INDIRECT, LED, 1025/575 LUMEN PF, 4000K, DIM TO 1%",
+        "manufacturer": "PRUDENTIAL LIGHTING",
+        "model": "BPRO5-LIN FLSH LED4 SO/LO R4 TMW BTW SCW ADC SC UNV CA48 DM01",
+        "lamp": "48 VA",
+        "driver": "1% 0-10V DIMMING",
+        "remarks": "BOTTOM OF FIXTURE SHALL BE FLUSH WITH BOTTOM OF DOUBLE T STRUCTURE"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L20G",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "5\"x6' LINEAR PENDANT, DIRECT/INDIRECT, LED, 1025/575 LUMEN PF, 4000K, DIM TO 1%",
+      "attributes": {
+        "fixture_tag": "L20G",
+        "description": "5\"x6' LINEAR PENDANT, DIRECT/INDIRECT, LED, 1025/575 LUMEN PF, 4000K, DIM TO 1%",
+        "manufacturer": "PRUDENTIAL LIGHTING",
+        "model": "BPRO5-LIN FLSH LED4 SO/LO R6 TMW BTW SCW ADC SC UNV CA48 DM01",
+        "lamp": "72 VA",
+        "driver": "1% 0-10V DIMMING",
+        "remarks": "BOTTOM OF FIXTURE SHALL BE FLUSH WITH BOTTOM OF DOUBLE T STRUCTURE"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L20H",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "5\"x10' LINEAR PENDANT, DIRECT/INDIRECT, LED, 1025/575 LUMEN PF, 4000K, DIM TO 1%",
+      "attributes": {
+        "fixture_tag": "L20H",
+        "description": "5\"x10' LINEAR PENDANT, DIRECT/INDIRECT, LED, 1025/575 LUMEN PF, 4000K, DIM TO 1%",
+        "manufacturer": "PRUDENTIAL LIGHTING",
+        "model": "BPRO5-LIN FLSH LED4 SO/LO R10 TMW BTW SCW ADC SC UNV CA48 DM01",
+        "lamp": "120 VA",
+        "driver": "1% 0-10V DIMMING",
+        "remarks": "BOTTOM OF FIXTURE SHALL BE FLUSH WITH BOTTOM OF DOUBLE T STRUCTURE"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "lighting_fixture",
+      "shape": "catalog",
+      "mark": "L20K",
+      "quantity": null,
+      "unit": null,
+      "quantity_basis": "unknown_plan_count",
+      "description": "5\"x22' LINEAR PENDANT, DIRECT/INDIRECT, LED, 1025/575 LUMEN PF, 4000K, DIM TO 1%",
+      "attributes": {
+        "fixture_tag": "L20K",
+        "description": "5\"x22' LINEAR PENDANT, DIRECT/INDIRECT, LED, 1025/575 LUMEN PF, 4000K, DIM TO 1%",
+        "manufacturer": "PRUDENTIAL LIGHTING",
+        "model": "BPRO5-LIN FLSH LED4 SO/LO R22 TMW BTW SCW ADC SC UNV CA48 DM01",
+        "lamp": "264 VA",
+        "driver": "1% 0-10V DIMMING",
+        "remarks": "BOTTOM OF FIXTURE SHALL BE FLUSH WITH BOTTOM OF DOUBLE T STRUCTURE"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 105,
+        "schedule": "lighting_fixture"
+      }
+    },
+    {
+      "schedule": "camera",
+      "shape": "instance",
+      "mark": "C-EXTERIOR-1",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "",
+        "room_name": "",
+        "device_number": "C-EXTERIOR-1",
+        "camera_type": "FIX",
+        "make_model": "4MP EXTERIOR",
+        "reference": "7/Y8.1.1"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 128,
+        "schedule": "camera"
+      }
+    },
+    {
+      "schedule": "camera",
+      "shape": "instance",
+      "mark": "C-EXTERIOR-2",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "",
+        "room_name": "",
+        "device_number": "C-EXTERIOR-2",
+        "camera_type": "FIX",
+        "make_model": "4MP EXTERIOR",
+        "reference": "7/Y8.1.1"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 128,
+        "schedule": "camera"
+      }
+    },
+    {
+      "schedule": "camera",
+      "shape": "instance",
+      "mark": "C-E-180B-1",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "E-180B",
+        "room_name": "VEST",
+        "device_number": "C-E-180B-1",
+        "camera_type": "FIX",
+        "make_model": "1080P",
+        "reference": "6/Y8.1.1"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 128,
+        "schedule": "camera"
+      }
+    },
+    {
+      "schedule": "camera",
+      "shape": "instance",
+      "mark": "C-N103-1",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N103",
+        "room_name": "CAFE",
+        "device_number": "C-N103-1",
+        "camera_type": "360",
+        "make_model": "FISHEYE 360",
+        "reference": "6/Y8.1.1"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 128,
+        "schedule": "camera"
+      }
+    },
+    {
+      "schedule": "camera",
+      "shape": "instance",
+      "mark": "C-N119-1",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N119",
+        "room_name": "CIRCULATION",
+        "device_number": "C-N119-1",
+        "camera_type": "360",
+        "make_model": "FISHEYE 360",
+        "reference": "6/Y8.1.1"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 128,
+        "schedule": "camera"
+      }
+    },
+    {
+      "schedule": "camera",
+      "shape": "instance",
+      "mark": "C-N119-2",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N119",
+        "room_name": "CIRCULATION",
+        "device_number": "C-N119-2",
+        "camera_type": "360",
+        "make_model": "FISHEYE 360",
+        "reference": "5/Y8.1.1"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 128,
+        "schedule": "camera"
+      }
+    },
+    {
+      "schedule": "camera",
+      "shape": "instance",
+      "mark": "C-N119-3",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N122",
+        "room_name": "Space",
+        "device_number": "C-N119-3",
+        "camera_type": "180",
+        "make_model": "FISHEYE 180",
+        "reference": "6/Y8.1.1"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 128,
+        "schedule": "camera"
+      }
+    },
+    {
+      "schedule": "camera",
+      "shape": "instance",
+      "mark": "C-S100-1",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S100",
+        "room_name": "EAST CORRIDOR",
+        "device_number": "C-S100-1",
+        "camera_type": "180",
+        "make_model": "FISHEYE 180",
+        "reference": "4/Y8.1.1"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 128,
+        "schedule": "camera"
+      }
+    },
+    {
+      "schedule": "camera",
+      "shape": "instance",
+      "mark": "C-S101-1",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S101",
+        "room_name": "SPACE ISAC RECEPTION",
+        "device_number": "C-S101-1",
+        "camera_type": "FIX",
+        "make_model": "1080P",
+        "reference": "4/Y8.1.1"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 128,
+        "schedule": "camera"
+      }
+    },
+    {
+      "schedule": "camera",
+      "shape": "instance",
+      "mark": "C-S102-1",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S102",
+        "room_name": "CYBER VULNERABILITY LAB",
+        "device_number": "C-S102-1",
+        "camera_type": "FIX",
+        "make_model": "1080P",
+        "reference": "4/Y8.1.1"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 128,
+        "schedule": "camera"
+      }
+    },
+    {
+      "schedule": "camera",
+      "shape": "instance",
+      "mark": "C-S103-1",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S103",
+        "room_name": "DATA/SERVER",
+        "device_number": "C-S103-1",
+        "camera_type": "FIX",
+        "make_model": "1080P",
+        "reference": "4/Y8.1.1"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 128,
+        "schedule": "camera"
+      }
+    },
+    {
+      "schedule": "camera",
+      "shape": "instance",
+      "mark": "C-S107-1",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S107",
+        "room_name": "WATCH CENTER",
+        "device_number": "C-S107-1",
+        "camera_type": "FIX",
+        "make_model": "1080P",
+        "reference": "5/Y8.1.1"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 128,
+        "schedule": "camera"
+      }
+    },
+    {
+      "schedule": "camera",
+      "shape": "instance",
+      "mark": "C-S108-1",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S108",
+        "room_name": "CIRCULATION",
+        "device_number": "C-S108-1",
+        "camera_type": "FIX",
+        "make_model": "1080P",
+        "reference": "5/Y8.1.1"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 128,
+        "schedule": "camera"
+      }
+    },
+    {
+      "schedule": "security_device",
+      "shape": "instance",
+      "mark": "ACP-N124-1",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N124",
+        "room_name": "DATA ROOM",
+        "device_number": "ACP-N124-1",
+        "device_type": "ACP",
+        "make": "-",
+        "reference": "-"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 128,
+        "schedule": "security_device"
+      }
+    },
+    {
+      "schedule": "security_device",
+      "shape": "instance",
+      "mark": "NVR-N124-1",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N124",
+        "room_name": "DATA ROOM",
+        "device_number": "NVR-N124-1",
+        "device_type": "NVR",
+        "make": "-",
+        "reference": "-"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 128,
+        "schedule": "security_device"
+      }
+    },
+    {
+      "schedule": "security_device",
+      "shape": "instance",
+      "mark": "PS-N124-1",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "N124",
+        "room_name": "DATA ROOM",
+        "device_number": "PS-N124-1",
+        "device_type": "PS",
+        "make": "-",
+        "reference": "-"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 128,
+        "schedule": "security_device"
+      }
+    },
+    {
+      "schedule": "security_device",
+      "shape": "instance",
+      "mark": "ACP-S103-1",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S103",
+        "room_name": "DATA/SERVER",
+        "device_number": "ACP-S103-1",
+        "device_type": "ACP",
+        "make": "-",
+        "reference": "-"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 128,
+        "schedule": "security_device"
+      }
+    },
+    {
+      "schedule": "security_device",
+      "shape": "instance",
+      "mark": "PS-S103-1",
+      "quantity": 1.0,
+      "unit": "EA",
+      "quantity_basis": "row_count",
+      "description": "",
+      "attributes": {
+        "room_number": "S103",
+        "room_name": "DATA/SERVER",
+        "device_number": "PS-S103-1",
+        "device_type": "PS",
+        "make": "-",
+        "reference": "-"
+      },
+      "source": {
+        "file_id": "drawings",
+        "page_index": 128,
+        "schedule": "security_device"
+      }
+    }
+  ],
+  "room_areas": [
+    {
+      "room_number": "N107C",
+      "area_sf": 219.0,
+      "confidence": 0.983,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N107B",
+      "area_sf": 212.0,
+      "confidence": 0.864,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N105",
+      "area_sf": 816.0,
+      "confidence": 0.741,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N139",
+      "area_sf": 160.0,
+      "confidence": 0.711,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N111",
+      "area_sf": 526.0,
+      "confidence": 0.614,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N138",
+      "area_sf": 1024.0,
+      "confidence": 0.561,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N104D",
+      "area_sf": 43.0,
+      "confidence": 0.555,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "S105",
+      "area_sf": 119.0,
+      "confidence": 0.547,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N113A",
+      "area_sf": 129.0,
+      "confidence": 0.531,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "S103",
+      "area_sf": 308.0,
+      "confidence": 0.472,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "S102",
+      "area_sf": 781.0,
+      "confidence": 0.464,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "S101A",
+      "area_sf": 218.0,
+      "confidence": 0.334,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N120H",
+      "area_sf": 2169.0,
+      "confidence": 0.325,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "S108D",
+      "area_sf": 1986.0,
+      "confidence": 0.322,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N106",
+      "area_sf": 1055.0,
+      "confidence": 0.298,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N124",
+      "area_sf": 141.0,
+      "confidence": 0.297,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N113B",
+      "area_sf": 118.0,
+      "confidence": 0.295,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N104C",
+      "area_sf": 484.0,
+      "confidence": 0.288,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N104F",
+      "area_sf": 937.0,
+      "confidence": 0.281,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N119",
+      "area_sf": 107.0,
+      "confidence": 0.275,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N108",
+      "area_sf": 71.0,
+      "confidence": 0.26,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N120C",
+      "area_sf": 248.0,
+      "confidence": 0.233,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N113C",
+      "area_sf": 118.0,
+      "confidence": 0.222,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "N102",
+      "area_sf": 364.0,
+      "confidence": 0.189,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    },
+    {
+      "room_number": "S107",
+      "area_sf": 1806.0,
+      "confidence": 0.048,
+      "basis": "area_label_join",
+      "source": {
+        "file_id": "drawings",
+        "page_index": 3
+      }
+    }
+  ],
+  "fixture_counts": [
+    {
+      "symbol_id": "MS-1",
+      "sheet_page": 58,
+      "count": 2,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          1626.2,
+          1839.8
+        ],
+        [
+          382.5,
+          1862.8
+        ]
+      ]
+    },
+    {
+      "symbol_id": "WC-2",
+      "sheet_page": 58,
+      "count": 4,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          1846.1,
+          1743.0
+        ],
+        [
+          649.9,
+          1743.3
+        ],
+        [
+          2155.9,
+          465.6
+        ],
+        [
+          2128.0,
+          550.4
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L-1",
+      "sheet_page": 58,
+      "count": 6,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          1862.1,
+          1899.4
+        ],
+        [
+          658.4,
+          1879.5
+        ],
+        [
+          1849.4,
+          456.5
+        ],
+        [
+          1876.9,
+          456.5
+        ],
+        [
+          1849.4,
+          567.9
+        ],
+        [
+          1876.9,
+          567.9
+        ]
+      ]
+    },
+    {
+      "symbol_id": "WC-1",
+      "sheet_page": 58,
+      "count": 3,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          1966.5,
+          433.1
+        ],
+        [
+          2024.3,
+          433.1
+        ],
+        [
+          2078.9,
+          433.1
+        ]
+      ]
+    },
+    {
+      "symbol_id": "U-1",
+      "sheet_page": 58,
+      "count": 3,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          2056.9,
+          558.0
+        ],
+        [
+          1997.5,
+          558.0
+        ],
+        [
+          1942.0,
+          558.0
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L-2",
+      "sheet_page": 58,
+      "count": 15,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          597.0,
+          972.8
+        ],
+        [
+          651.0,
+          972.8
+        ],
+        [
+          705.0,
+          972.8
+        ],
+        [
+          759.0,
+          972.8
+        ],
+        [
+          810.2,
+          972.8
+        ],
+        [
+          867.0,
+          972.8
+        ],
+        [
+          586.8,
+          387.8
+        ],
+        [
+          648.3,
+          388.0
+        ],
+        [
+          709.8,
+          387.8
+        ],
+        [
+          771.3,
+          387.8
+        ],
+        [
+          911.7,
+          327.9
+        ],
+        [
+          912.6,
+          380.4
+        ],
+        [
+          913.3,
+          436.4
+        ],
+        [
+          911.1,
+          488.8
+        ],
+        [
+          2564.0,
+          1403.5
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L2A",
+      "sheet_page": 99,
+      "count": 2,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          434.0,
+          575.9
+        ],
+        [
+          939.7,
+          952.2
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L18A",
+      "sheet_page": 99,
+      "count": 1,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          434.0,
+          875.9
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L16A",
+      "sheet_page": 99,
+      "count": 16,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          234.2,
+          877.3
+        ],
+        [
+          516.1,
+          1070.7
+        ],
+        [
+          516.1,
+          852.1
+        ],
+        [
+          516.1,
+          599.4
+        ],
+        [
+          516.1,
+          455.4
+        ],
+        [
+          695.7,
+          546.7
+        ],
+        [
+          695.7,
+          730.0
+        ],
+        [
+          752.4,
+          431.2
+        ],
+        [
+          786.6,
+          1335.0
+        ],
+        [
+          903.2,
+          1389.3
+        ],
+        [
+          903.2,
+          1543.5
+        ],
+        [
+          884.2,
+          1237.7
+        ],
+        [
+          695.7,
+          836.0
+        ],
+        [
+          695.7,
+          1040.2
+        ],
+        [
+          234.2,
+          541.2
+        ],
+        [
+          739.2,
+          917.6
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L16C",
+      "sheet_page": 99,
+      "count": 2,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          1082.1,
+          411.9
+        ],
+        [
+          893.1,
+          411.9
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L5A",
+      "sheet_page": 99,
+      "count": 14,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          293.7,
+          1025.1
+        ],
+        [
+          382.2,
+          1025.1
+        ],
+        [
+          412.5,
+          1025.1
+        ],
+        [
+          293.7,
+          1261.5
+        ],
+        [
+          382.2,
+          1261.5
+        ],
+        [
+          412.5,
+          1261.5
+        ],
+        [
+          1020.0,
+          1586.9
+        ],
+        [
+          1117.5,
+          1587.0
+        ],
+        [
+          1215.0,
+          1587.0
+        ],
+        [
+          1312.5,
+          1587.0
+        ],
+        [
+          1410.0,
+          1587.0
+        ],
+        [
+          1507.5,
+          1587.0
+        ],
+        [
+          1607.0,
+          1589.9
+        ],
+        [
+          1131.9,
+          1332.6
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L5B",
+      "sheet_page": 99,
+      "count": 9,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          1033.3,
+          992.8
+        ],
+        [
+          1033.3,
+          1141.0
+        ],
+        [
+          1033.3,
+          844.2
+        ],
+        [
+          1033.3,
+          695.8
+        ],
+        [
+          838.3,
+          679.5
+        ],
+        [
+          836.1,
+          511.7
+        ],
+        [
+          1168.7,
+          1337.1
+        ],
+        [
+          1035.4,
+          522.3
+        ],
+        [
+          926.8,
+          1195.4
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L10A",
+      "sheet_page": 99,
+      "count": 1,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          504.6,
+          300.7
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L9A",
+      "sheet_page": 99,
+      "count": 3,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          916.9,
+          1325.9
+        ],
+        [
+          1705.6,
+          1618.0
+        ],
+        [
+          423.3,
+          294.9
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L12A",
+      "sheet_page": 99,
+      "count": 1,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          477.7,
+          1299.0
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L7B",
+      "sheet_page": 99,
+      "count": 1,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          1339.2,
+          1412.1
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L7G",
+      "sheet_page": 99,
+      "count": 1,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          310.3,
+          1528.7
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L7H",
+      "sheet_page": 99,
+      "count": 2,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          389.8,
+          1528.7
+        ],
+        [
+          551.8,
+          1528.7
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L7K",
+      "sheet_page": 99,
+      "count": 2,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          473.8,
+          1528.7
+        ],
+        [
+          634.3,
+          1528.7
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L7J",
+      "sheet_page": 99,
+      "count": 1,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          713.8,
+          1528.7
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L7L",
+      "sheet_page": 99,
+      "count": 1,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          768.5,
+          1573.4
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L16B",
+      "sheet_page": 99,
+      "count": 4,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          738.6,
+          1468.7
+        ],
+        [
+          785.0,
+          1410.4
+        ],
+        [
+          785.0,
+          1526.1
+        ],
+        [
+          796.8,
+          1597.8
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L3A",
+      "sheet_page": 99,
+      "count": 1,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          1115.4,
+          1448.9
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L4A",
+      "sheet_page": 99,
+      "count": 6,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          833.0,
+          1447.5
+        ],
+        [
+          908.1,
+          1447.5
+        ],
+        [
+          833.0,
+          1489.5
+        ],
+        [
+          974.0,
+          1488.9
+        ],
+        [
+          707.7,
+          881.0
+        ],
+        [
+          707.7,
+          596.7
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L4B",
+      "sheet_page": 99,
+      "count": 2,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          908.8,
+          1498.5
+        ],
+        [
+          973.3,
+          1441.8
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L8A",
+      "sheet_page": 99,
+      "count": 6,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          1025.4,
+          1377.9
+        ],
+        [
+          1205.4,
+          1492.8
+        ],
+        [
+          783.0,
+          1165.2
+        ],
+        [
+          1472.7,
+          1409.1
+        ],
+        [
+          351.9,
+          1164.4
+        ],
+        [
+          1565.4,
+          1450.1
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L20D",
+      "sheet_page": 99,
+      "count": 1,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          703.3,
+          273.9
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L6A",
+      "sheet_page": 99,
+      "count": 1,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          1633.6,
+          1328.7
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L7N",
+      "sheet_page": 99,
+      "count": 2,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          1225.7,
+          1100.3
+        ],
+        [
+          1225.7,
+          545.3
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L20B",
+      "sheet_page": 99,
+      "count": 1,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          469.4,
+          1378.5
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L20K",
+      "sheet_page": 99,
+      "count": 2,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          708.6,
+          1378.5
+        ],
+        [
+          708.6,
+          1306.5
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L20A",
+      "sheet_page": 99,
+      "count": 1,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          703.3,
+          370.1
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L20H",
+      "sheet_page": 99,
+      "count": 9,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          475.0,
+          370.1
+        ],
+        [
+          838.0,
+          370.1
+        ],
+        [
+          1234.0,
+          370.1
+        ],
+        [
+          1036.0,
+          370.1
+        ],
+        [
+          838.0,
+          1281.0
+        ],
+        [
+          1234.0,
+          1281.6
+        ],
+        [
+          1036.0,
+          1281.6
+        ],
+        [
+          1397.1,
+          1281.6
+        ],
+        [
+          1560.1,
+          1281.6
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L7R",
+      "sheet_page": 99,
+      "count": 3,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          389.8,
+          1488.8
+        ],
+        [
+          551.8,
+          1488.8
+        ],
+        [
+          497.5,
+          1718.3
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L19A",
+      "sheet_page": 99,
+      "count": 1,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          487.6,
+          1330.1
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L14A",
+      "sheet_page": 100,
+      "count": 7,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          1008.8,
+          816.8
+        ],
+        [
+          1319.4,
+          866.6
+        ],
+        [
+          1554.6,
+          844.0
+        ],
+        [
+          1461.7,
+          1643.7
+        ],
+        [
+          1333.0,
+          1622.8
+        ],
+        [
+          1067.6,
+          1713.6
+        ],
+        [
+          859.4,
+          1713.6
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L13A",
+      "sheet_page": 100,
+      "count": 8,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          1281.4,
+          1530.5
+        ],
+        [
+          1281.4,
+          918.5
+        ],
+        [
+          1087.4,
+          918.4
+        ],
+        [
+          1087.4,
+          1530.4
+        ],
+        [
+          1087.4,
+          1206.4
+        ],
+        [
+          1281.4,
+          1206.5
+        ],
+        [
+          2179.4,
+          1844.2
+        ],
+        [
+          2214.4,
+          1998.8
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L16A",
+      "sheet_page": 102,
+      "count": 3,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          2280.9,
+          754.6
+        ],
+        [
+          1539.1,
+          1295.6
+        ],
+        [
+          2280.9,
+          418.5
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L5A",
+      "sheet_page": 102,
+      "count": 4,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          1685.7,
+          781.1
+        ],
+        [
+          1685.7,
+          871.1
+        ],
+        [
+          1685.7,
+          961.1
+        ],
+        [
+          1685.7,
+          1050.6
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L7A",
+      "sheet_page": 102,
+      "count": 2,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          1577.1,
+          1045.2
+        ],
+        [
+          1359.1,
+          1255.1
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L11A",
+      "sheet_page": 102,
+      "count": 3,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          1414.7,
+          1125.0
+        ],
+        [
+          1147.3,
+          904.4
+        ],
+        [
+          1224.6,
+          1127.6
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L7D",
+      "sheet_page": 102,
+      "count": 1,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          1631.5,
+          1103.1
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L2B",
+      "sheet_page": 102,
+      "count": 1,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          1467.8,
+          1228.0
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L7E",
+      "sheet_page": 102,
+      "count": 2,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          1577.1,
+          841.1
+        ],
+        [
+          1577.1,
+          751.1
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L7N",
+      "sheet_page": 102,
+      "count": 1,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          1752.5,
+          1387.5
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L3B",
+      "sheet_page": 102,
+      "count": 1,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          1232.6,
+          853.6
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L7P",
+      "sheet_page": 102,
+      "count": 1,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          1619.0,
+          1215.8
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L15A",
+      "sheet_page": 102,
+      "count": 2,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          1075.6,
+          1045.0
+        ],
+        [
+          985.6,
+          1182.3
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L7C",
+      "sheet_page": 102,
+      "count": 1,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          1448.9,
+          865.2
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L9A",
+      "sheet_page": 102,
+      "count": 1,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          906.6,
+          669.6
+        ]
+      ]
+    },
+    {
+      "symbol_id": "L14A",
+      "sheet_page": 104,
+      "count": 7,
+      "confidence": 0.7,
+      "source": "text_tag",
+      "verified": false,
+      "boxes": [
+        [
+          1484.4,
+          349.0
+        ],
+        [
+          1724.5,
+          388.1
+        ],
+        [
+          1959.7,
+          365.5
+        ],
+        [
+          1866.8,
+          1165.2
+        ],
+        [
+          1738.2,
+          1144.2
+        ],
+        [
+          1472.7,
+          1235.2
+        ],
+        [
+          1264.5,
+          1235.2
+        ]
+      ]
+    }
+  ]
+}

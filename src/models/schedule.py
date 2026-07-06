@@ -5,7 +5,7 @@ PartitionType land with the schedule parsers in Milestones 7-8.
 """
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from .base import JsonModel
 
@@ -16,6 +16,79 @@ class AbbreviationEntry(JsonModel):
 
     abbreviation: str           # e.g. "HM"
     definition: str             # e.g. "HOLLOW METAL"
+
+
+@dataclass
+class ScheduleItem(JsonModel):
+    """A uniform, quantity-bearing row from any schedule (Tier 1 quantity harness).
+
+    One record per data row, whatever the schedule. `quantity_basis` makes the
+    provenance of `quantity` explicit so downstream never mistakes a spec catalog
+    row for a real count:
+      * "row_count"          — an instance row; quantity == 1, aggregate = row count
+      * "qty_column"         — quantity read from an explicit QUANTITY column
+      * "unknown_plan_count" — a type/catalog row whose count lives on the drawings
+                               (deferred to plan-counting); quantity is None
+    """
+
+    schedule: str                               # canonical schedule name, e.g. "door"
+    shape: str                                  # "instance" | "catalog"
+    mark: str                                   # row key: door_mark / room / fixture tag
+    quantity: float | None                      # count or measured qty; None if unknown
+    unit: str | None                            # "EA" | "SF" | ...; None when quantity is None
+    quantity_basis: str                         # see class docstring
+    description: str = ""                        # schedule description, if any
+    attributes: dict = field(default_factory=dict)   # all resolved canonical field -> value
+    source: dict = field(default_factory=dict)       # provenance: {file_id, page_index, signature}
+
+
+@dataclass
+class BidItem(JsonModel):
+    """A single Division 00/01 bid-structure item — an alternate, unit price, or
+    allowance (Tier: bid structure). These define HOW the bid is organized and
+    priced, sourced from the standard CSI Division-01 pricing sections in the
+    project manual. Absent sections are simply not emitted (degrade + flag), never
+    faked.
+    """
+
+    kind: str                                   # "alternate" | "unit_price" | "allowance"
+    number: str                                 # "1", "2", ... (as printed in the schedule)
+    title: str                                  # e.g. "Bench Millwork"
+    basis: str                                  # alternate: add|deduct|unknown ; unit_price: unit ; allowance: lump_sum
+    description: str = ""                        # base-bid / unit / allowance scope (first line)
+    unit: str | None = None                     # unit of measure for unit_price items
+    source: dict = field(default_factory=dict)  # {file_id, page, section}
+class CountResult(JsonModel):
+    """A deterministic per-sheet fixture-tag count (Tier 3.1 extraction).
+
+    The count is per SHEET, not a deduped building total: the same fixture is tagged
+    on the overall plan and re-tagged on enlarged plans, so the true total is resolved
+    later by the VLM verifier. `source="text_tag"` (tags live in the plumbing sheets'
+    text layer); `verified` is set only after verification.
+    """
+
+    symbol_id: str                              # catalog key, e.g. "WC-1"
+    sheet_page: int                             # 1-indexed page the count is from
+    count: int                                  # tag occurrences on this sheet (candidate)
+    confidence: float = 0.7                     # deterministic, pre-verification, pre-dedup
+    source: str = "text_tag"
+    verified: bool = False
+    boxes: list = field(default_factory=list)   # [[x, y], ...] tag centers -> provenance
+
+
+@dataclass
+class RoomArea(JsonModel):
+    """An approximate per-room floor area harvested from SF text labels on the
+    area/floor plans (Tier 2). Deliberately approximate — occupancy/gross magnitude,
+    partial coverage — so it carries a confidence and an explicit basis; it is never
+    presented as an exact net area (that is Tier 3 geometry).
+    """
+
+    room_number: str
+    area_sf: float
+    confidence: float                            # 0..1, from label-to-room distance + uniqueness
+    basis: str = "area_label_join"               # provenance of the number
+    source: dict = field(default_factory=dict)   # {file_id, page_index}
 
 
 @dataclass

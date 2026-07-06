@@ -18,13 +18,16 @@ from __future__ import annotations
 import pathlib
 import re
 
+from src.models.document_map import DocumentMap
 from src.models.graph import GraphEdge, GraphNode, KnowledgeGraph
+from src.pipeline.build_document_map import build_document_map, extraction_pages
 from src.pipeline.phase2_abbreviation_parser import parse_abbreviations, abbreviations_as_dict
 from src.pipeline.phase2_drawing_index import parse_drawing_index
 from src.pipeline.phase2_schedule_parser import (
     extraction_confidence, parse_applied_finish_list, parse_door_schedule, parse_finish_schedule,
 )
 from src.pipeline.phase2_spec_parser import parse_spec_section, parse_spec_toc
+from src.pipeline.section_resolver import SectionLink, build_section_map
 
 MANUAL = "project_manual.pdf"
 DRAWINGS = "drawings.pdf"
@@ -47,6 +50,9 @@ _TRACE_SECTIONS = ["081113", "081416", "087100"]
 
 
 def _sid(num: str) -> str: return f"section:{num}"
+def _sec(links: dict[str, SectionLink], key: str) -> str | None:
+    link = links.get(key)
+    return link.section if link else None
 def _room_of(mark: str) -> str:
     m = re.match(r"([NS]\d{3})", mark)
     return m.group(1) if m else mark
@@ -55,15 +61,30 @@ def _room_of(mark: str) -> str:
 def build_graph(
     manual_path: str | pathlib.Path,
     drawings_path: str | pathlib.Path,
+    doc_map: DocumentMap | None = None,
+    section_llm=None,
 ) -> KnowledgeGraph:
     kg = KnowledgeGraph()
 
-    toc = parse_spec_toc(manual_path)
-    registry = parse_drawing_index(drawings_path)
-    doors = parse_door_schedule(drawings_path)
-    rooms = parse_finish_schedule(drawings_path)
-    abbrev = abbreviations_as_dict(parse_abbreviations(drawings_path))
-    door_conf = round(extraction_confidence(doors), 3)
+    # Discover where each artifact lives instead of hardcoding page indices.
+    # Absent artifacts (an artifact the locator couldn't confirm) resolve to None
+    # and their parser is skipped rather than reading a wrong page.
+    if doc_map is None:
+        doc_map = build_document_map([drawings_path, manual_path])
+    pg = extraction_pages(doc_map)
+
+    toc = parse_spec_toc(manual_path, start_page=pg["toc_start"] or 0)
+    registry = parse_drawing_index(drawings_path, page_index=pg["drawing_index"]) \
+        if pg["drawing_index"] is not None else []
+    doors = parse_door_schedule(drawings_path, page_index=pg["door_schedule"]) \
+        if pg["door_schedule"] is not None else []
+    rooms = parse_finish_schedule(drawings_path, page_index=pg["finish_schedule"]) \
+        if pg["finish_schedule"] is not None else []
+    abbrev = abbreviations_as_dict(parse_abbreviations(drawings_path, page_index=pg["abbreviations"])) \
+        if pg["abbreviations"] is not None else {}
+    applied = parse_applied_finish_list(drawings_path, page_index=pg["finish_schedule"]) \
+        if pg["finish_schedule"] is not None else {}
+    door_conf = round(extraction_confidence(doors), 3) if doors else 0.0
 
     section_titles: dict[str, str] = {}
 
@@ -77,10 +98,18 @@ def build_graph(
                 source_file=MANUAL, source_page=None, confidence=1.0,
             ))
 
+    # Derive code -> section links (B9) instead of hardcoding. The hand-authored
+    # maps are passed only as a shrinking `seed` override for cases the matcher
+    # can't yet derive, so UCCS stays byte-identical.
+    material_links = build_section_map(MATERIAL_SECTION, abbrev, applied, section_titles,
+                                       "material", "08", seed=MATERIAL_SECTION, llm=section_llm)
+    finish_links = build_section_map(FINISH_SECTION, abbrev, applied, section_titles,
+                                     "finish", None, seed=FINISH_SECTION, llm=section_llm)
+
     # enrich the trace sections with page provenance + collect cross-references
     section_refs: dict[str, set[str]] = {}
     for num in _TRACE_SECTIONS:
-        sec = parse_spec_section(manual_path, num, toc=toc, start_hint=340)
+        sec = parse_spec_section(manual_path, num, toc=toc, start_hint=pg["section_start_hint"])
         section_refs[num] = {r for r in _SECTION_REF_RE.findall(sec.raw_text) if r != num}
         if _sid(num) in kg.g:
             kg.g.nodes[_sid(num)]["source_page"] = sec.page_range[0]
@@ -128,7 +157,7 @@ def build_graph(
         ))
 
         def link_material(material: str, rel: str) -> None:
-            sec = MATERIAL_SECTION.get(material)
+            sec = _sec(material_links, material)
             if sec and kg.find_node(_sid(sec)):
                 kg.add_edge(GraphEdge(did, _sid(sec), rel, {"material": material}))
                 base = material.split(" ")[0]
@@ -172,7 +201,7 @@ def build_graph(
             codes.update(_CODE_RE.findall(cell or ""))
         for code in codes:
             prefix = re.match(r"[A-Z]+", code)
-            sec = FINISH_SECTION.get(prefix.group()) if prefix else None
+            sec = _sec(finish_links, prefix.group()) if prefix else None
             if sec and kg.find_node(_sid(sec)):
                 kg.add_edge(GraphEdge(rid, _sid(sec), "FINISH_SPECIFIED_IN", {"code": code}))
             else:
