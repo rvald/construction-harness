@@ -33,6 +33,7 @@ from service.models import (
     STATUS_REDUCING, STATUS_RUNNING, STATUS_SUCCEEDED, TakeoffJob, TakeoffShard,
 )
 from service.planner import plan_shard_windows
+from service.projection import shred_entities
 from service.queue import get_queue
 from service.reduce import merge_partials
 
@@ -212,6 +213,7 @@ def reduce_job(job_id: str) -> str:
         job.artifact_object_key = art_key
         job.manifest = manifest
         job.entity_schema_version = adapter.ENTITY_SCHEMA_VERSION
+        shred_entities(s, job_id, report)   # project the artifact into queryable rows (ADR-003)
     log.info("takeoff.reduce.done",
              extra={"job_id": job_id, "shards_merged": len(partial_keys),
                     "incomplete": bool(failed_shards)})

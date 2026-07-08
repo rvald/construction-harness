@@ -8,7 +8,7 @@ from __future__ import annotations
 import uuid
 from datetime import datetime, timezone
 
-from sqlalchemy import DateTime, Integer, String, func
+from sqlalchemy import Boolean, DateTime, Float, Index, Integer, String, Text, func
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -73,6 +73,71 @@ class TakeoffJob(Base):
     )
     started_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     finished_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+
+
+# --- shredded entity tables (ADR-003): a queryable projection of the artifact blob ---
+# `ordinal` preserves the artifact's record order so paginated reads match the golden.
+
+class ScheduleItemRow(Base):
+    __tablename__ = "schedule_items"
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=_uuid)
+    job_id: Mapped[str] = mapped_column(String(36), index=True)
+    ordinal: Mapped[int] = mapped_column(Integer)
+
+    schedule: Mapped[str] = mapped_column(String(64))
+    shape: Mapped[str] = mapped_column(String(16))
+    mark: Mapped[str] = mapped_column(String(128))
+    quantity: Mapped[float | None] = mapped_column(Float)
+    unit: Mapped[str | None] = mapped_column(String(16))
+    quantity_basis: Mapped[str] = mapped_column(String(32))
+    description: Mapped[str] = mapped_column(Text, default="")
+    attributes: Mapped[dict] = mapped_column(JSONB, default=dict)
+    src_file_id: Mapped[str | None] = mapped_column(String(128))
+    src_page_index: Mapped[int | None] = mapped_column(Integer)
+
+    __table_args__ = (
+        Index("ix_schedule_items_job_schedule", "job_id", "schedule"),
+        Index("ix_schedule_items_job_ordinal", "job_id", "ordinal"),
+    )
+
+
+class RoomAreaRow(Base):
+    __tablename__ = "room_areas"
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=_uuid)
+    job_id: Mapped[str] = mapped_column(String(36), index=True)
+    ordinal: Mapped[int] = mapped_column(Integer)
+
+    room_number: Mapped[str] = mapped_column(String(64))
+    area_sf: Mapped[float] = mapped_column(Float)
+    confidence: Mapped[float] = mapped_column(Float)
+    basis: Mapped[str] = mapped_column(String(64))
+    src_file_id: Mapped[str | None] = mapped_column(String(128))
+    src_page_index: Mapped[int | None] = mapped_column(Integer)
+
+    __table_args__ = (Index("ix_room_areas_job_ordinal", "job_id", "ordinal"),)
+
+
+class FixtureCountRow(Base):
+    __tablename__ = "fixture_counts"
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=_uuid)
+    job_id: Mapped[str] = mapped_column(String(36), index=True)
+    ordinal: Mapped[int] = mapped_column(Integer)
+
+    symbol_id: Mapped[str] = mapped_column(String(64))
+    sheet_page: Mapped[int] = mapped_column(Integer)     # 1-indexed page — the provenance
+    count: Mapped[int] = mapped_column(Integer)
+    confidence: Mapped[float] = mapped_column(Float)
+    source: Mapped[str] = mapped_column(String(32))
+    verified: Mapped[bool] = mapped_column(Boolean, default=False)
+    boxes: Mapped[list] = mapped_column(JSONB, default=list)
+
+    __table_args__ = (
+        Index("ix_fixture_counts_job_symbol", "job_id", "symbol_id"),
+        Index("ix_fixture_counts_job_ordinal", "job_id", "ordinal"),
+    )
 
 
 class TakeoffShard(Base):

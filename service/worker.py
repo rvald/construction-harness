@@ -17,6 +17,7 @@ from pathlib import Path
 from service.db import session_scope
 from service.models import STATUS_FAILED, STATUS_RUNNING, STATUS_SUCCEEDED, TakeoffJob
 from service.pipeline_adapter import ENTITY_SCHEMA_VERSION, run_takeoff
+from service.projection import shred_entities
 from service import storage
 
 log = logging.getLogger("takeoff.worker")
@@ -68,6 +69,7 @@ def process_job(job_id: str) -> str:
         job.artifact_object_key = artifact_key
         job.manifest = manifest
         job.entity_schema_version = ENTITY_SCHEMA_VERSION
+        shred_entities(s, job_id, report)   # project the artifact into queryable rows (ADR-003)
     log.info(
         "takeoff.done",
         extra={"job_id": job_id, "timing": manifest.get("timing"),
