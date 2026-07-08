@@ -1,0 +1,93 @@
+# Local dev topology for the takeoff ingestion service (S0/S1 walking skeleton).
+# `docker compose up --build` brings up: postgres, redis, minio, a one-shot migration,
+# the API, and one worker.
+
+x-service-env: &service-env
+  TAKEOFF_ENVIRONMENT: local
+  TAKEOFF_DATABASE_URL: postgresql+psycopg://takeoff:takeoff@postgres:5432/takeoff
+  TAKEOFF_REDIS_URL: redis://redis:6379/0
+  TAKEOFF_S3_ENDPOINT_URL: http://minio:9000
+  TAKEOFF_S3_ACCESS_KEY: minioadmin
+  TAKEOFF_S3_SECRET_KEY: minioadmin
+  TAKEOFF_S3_BUCKET: takeoff
+
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: takeoff
+      POSTGRES_PASSWORD: takeoff
+      POSTGRES_DB: takeoff
+    ports: ["5432:5432"]
+    volumes: ["pgdata:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U takeoff"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  redis:
+    image: redis:7
+    ports: ["6379:6379"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  minio:
+    image: minio/minio
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    ports: ["9000:9000", "9001:9001"]
+    volumes: ["miniodata:/data"]
+
+  createbuckets:
+    image: minio/mc
+    depends_on: [minio]
+    entrypoint: >
+      /bin/sh -c "
+      until mc alias set local http://minio:9000 minioadmin minioadmin; do sleep 1; done;
+      mc mb -p local/takeoff;
+      exit 0;"
+
+  migrate:
+    build:
+      context: .
+      dockerfile: service/Dockerfile
+    command: alembic -c service/alembic.ini upgrade head
+    environment: *service-env
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  api:
+    build:
+      context: .
+      dockerfile: service/Dockerfile
+    command: uvicorn service.api.main:app --host 0.0.0.0 --port 8000
+    environment: *service-env
+    ports: ["8000:8000"]
+    depends_on:
+      postgres: {condition: service_healthy}
+      redis: {condition: service_healthy}
+      minio: {condition: service_started}
+      migrate: {condition: service_completed_successfully}
+
+  worker:
+    build:
+      context: .
+      dockerfile: service/Dockerfile
+    command: rq worker takeoff --url redis://redis:6379/0
+    environment: *service-env
+    depends_on:
+      postgres: {condition: service_healthy}
+      redis: {condition: service_healthy}
+      minio: {condition: service_started}
+      migrate: {condition: service_completed_successfully}
+
+volumes:
+  pgdata:
+  miniodata:

@@ -15,6 +15,21 @@ dependencies = [
 # by src/pipeline/section_llm.py so core pipeline + tests run without it.
 [project.optional-dependencies]
 llm = ["anthropic>=0.40"]
+# Optional: the production service that wraps the takeoff builder as async jobs.
+# Kept out of the default install so the pipeline's dependency surface stays lean;
+# install with `uv sync --extra service`. See docs/takeoff_service_design.md.
+service = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.32",
+    "python-multipart>=0.0.12",
+    "pydantic-settings>=2.6",
+    "sqlalchemy>=2.0",
+    "alembic>=1.14",
+    "psycopg[binary]>=3.2",
+    "rq>=2.0",
+    "redis>=5.2",
+    "boto3>=1.35",
+]
 
 [dependency-groups]
 dev = [
