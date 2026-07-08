@@ -29,6 +29,22 @@ def run_takeoff(pdf_path: str | Path) -> tuple[dict, dict]:
     return report, manifest
 
 
+def extract_shard(pdf_path: str | Path, page_range: tuple[int, int]) -> list[dict]:
+    """The map step (ADR-002): extract schedule items over ONE page-range window.
+
+    Returns items as plain dicts (the same shape as the artifact's `items` and the golden),
+    in the pipeline's own sorted-page order. Items are deduped WITHIN the window by the
+    extractor; cross-window dedup is the reduce's job (`service.reduce.merge_partials`).
+
+    NB: the pipeline's `extract_schedule_items` iterates `for i in page_range`, so it wants an
+    iterable of page indices — a ``range``, not a ``(start, end)`` tuple.
+    """
+    from src.takeoff.quantity_schedules import extract_schedule_items
+
+    items = extract_schedule_items(Path(pdf_path), page_range=range(page_range[0], page_range[1]))
+    return [it.to_dict() for it in items]
+
+
 def find_candidate_pages(pdf_path: str | Path) -> tuple[list[int], int]:
     """The cheap planner pass (ADR-002 D3): text-gate the whole doc, return the 0-based
     candidate page indices + total page count. No pdfplumber, so it is fast (~0.018 s/page)
