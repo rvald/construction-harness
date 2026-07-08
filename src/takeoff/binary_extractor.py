@@ -6,7 +6,7 @@ binary/vector layer of a floor plan yields, not to build a production extractor.
 Source: drawings PDF, page 14 (sheet A2.1.1 — Level 1 Floor Plan Overall).
 
 Requires PyMuPDF:  pip install PyMuPDF        (imports as `fitz`)
-Run:               python -m src.pipeline.phase4_binary_extractor
+Run:               python -m src.takeoff.binary_extractor
 
 Why fitz here (and not pdfplumber): this phase is specifically about the binary
 layer. fitz exposes glyph-level text with writing direction (get_text("dict"))
