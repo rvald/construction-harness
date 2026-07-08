@@ -8,6 +8,7 @@ from fastapi.responses import JSONResponse
 from sqlalchemy import text
 
 from service.api.ingestions import router as ingestions_router
+from service.api.query import router as query_router
 from service.db import engine
 from service.errors import install_error_handlers
 from service.queue import redis_conn
@@ -66,6 +67,7 @@ def create_app() -> FastAPI:
         )
 
     app.include_router(ingestions_router)
+    app.include_router(query_router)
     return app
 
 
