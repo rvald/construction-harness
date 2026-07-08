@@ -30,8 +30,19 @@ class Settings(BaseSettings):
     max_upload_bytes: int = 500 * 1024 * 1024   # 500 MiB ceiling on an uploaded PDF
     job_timeout_seconds: int = 1200             # 20 min; the ~5-min build plus headroom
 
+    # --- sharding (ADR-002) ---
+    # A shard's peak memory ~= mb_per_candidate * (candidates in its window); measured
+    # ~96 MB/candidate for pdfplumber. The candidate cap per shard is derived so peak RSS
+    # stays under the budget. Below the cap, a set runs as a single (unsharded) job.
+    shard_memory_budget_mb: int = 3000
+    mb_per_candidate: int = 96
+
     # --- queue ---
     rq_queue_name: str = "takeoff"
+
+    @property
+    def max_candidates_per_shard(self) -> int:
+        return max(1, self.shard_memory_budget_mb // self.mb_per_candidate)
 
 
 @lru_cache

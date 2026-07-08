@@ -27,3 +27,23 @@ def run_takeoff(pdf_path: str | Path) -> tuple[dict, dict]:
 
     report, manifest = build_schedule_items(Path(pdf_path))
     return report, manifest
+
+
+def find_candidate_pages(pdf_path: str | Path) -> tuple[list[int], int]:
+    """The cheap planner pass (ADR-002 D3): text-gate the whole doc, return the 0-based
+    candidate page indices + total page count. No pdfplumber, so it is fast (~0.018 s/page)
+    and light — it never triggers the expensive table extraction. Reuses the pipeline's own
+    signature gate so the planner's notion of "candidate" matches the extractor's exactly.
+    """
+    from src.access.document import Document
+    from src.takeoff.quantity_schedules import SCHEDULE_REGISTRY, _page_matches
+
+    doc = Document(Path(pdf_path))
+    try:
+        candidates = [
+            i for i in range(doc.page_count)
+            if any(_page_matches(doc.page(i).get_text(), s) for s in SCHEDULE_REGISTRY)
+        ]
+        return candidates, doc.page_count
+    finally:
+        doc.close()
