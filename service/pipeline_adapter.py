@@ -45,6 +45,31 @@ def extract_shard(pdf_path: str | Path, page_range: tuple[int, int]) -> list[dic
     return [it.to_dict() for it in items]
 
 
+def assemble_report(pdf_path: str | Path, merged_items: list[dict]) -> dict:
+    """The reduce's final step (ADR-002 §5): given the merged schedule items (from the map
+    shards), run Wave 2 — area harvest + fixture counts over the whole doc — and assemble the
+    final artifact, reusing the pipeline's own `assemble` so the output matches the serial
+    builder exactly.
+
+    Wave 2 is fitz-only (no pdfplumber), so it is memory-light (~150 MB) regardless of page
+    count — the pdfplumber cost lives entirely in the sharded map. Items are rehydrated into
+    the pipeline's `ScheduleItem` dataclass (Wave 2 + assemble read attributes, not dicts).
+    """
+    from dataclasses import fields
+
+    from src.models.schedule import ScheduleItem
+    from src.takeoff.area_harvest import harvest_room_areas
+    from src.takeoff.build_schedule_items import assemble, count_fixtures
+
+    names = {f.name for f in fields(ScheduleItem)}
+    items = [ScheduleItem(**{k: v for k, v in d.items() if k in names}) for d in merged_items]
+
+    finish_rooms = {i.mark for i in items if i.schedule == "finish"}
+    room_areas = harvest_room_areas(Path(pdf_path), finish_rooms)
+    fixture_counts = count_fixtures(Path(pdf_path), items)
+    return assemble(items, room_areas, finish_rooms, fixture_counts)
+
+
 def find_candidate_pages(pdf_path: str | Path) -> tuple[list[int], int]:
     """The cheap planner pass (ADR-002 D3): text-gate the whole doc, return the 0-based
     candidate page indices + total page count. No pdfplumber, so it is fast (~0.018 s/page)

@@ -67,8 +67,10 @@ async def create_ingestion(
         )
         s.add(job)
 
+    # Enqueue the orchestrator: it plans the shard windows and either runs the single-build
+    # fast path (small sets) or fans out into per-shard jobs (ADR-002).
     get_queue().enqueue(
-        "service.worker.process_job", job_id, job_timeout=settings.job_timeout_seconds
+        "service.orchestrator.plan_and_dispatch", job_id, job_timeout=settings.job_timeout_seconds
     )
     return IngestionCreated(job_id=job_id, status=STATUS_QUEUED)
 
