@@ -7,6 +7,7 @@ requires-python = ">=3.13"
 dependencies = [
     "networkx>=3.6.1",
     "pdfplumber>=0.11.10",
+    "pydantic>=2.13.4",
     "pymupdf>=1.28.0",
 ]
 
@@ -14,3 +15,14 @@ dependencies = [
 # by src/pipeline/section_llm.py so core pipeline + tests run without it.
 [project.optional-dependencies]
 llm = ["anthropic>=0.40"]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]                 # replaces run.py's sys.path insert
+testpaths = ["tests"]
+markers = ["integration: opens a real PDF / full-doc scan; slow; CI-gated"]
+addopts = "-ra"

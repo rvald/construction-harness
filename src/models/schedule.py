@@ -58,6 +58,9 @@ class BidItem(JsonModel):
     description: str = ""                        # base-bid / unit / allowance scope (first line)
     unit: str | None = None                     # unit of measure for unit_price items
     source: dict = field(default_factory=dict)  # {file_id, page, section}
+
+
+@dataclass
 class CountResult(JsonModel):
     """A deterministic per-sheet fixture-tag count (Tier 3.1 extraction).
 
