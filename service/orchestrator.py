@@ -21,6 +21,7 @@ import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 
+from rq import Retry
 from sqlalchemy import select, update
 
 from service import pipeline_adapter as adapter
@@ -28,7 +29,7 @@ from service import storage
 from service.config import settings
 from service.db import session_scope
 from service.models import (
-    MODE_SHARDED, MODE_SINGLE, STATUS_FAILED, STATUS_MAPPING, STATUS_PLANNING,
+    MODE_SHARDED, MODE_SINGLE, STATUS_DEAD, STATUS_FAILED, STATUS_MAPPING, STATUS_PLANNING,
     STATUS_REDUCING, STATUS_RUNNING, STATUS_SUCCEEDED, TakeoffJob, TakeoffShard,
 )
 from service.planner import plan_shard_windows
@@ -97,9 +98,12 @@ def plan_and_dispatch(job_id: str) -> str:
                                candidate_count=w.candidate_count))
 
     q = get_queue()
+    retries = max(settings.max_shard_attempts - 1, 0)
+    enqueue_kwargs = {"job_timeout": settings.job_timeout_seconds}
+    if retries > 0:  # RQ's Retry requires max >= 1; omit it when no retries are configured
+        enqueue_kwargs["retry"] = Retry(max=retries, interval=settings.shard_retry_backoff_seconds)
     for w in windows:
-        q.enqueue("service.orchestrator.run_shard", job_id, w.index,
-                  job_timeout=settings.job_timeout_seconds)
+        q.enqueue("service.orchestrator.run_shard", job_id, w.index, **enqueue_kwargs)
     return STATUS_MAPPING
 
 
@@ -110,6 +114,7 @@ def run_shard(job_id: str, shard_index: int) -> str:
         shard.status = STATUS_RUNNING
         shard.attempts += 1
         shard.started_at = _now()
+        attempt_no = shard.attempts
         page_range = (shard.page_start, shard.page_end)
         pdf_key = s.get(TakeoffJob, job_id).pdf_object_key
 
@@ -121,13 +126,21 @@ def run_shard(job_id: str, shard_index: int) -> str:
         storage.put_bytes(key, json.dumps(partial, ensure_ascii=False).encode("utf-8"),
                           "application/json")
     except Exception as exc:
+        terminal = attempt_no >= settings.max_shard_attempts
         with session_scope() as s:
             shard = _get_shard(s, job_id, shard_index)
-            shard.status = STATUS_FAILED
-            shard.finished_at = _now()
+            shard.status = STATUS_DEAD if terminal else STATUS_FAILED
+            shard.finished_at = _now() if terminal else None
             shard.error = {"type": type(exc).__name__, "message": str(exc)[:2000]}
-        log.exception("takeoff.shard.failed", extra={"job_id": job_id, "shard": shard_index})
-        raise
+        log.exception("takeoff.shard.failed",
+                      extra={"job_id": job_id, "shard": shard_index,
+                             "attempt": attempt_no, "terminal": terminal})
+        if not terminal:
+            raise  # let RQ retry with backoff
+        # Terminal: don't hang the job — count this shard as finished and let the reduce run
+        # on the survivors (degrade-and-flag).
+        _finalize_shard(job_id)
+        return STATUS_DEAD
 
     with session_scope() as s:
         shard = _get_shard(s, job_id, shard_index)
@@ -135,21 +148,22 @@ def run_shard(job_id: str, shard_index: int) -> str:
         shard.finished_at = _now()
         shard.partial_object_key = key
 
-    _bump_and_maybe_reduce(job_id)
+    _finalize_shard(job_id)
     return STATUS_SUCCEEDED
 
 
-def _bump_and_maybe_reduce(job_id: str) -> None:
-    """Atomic completion counter (D8): one UPDATE ... RETURNING; the row that reads
-    completed_shards == shard_count is the single one that enqueues the reduce."""
+def _finalize_shard(job_id: str) -> None:
+    """Atomic terminal counter (D8): one UPDATE ... RETURNING per finished shard (succeeded
+    OR dead). The row that reads completed_shards == shard_count is the single one that
+    enqueues the reduce — so a dead shard advances the counter too and the job never hangs."""
     with session_scope() as s:
-        completed, total = s.execute(
+        finished, total = s.execute(
             update(TakeoffJob)
             .where(TakeoffJob.id == job_id)
             .values(completed_shards=TakeoffJob.completed_shards + 1)
             .returning(TakeoffJob.completed_shards, TakeoffJob.shard_count)
         ).one()
-    if completed == total:
+    if finished == total:
         get_queue().enqueue("service.orchestrator.reduce_job", job_id,
                             job_timeout=settings.job_timeout_seconds)
 
@@ -160,11 +174,18 @@ def reduce_job(job_id: str) -> str:
         job = s.get(TakeoffJob, job_id)
         job.status = STATUS_REDUCING
         pdf_key = job.pdf_object_key
+        shard_count = job.shard_count
         shards = s.scalars(
             select(TakeoffShard).where(TakeoffShard.job_id == job_id)
             .order_by(TakeoffShard.shard_index)
         ).all()
-        partial_keys = [sh.partial_object_key for sh in shards]
+        # Only succeeded shards have a partial; dead shards are flagged, not merged.
+        partial_keys = [sh.partial_object_key for sh in shards
+                        if sh.status == STATUS_SUCCEEDED and sh.partial_object_key]
+        failed_shards = [{"shard_index": sh.shard_index,
+                          "page_range": [sh.page_start, sh.page_end],
+                          "error": sh.error}
+                         for sh in shards if sh.status == STATUS_DEAD]
 
     partials = [json.loads(storage.get_bytes(k).decode("utf-8")) for k in partial_keys]
     merged = merge_partials(partials)
@@ -176,15 +197,22 @@ def reduce_job(job_id: str) -> str:
     art_key = _artifact_key(job_id)
     storage.put_bytes(art_key, json.dumps(report, ensure_ascii=False).encode("utf-8"),
                       "application/json")
-    manifest = {"mode": MODE_SHARDED, "shard_count": len(partials),
-                "total_items": report.get("summary", {}).get("total_items")}
+    manifest = {"mode": MODE_SHARDED, "shard_count": shard_count,
+                "shards_merged": len(partial_keys),
+                "total_items": report.get("summary", {}).get("total_items"),
+                "incomplete": bool(failed_shards),
+                "failed_shards": failed_shards}
 
     with session_scope() as s:
         job = s.get(TakeoffJob, job_id)
+        # Degrade-and-flag: the job SUCCEEDS with a partial, incomplete-flagged artifact
+        # rather than failing outright when some shards died.
         job.status = STATUS_SUCCEEDED
         job.finished_at = _now()
         job.artifact_object_key = art_key
         job.manifest = manifest
         job.entity_schema_version = adapter.ENTITY_SCHEMA_VERSION
-    log.info("takeoff.reduce.done", extra={"job_id": job_id, "shards": len(partials)})
+    log.info("takeoff.reduce.done",
+             extra={"job_id": job_id, "shards_merged": len(partial_keys),
+                    "incomplete": bool(failed_shards)})
     return STATUS_SUCCEEDED

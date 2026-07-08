@@ -37,6 +37,12 @@ class Settings(BaseSettings):
     shard_memory_budget_mb: int = 3000
     mb_per_candidate: int = 96
 
+    # per-shard reliability: total attempts (1 initial + retries) and the RQ backoff between
+    # them. When a shard exhausts its attempts it is marked dead and the job still reduces on
+    # the surviving shards, flagging the artifact incomplete (degrade-and-flag), never hangs.
+    max_shard_attempts: int = 3
+    shard_retry_backoff_seconds: int = 10
+
     # --- queue ---
     rq_queue_name: str = "takeoff"
 

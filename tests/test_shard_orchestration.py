@@ -44,6 +44,15 @@ def _canned_extract(_pdf, page_range):
     return []
 
 
+def _failing_middle_extract(_pdf, page_range):
+    start = page_range[0]
+    if start == 0:
+        return [{"schedule": "door", "mark": "D1"}, {"schedule": "door", "mark": "D2"}]
+    if start == 21:
+        raise RuntimeError("boom: malformed page in this window")
+    return []
+
+
 @pytest.fixture
 def stubs(monkeypatch):
     store: dict[str, bytes] = {}
@@ -92,3 +101,30 @@ def test_fan_out_reduces_to_a_deduped_artifact(stubs):
     report = json.loads(stubs[artifact_key].decode())
     assert [it["mark"] for it in report["items"]] == ["D1", "D2", "R1"]
     assert report["summary"]["total_items"] == 3
+
+
+def test_dead_shard_degrades_and_flags(stubs, monkeypatch):
+    import json
+
+    monkeypatch.setattr(adapter, "extract_shard", _failing_middle_extract)
+    monkeypatch.setattr(settings, "max_shard_attempts", 1)  # fail terminally on first attempt
+
+    job_id = _make_job()
+    orchestrator.plan_and_dispatch(job_id)
+
+    with session_scope() as s:
+        job = s.get(TakeoffJob, job_id)
+        # degrade-and-flag: the job SUCCEEDS with a flagged partial, it does not hang or fail
+        assert job.status == STATUS_SUCCEEDED
+        assert job.completed_shards == 3        # the dead shard still advanced the counter
+        artifact_key = job.artifact_object_key
+        manifest = job.manifest
+        rows = {r.shard_index: r.status for r in s.query(TakeoffShard).filter_by(job_id=job_id)}
+
+    assert rows == {0: "succeeded", 1: "dead", 2: "succeeded"}
+    assert manifest["incomplete"] is True
+    assert [f["shard_index"] for f in manifest["failed_shards"]] == [1]
+
+    # only the surviving shards' items are in the artifact (window [21,41)'s R1 is lost)
+    report = json.loads(stubs[artifact_key].decode())
+    assert [it["mark"] for it in report["items"]] == ["D1", "D2"]
