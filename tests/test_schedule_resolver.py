@@ -18,7 +18,7 @@ from src.pipeline.schedule_resolver import (
 
 DATA = pathlib.Path(__file__).resolve().parents[1] / "data" / "uccs"
 DRAWINGS = DATA / "drawings.pdf"
-PINNEY = DATA / "pinney" / "pinney_library_drawings_and_project_manual.pdf"
+PINNEY = pathlib.Path(__file__).resolve().parents[1] / "data" / "pinney" / "pinney_library_drawings_and_project_manual.pdf"
 
 
 def _uccs_door_table():

@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import pathlib
 
-from src.pipeline.fixture_counts import classify_page, extract_counts, summarize_counts
+from src.takeoff.fixture_counts import classify_page, extract_counts, summarize_counts
 
 DRAWINGS = pathlib.Path(__file__).resolve().parents[1] / "data" / "uccs" / "drawings.pdf"
 
@@ -53,8 +53,8 @@ def test_exclude_pages_drops_a_sheet():
 # --- A1: lighting counting excludes the fixture schedule sheet ------------
 
 def test_lighting_counts_exclude_schedule_sheet():
-    from src.pipeline.build_schedule_items import count_fixtures
-    from src.pipeline.quantity_schedules import extract_schedule_items
+    from src.takeoff.build_schedule_items import count_fixtures
+    from src.takeoff.quantity_schedules import extract_schedule_items
 
     items = extract_schedule_items(DRAWINGS, page_range=range(99, 107))
     counts = count_fixtures(DRAWINGS, items, page_range=range(99, 107))

@@ -6,7 +6,7 @@ reconcile / basis-flip logic and graceful degradation — never a real VLM call.
 from __future__ import annotations
 
 from src.models.schedule import CountResult, ScheduleItem
-from src.pipeline.count_verifier import (
+from src.takeoff.count_verifier import (
     CountVerifier, StubVerifierClient, flip_fixture_items, merge, reconcile, verify_counts,
 )
 

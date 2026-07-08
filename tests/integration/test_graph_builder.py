@@ -7,7 +7,7 @@ import pathlib
 
 from src.pipeline.phase5_graph_builder import build_graph
 
-_BASE = pathlib.Path(__file__).resolve().parents[1] / "data" / "uccs"
+_BASE = pathlib.Path(__file__).resolve().parents[2] / "data" / "uccs"
 _KG = build_graph(_BASE / "project_manual.pdf", _BASE / "drawings.pdf")
 
 

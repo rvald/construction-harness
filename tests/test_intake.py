@@ -12,7 +12,7 @@ from src.pipeline.phase1_intake import intake_file, intake_package
 DATA = pathlib.Path(__file__).resolve().parents[1] / "data" / "uccs"
 DRAWINGS = DATA / "drawings.pdf"
 MANUAL = DATA / "project_manual.pdf"
-PINNEY = DATA / "pinney" / "pinney_library_drawings_and_project_manual.pdf"
+PINNEY = pathlib.Path(__file__).resolve().parents[1] / "data" / "pinney" / "pinney_library_drawings_and_project_manual.pdf"
 
 
 def test_intake_separate_files():

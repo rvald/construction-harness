@@ -15,7 +15,7 @@ from src.pipeline.phase3_sheet_classifier import (
     reconcile,
 )
 
-DRAWINGS = pathlib.Path(__file__).resolve().parents[1] / "data" / "uccs" / "drawings.pdf"
+DRAWINGS = pathlib.Path(__file__).resolve().parents[2] / "data" / "uccs" / "drawings.pdf"
 
 _REGISTRY = parse_drawing_index(DRAWINGS)
 _META = classify_sheets(DRAWINGS)

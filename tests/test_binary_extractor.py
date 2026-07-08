@@ -10,7 +10,7 @@ from __future__ import annotations
 import pathlib
 from collections import Counter
 
-from src.pipeline.phase4_binary_extractor import classify, extract_page
+from src.takeoff.binary_extractor import classify, extract_page
 
 DRAWINGS = pathlib.Path(__file__).resolve().parents[1] / "data" / "uccs" / "drawings.pdf"
 

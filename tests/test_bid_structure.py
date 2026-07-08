@@ -13,7 +13,7 @@ from src.pipeline.bid_structure import (
 
 DATA = pathlib.Path(__file__).resolve().parents[1] / "data" / "uccs"
 MANUAL = DATA / "project_manual.pdf"
-PINNEY = DATA / "pinney" / "pinney_library_drawings_and_project_manual.pdf"
+PINNEY = pathlib.Path(__file__).resolve().parents[1] / "data" / "pinney" / "pinney_library_drawings_and_project_manual.pdf"
 
 # The measured shape of UCCS 012300 PART 3 (SCHEDULE OF ALTERNATES).
 _SAMPLE = """PART 3 - EXECUTION

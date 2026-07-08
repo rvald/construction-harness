@@ -15,7 +15,7 @@ from src.pipeline.page_profiler import profile_file
 DATA = pathlib.Path(__file__).resolve().parents[1] / "data" / "uccs"
 DRAWINGS = DATA / "drawings.pdf"
 MANUAL = DATA / "project_manual.pdf"
-PINNEY = DATA / "pinney" / "pinney_library_drawings_and_project_manual.pdf"
+PINNEY = pathlib.Path(__file__).resolve().parents[1] / "data" / "pinney" / "pinney_library_drawings_and_project_manual.pdf"
 
 _MANUAL = profile_file(intake_file(MANUAL))
 _DRAWINGS = profile_file(intake_file(DRAWINGS))

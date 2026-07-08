@@ -14,7 +14,7 @@ from src.pipeline.phase2_schedule_parser import (
     _select_schedule_table, parse_door_schedule, parse_finish_schedule,
 )
 from src.models.schedule import ScheduleItem
-from src.pipeline.quantity_schedules import (
+from src.takeoff.quantity_schedules import (
     BASIS_ROW_COUNT, _looks_like_tag, _num, extract_schedule_items, parse_page,
     parse_schedule, summarize,
 )
@@ -25,7 +25,8 @@ from src.pipeline.schedule_resolver import (
 
 DATA = pathlib.Path(__file__).resolve().parents[1] / "data" / "uccs"
 DRAWINGS = DATA / "drawings.pdf"
-PINNEY = DATA / "pinney" / "pinney_library_drawings_and_project_manual.pdf"
+# Pinney lives under data/ (not data/uccs/) since the "move pinney dir" reorg.
+PINNEY = pathlib.Path(__file__).resolve().parents[1] / "data" / "pinney" / "pinney_library_drawings_and_project_manual.pdf"
 
 
 def _uccs_door_table():
@@ -144,7 +145,7 @@ def test_lighting_fixture_catalog():
 # --- security: instance-schedule counting (free-form device IDs) ---------
 
 def test_security_camera_and_device_counts():
-    from src.pipeline.quantity_schedules import extract_schedule_items
+    from src.takeoff.quantity_schedules import extract_schedule_items
     items = extract_schedule_items(DRAWINGS, page_range=range(128, 130))    # p129 security schedules
     cams = [i for i in items if i.schedule == "camera"]
     devs = [i for i in items if i.schedule == "security_device"]

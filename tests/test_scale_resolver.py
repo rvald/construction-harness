@@ -5,7 +5,7 @@ import pathlib
 
 import fitz
 
-from src.pipeline.scale_resolver import parse_scale, resolve_sheet_scale
+from src.takeoff.scale_resolver import parse_scale, resolve_sheet_scale
 
 DRAWINGS = pathlib.Path(__file__).resolve().parents[1] / "data" / "uccs" / "drawings.pdf"
 

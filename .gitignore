@@ -203,3 +203,6 @@ pyrightconfig.json
 # Ignore all local history of files
 .history
 .ionide
+
+# Per-run takeoff manifest (non-deterministic timing) — not a committed artifact
+output/

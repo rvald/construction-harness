@@ -9,7 +9,7 @@ import pathlib
 
 import fitz
 
-from src.pipeline.area_harvest import (
+from src.takeoff.area_harvest import (
     harvest_room_areas, join_areas, locate_area_plans, positioned_tokens,
     room_tokens, sf_labels,
 )
@@ -70,7 +70,7 @@ def test_join_one_label_binds_to_closest_room():
 
 def test_assemble_reports_area_coverage():
     from src.models.schedule import RoomArea, ScheduleItem
-    from src.pipeline.build_schedule_items import assemble
+    from src.takeoff.build_schedule_items import assemble
     items = [
         ScheduleItem("finish", "instance", "N105", 1.0, "EA", "row_count"),
         ScheduleItem("finish", "instance", "N138", 1.0, "EA", "row_count"),

@@ -54,7 +54,7 @@ Areas attach to the quantity artifact as a `room_areas` list and enrich the matc
 
 ---
 
-## 5. Module sketch — `src/pipeline/area_harvest.py`
+## 5. Module sketch — `src/takeoff/area_harvest.py`
 
 - `positioned_tokens(page)` → `[(text, cx, cy)]` (fitz).
 - `sf_labels(tokens)` → `[(area_sf, cx, cy)]` (rebuild split number+"SF").
