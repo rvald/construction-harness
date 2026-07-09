@@ -206,3 +206,6 @@ pyrightconfig.json
 
 # Per-run takeoff manifest (non-deterministic timing) — not a committed artifact
 output/
+
+# Customer bid-package documents — never publish
+data/
