@@ -38,6 +38,7 @@ def process_job(job_id: str) -> str:
         job.attempts += 1
         job.started_at = _now()
         pdf_key = job.pdf_object_key
+        config = job.config
     log.info("takeoff.start", extra={"job_id": job_id, "pdf_key": pdf_key})
 
     try:
@@ -45,7 +46,7 @@ def process_job(job_id: str) -> str:
             local_pdf = Path(tmp) / "drawings.pdf"
             storage.download_to(pdf_key, local_pdf)
 
-            report, manifest = run_takeoff(local_pdf)
+            report, manifest = run_takeoff(local_pdf, config=config)
 
             artifact_key = f"artifacts/{job_id}/schedule_items.json"
             storage.put_bytes(

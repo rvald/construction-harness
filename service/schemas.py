@@ -3,7 +3,28 @@ from __future__ import annotations
 
 from datetime import datetime
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict, Field, model_validator
+
+
+class TakeoffConfigIn(BaseModel):
+    """Optional per-run knobs on submit — mirrors the pipeline's TakeoffConfig constraints.
+    Omitted fields resolve to the golden defaults; the resolved (normalized) dict is what we
+    store and fold into config_hash, so 'omit config' and 'pass the defaults' dedupe alike."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    render_dpi: int = Field(default=100, ge=1)
+    spread_threshold: float = Field(default=0.35, ge=0.0, le=1.0)
+    min_tags: int = Field(default=3, ge=1)
+    page_range: tuple[int, int] | None = Field(default=None)
+
+    @model_validator(mode="after")
+    def _check_page_range(self) -> "TakeoffConfigIn":
+        if self.page_range is not None:
+            start, end = self.page_range
+            if start < 0 or start >= end:
+                raise ValueError(f"page_range must be 0 <= start < end, got {self.page_range!r}")
+        return self
 
 
 class IngestionCreated(BaseModel):

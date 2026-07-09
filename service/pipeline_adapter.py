@@ -17,15 +17,33 @@ from pathlib import Path
 ENTITY_SCHEMA_VERSION = "1.0.0"
 
 
-def run_takeoff(pdf_path: str | Path) -> tuple[dict, dict]:
+def _resolve_config(config: dict | None):
+    """Map a stored config dict -> (TakeoffConfig, page_range iterable | None).
+
+    page_range is threaded to the drivers as a `range` (their convention), NOT via the
+    TakeoffConfig (whose page_range drives `Document.pages`); so we build the TakeoffConfig
+    from the threshold knobs only and hand the window over separately. Empty/None config
+    yields defaults + no window == the golden."""
+    from src.access.config import TakeoffConfig
+
+    cfg = config or {}
+    pr = cfg.get("page_range")
+    page_range = range(pr[0], pr[1]) if pr else None
+    tc = TakeoffConfig(**{k: v for k, v in cfg.items()
+                          if k in {"render_dpi", "spread_threshold", "min_tags"}})
+    return tc, page_range
+
+
+def run_takeoff(pdf_path: str | Path, config: dict | None = None) -> tuple[dict, dict]:
     """Run the takeoff builder on one drawings PDF -> (report, manifest).
 
     Imported lazily so the API process (which never runs the build) does not pull PyMuPDF/
-    pdfplumber, and so importing this module stays cheap. Defaults reproduce the golden.
+    pdfplumber, and so importing this module stays cheap. `config=None` reproduces the golden.
     """
     from src.takeoff.build_schedule_items import build_schedule_items
 
-    report, manifest = build_schedule_items(Path(pdf_path))
+    tc, page_range = _resolve_config(config)
+    report, manifest = build_schedule_items(Path(pdf_path), config=tc, page_range=page_range)
     return report, manifest
 
 
@@ -45,28 +63,34 @@ def extract_shard(pdf_path: str | Path, page_range: tuple[int, int]) -> list[dic
     return [it.to_dict() for it in items]
 
 
-def assemble_report(pdf_path: str | Path, merged_items: list[dict]) -> dict:
+def assemble_report(pdf_path: str | Path, merged_items: list[dict],
+                    config: dict | None = None) -> dict:
     """The reduce's final step (ADR-002 §5): given the merged schedule items (from the map
-    shards), run Wave 2 — area harvest + fixture counts over the whole doc — and assemble the
-    final artifact, reusing the pipeline's own `assemble` so the output matches the serial
-    builder exactly.
+    shards), run Wave 2 — area harvest + fixture counts over the (optionally windowed) doc —
+    and assemble the final artifact, reusing the pipeline's own `assemble` so the output
+    matches the serial builder exactly.
 
     Wave 2 is fitz-only (no pdfplumber), so it is memory-light (~150 MB) regardless of page
-    count — the pdfplumber cost lives entirely in the sharded map. Items are rehydrated into
-    the pipeline's `ScheduleItem` dataclass (Wave 2 + assemble read attributes, not dicts).
+    count. One config-carrying Document is opened and threaded into both drivers, so the
+    submit-time knobs (`spread_threshold`/`min_tags`) and any `page_range` window are honored
+    and the two doc-opens collapse to one. Items are rehydrated into the pipeline's
+    `ScheduleItem` dataclass (Wave 2 + assemble read attributes, not dicts).
     """
     from dataclasses import fields
 
+    from src.access.document import using_document
     from src.models.schedule import ScheduleItem
     from src.takeoff.area_harvest import harvest_room_areas
     from src.takeoff.build_schedule_items import assemble, count_fixtures
 
+    tc, page_range = _resolve_config(config)
     names = {f.name for f in fields(ScheduleItem)}
     items = [ScheduleItem(**{k: v for k, v in d.items() if k in names}) for d in merged_items]
-
     finish_rooms = {i.mark for i in items if i.schedule == "finish"}
-    room_areas = harvest_room_areas(Path(pdf_path), finish_rooms)
-    fixture_counts = count_fixtures(Path(pdf_path), items)
+
+    with using_document(Path(pdf_path), config=tc) as doc:
+        room_areas = harvest_room_areas(doc, finish_rooms, page_range=page_range)
+        fixture_counts = count_fixtures(doc, items, page_range=page_range)
     return assemble(items, room_areas, finish_rooms, fixture_counts)
 
 

@@ -30,20 +30,27 @@ def plan_shard_windows(
     candidate_pages: list[int],
     total_pages: int,
     max_candidates_per_shard: int,
+    page_start: int = 0,
+    page_end: int | None = None,
 ) -> list[ShardWindow]:
+    """Windows cover `[page_start, page_end or total_pages)`. A submit-time page_range bounds
+    the whole job to that window (only candidates inside it are considered/covered)."""
     if total_pages < 0:
         raise ValueError(f"total_pages must be >= 0, got {total_pages}")
     if max_candidates_per_shard < 1:
         raise ValueError(f"max_candidates_per_shard must be >= 1, got {max_candidates_per_shard}")
-    cands = sorted(set(p for p in candidate_pages if 0 <= p < total_pages))
 
-    if total_pages == 0:
+    lo = max(page_start, 0)
+    hi = min(total_pages if page_end is None else page_end, total_pages)
+    if lo >= hi:
         return []
-    # No candidates (or all fit in one shard): a single window == the serial run.
-    if len(cands) <= max_candidates_per_shard:
-        return [ShardWindow(0, 0, total_pages, len(cands))]
+    cands = sorted(set(p for p in candidate_pages if lo <= p < hi))
 
-    # Cut a boundary right AFTER every `cap`-th candidate; the tail runs to total_pages.
+    # No candidates (or all fit in one shard): a single window == the serial run over [lo,hi).
+    if len(cands) <= max_candidates_per_shard:
+        return [ShardWindow(0, lo, hi, len(cands))]
+
+    # Cut a boundary right AFTER every `cap`-th candidate; the tail runs to hi.
     boundaries: list[int] = []
     count = 0
     for page in cands:
@@ -52,11 +59,11 @@ def plan_shard_windows(
             boundaries.append(page + 1)
             count = 0
 
-    edges = [0, *boundaries, total_pages]
+    edges = [lo, *boundaries, hi]
     windows: list[ShardWindow] = []
     for start, end in zip(edges, edges[1:]):
         if start >= end:
-            continue  # a boundary landing exactly on total_pages collapses the empty tail
+            continue  # a boundary landing exactly on hi collapses the empty tail
         n = sum(1 for p in cands if start <= p < end)
         windows.append(ShardWindow(len(windows), start, end, n))
     return windows

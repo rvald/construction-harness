@@ -9,7 +9,8 @@ import hashlib
 import json
 import uuid
 
-from fastapi import APIRouter, Header, Response, UploadFile
+from fastapi import APIRouter, Form, Header, Response, UploadFile
+from pydantic import ValidationError
 from sqlalchemy import select
 
 from service.config import settings
@@ -18,24 +19,38 @@ from service.errors import ApiError
 from service.models import STATUS_QUEUED, TakeoffJob
 from service.pipeline_adapter import ENTITY_SCHEMA_VERSION
 from service.queue import get_queue
-from service.schemas import IngestionCreated, JobStatus, ManifestSummary
+from service.schemas import IngestionCreated, JobStatus, ManifestSummary, TakeoffConfigIn
 from service import storage
 
 router = APIRouter(prefix="/v1/takeoff/ingestions", tags=["takeoff"])
 
 _PDF_MAGIC = b"%PDF-"
-# Resolved config for S1 is always the golden default; recorded so the dedupe key + manifest
-# already speak "config" before knobs are exposed (S3).
-_DEFAULT_CONFIG: dict = {}
 
 
 def _config_hash(config: dict) -> str:
     return hashlib.sha256(json.dumps(config, sort_keys=True).encode()).hexdigest()
 
 
+def _resolve_config(config_json: str | None) -> dict:
+    """Parse + validate the optional config form field into a NORMALIZED dict (defaults
+    filled), so 'omit config' and 'pass the defaults' produce the same stored config +
+    config_hash (dedup-stable)."""
+    if config_json is None:
+        return TakeoffConfigIn().model_dump()
+    try:
+        parsed = json.loads(config_json)
+    except json.JSONDecodeError:
+        raise ApiError(422, "invalid_config", "config must be valid JSON.")
+    try:
+        return TakeoffConfigIn(**parsed).model_dump()
+    except (ValidationError, TypeError) as e:
+        raise ApiError(422, "invalid_config", f"config failed validation: {e}")
+
+
 @router.post("", status_code=202, response_model=IngestionCreated)
 async def create_ingestion(
     drawings: UploadFile,
+    config: str | None = Form(default=None),
     idempotency_key: str | None = Header(default=None, alias="Idempotency-Key"),
 ) -> IngestionCreated:
     data = await drawings.read()
@@ -48,7 +63,7 @@ async def create_ingestion(
         raise ApiError(415, "not_a_pdf", "The uploaded drawings file is not a PDF.")
 
     content_sha256 = hashlib.sha256(data).hexdigest()
-    config = dict(_DEFAULT_CONFIG)
+    resolved_config = _resolve_config(config)
     job_id = str(uuid.uuid4())
     pdf_key = f"uploads/{job_id}/drawings.pdf"
 
@@ -59,8 +74,8 @@ async def create_ingestion(
             id=job_id,
             idempotency_key=idempotency_key,
             content_sha256=content_sha256,
-            config=config,
-            config_hash=_config_hash(config),
+            config=resolved_config,
+            config_hash=_config_hash(resolved_config),
             status=STATUS_QUEUED,
             pdf_object_key=pdf_key,
             entity_schema_version=ENTITY_SCHEMA_VERSION,

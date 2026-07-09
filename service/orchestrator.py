@@ -73,11 +73,15 @@ def plan_and_dispatch(job_id: str) -> str:
         job.status = STATUS_PLANNING
         job.started_at = _now()
         pdf_key = job.pdf_object_key
+        config = job.config or {}
 
     with tempfile.TemporaryDirectory(prefix=f"plan-{job_id}-") as tmp:
         local = _download_pdf(pdf_key, tmp)
         candidates, total = adapter.find_candidate_pages(local)
-    windows = plan_shard_windows(candidates, total, settings.max_candidates_per_shard)
+    pr = config.get("page_range")   # optional submit-time window bounds the whole job
+    page_start, page_end = (pr[0], pr[1]) if pr else (0, None)
+    windows = plan_shard_windows(candidates, total, settings.max_candidates_per_shard,
+                                 page_start=page_start, page_end=page_end)
     log.info("takeoff.plan", extra={"job_id": job_id, "pages": total,
                                     "candidates": len(candidates), "shards": len(windows)})
 
@@ -175,6 +179,7 @@ def reduce_job(job_id: str) -> str:
         job = s.get(TakeoffJob, job_id)
         job.status = STATUS_REDUCING
         pdf_key = job.pdf_object_key
+        config = job.config or {}
         shard_count = job.shard_count
         shards = s.scalars(
             select(TakeoffShard).where(TakeoffShard.job_id == job_id)
@@ -193,7 +198,7 @@ def reduce_job(job_id: str) -> str:
 
     with tempfile.TemporaryDirectory(prefix=f"reduce-{job_id}-") as tmp:
         local = _download_pdf(pdf_key, tmp)
-        report = adapter.assemble_report(local, merged)
+        report = adapter.assemble_report(local, merged, config=config)
 
     art_key = _artifact_key(job_id)
     storage.put_bytes(art_key, json.dumps(report, ensure_ascii=False).encode("utf-8"),

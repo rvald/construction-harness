@@ -62,7 +62,8 @@ def stubs(monkeypatch):
     monkeypatch.setattr(adapter, "find_candidate_pages", lambda pdf: ([10, 20, 30, 40], 50))
     monkeypatch.setattr(adapter, "extract_shard", _canned_extract)
     monkeypatch.setattr(adapter, "assemble_report",
-                        lambda pdf, merged: {"summary": {"total_items": len(merged)}, "items": merged})
+                        lambda pdf, merged, config=None: {"summary": {"total_items": len(merged)},
+                                                          "items": merged})
     monkeypatch.setattr(orchestrator, "get_queue", lambda: _FakeQueue())
     monkeypatch.setattr(settings, "shard_memory_budget_mb", 192)  # cap = 192 // 96 = 2
     # shredding is exercised by test_shred.py; keep the orchestration test focused on flow
