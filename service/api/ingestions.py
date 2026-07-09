@@ -14,6 +14,7 @@ from fastapi import APIRouter, Form, Header, Request, Response, UploadFile
 from pydantic import ValidationError
 from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
+from starlette.concurrency import run_in_threadpool
 
 from service.config import settings
 from service.db import session_scope
@@ -28,6 +29,33 @@ router = APIRouter(prefix="/v1/takeoff/ingestions", tags=["takeoff"])
 log = logging.getLogger("takeoff.api")
 
 _PDF_MAGIC = b"%PDF-"
+_CHUNK = 1 << 20   # 1 MiB
+
+
+def _hash_and_validate(fileobj, max_bytes: int) -> tuple[str, int]:
+    """Stream the (already spooled) upload once: sha256 + size + PDF magic, in bounded memory.
+    Leaves fileobj rewound to 0 for the subsequent streamed upload. Sync — run in a threadpool."""
+    sha = hashlib.sha256()
+    total = 0
+    head = b""
+    fileobj.seek(0)
+    while True:
+        chunk = fileobj.read(_CHUNK)
+        if not chunk:
+            break
+        if not head:
+            head = chunk[:5]
+        total += len(chunk)
+        if total > max_bytes:
+            raise ApiError(413, "file_too_large",
+                           f"Drawings PDF exceeds the {max_bytes}-byte limit.")
+        sha.update(chunk)
+    fileobj.seek(0)
+    if total == 0:
+        raise ApiError(400, "empty_file", "The uploaded drawings file is empty.")
+    if not head.startswith(_PDF_MAGIC):
+        raise ApiError(415, "not_a_pdf", "The uploaded drawings file is not a PDF.")
+    return sha.hexdigest(), total
 
 
 def _config_hash(config: dict) -> str:
@@ -68,10 +96,11 @@ def _find_existing(s, idempotency_key: str | None, sha: str, cfg_hash: str) -> T
         .order_by(TakeoffJob.created_at.desc()))
 
 
-def _submit(content_sha256: str, data: bytes, resolved_config: dict,
+def _submit(content_sha256: str, fileobj, resolved_config: dict,
             idempotency_key: str | None) -> tuple[str, str, bool]:
-    """Dedupe-or-create. Returns (job_id, status, created). Uploads + enqueues only for a
-    genuinely new job; the partial unique indexes make the create race-safe."""
+    """Dedupe-or-create. Returns (job_id, status, created). Streams the upload + enqueues only
+    for a genuinely new job; the partial unique indexes make the create race-safe. Sync (does
+    blocking DB + S3 I/O) — run in a threadpool."""
     cfg_hash = _config_hash(resolved_config)
 
     with session_scope() as s:
@@ -95,8 +124,9 @@ def _submit(content_sha256: str, data: bytes, resolved_config: dict,
                 raise
             return existing.id, existing.status, False
 
-    # only a new job uploads its PDF + enqueues (worker never runs before the object exists)
-    storage.put_bytes(pdf_key, data, "application/pdf")
+    # only a new job streams its PDF + enqueues (worker never runs before the object exists)
+    fileobj.seek(0)
+    storage.upload_fileobj(pdf_key, fileobj, "application/pdf")
     get_queue().enqueue("service.orchestrator.plan_and_dispatch", job_id,
                         job_timeout=settings.job_timeout_seconds)
     return job_id, STATUS_QUEUED, True
@@ -110,18 +140,13 @@ async def create_ingestion(
     config: str | None = Form(default=None),
     idempotency_key: str | None = Header(default=None, alias="Idempotency-Key"),
 ) -> IngestionCreated:
-    data = await drawings.read()
-    if len(data) == 0:
-        raise ApiError(400, "empty_file", "The uploaded drawings file is empty.")
-    if len(data) > settings.max_upload_bytes:
-        raise ApiError(413, "file_too_large",
-                       f"Drawings PDF exceeds the {settings.max_upload_bytes}-byte limit.")
-    if not data.startswith(_PDF_MAGIC):
-        raise ApiError(415, "not_a_pdf", "The uploaded drawings file is not a PDF.")
-
-    content_sha256 = hashlib.sha256(data).hexdigest()
+    # Stream the (spooled) upload — hash + validate + upload without loading it into memory.
+    # Blocking file/S3 I/O runs in a threadpool so the event loop stays free.
+    content_sha256, _size = await run_in_threadpool(
+        _hash_and_validate, drawings.file, settings.max_upload_bytes)
     resolved_config = _resolve_config(config)
-    job_id, status, created = _submit(content_sha256, data, resolved_config, idempotency_key)
+    job_id, status, created = await run_in_threadpool(
+        _submit, content_sha256, drawings.file, resolved_config, idempotency_key)
     response.status_code = 202 if created else 200   # 200 signals a dedupe hit, not a new job
     metrics.SUBMISSIONS.labels(created=str(created)).inc()
     # correlate the client request to the async job; every downstream log carries job_id

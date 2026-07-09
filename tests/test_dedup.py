@@ -2,6 +2,7 @@
 are the point) with storage/queue stubbed. Marked integration; memory-light."""
 from __future__ import annotations
 
+import io
 import uuid
 
 import pytest
@@ -17,12 +18,13 @@ from service.schemas import TakeoffConfigIn
 
 pytestmark = pytest.mark.integration
 
-DATA = b"%PDF-1.4 test"
+def DATA():
+    return io.BytesIO(b"%PDF-1.4 test")
 
 
 @pytest.fixture(autouse=True)
 def stub_io(monkeypatch):
-    monkeypatch.setattr(storage, "put_bytes", lambda k, d, ct: k)
+    monkeypatch.setattr(storage, "upload_fileobj", lambda k, f, ct: k)
 
     class _Q:
         def enqueue(self, *a, **k):
@@ -45,40 +47,40 @@ def _key() -> str:
 
 def test_new_then_dedup_same_content_config():
     sha, cfg = _sha(), _cfg()
-    jid, st, created = _submit(sha, DATA, cfg, None)
+    jid, st, created = _submit(sha, DATA(),cfg, None)
     assert created is True and st == "queued"
-    jid2, _, created2 = _submit(sha, DATA, cfg, None)
+    jid2, _, created2 = _submit(sha, DATA(),cfg, None)
     assert created2 is False and jid2 == jid          # same job, no re-run
 
 
 def test_different_config_is_a_new_job():
     sha = _sha()
-    jid, _, c1 = _submit(sha, DATA, _cfg(), None)
-    jid2, _, c2 = _submit(sha, DATA, _cfg(min_tags=5), None)
+    jid, _, c1 = _submit(sha, DATA(),_cfg(), None)
+    jid2, _, c2 = _submit(sha, DATA(),_cfg(min_tags=5), None)
     assert c1 and c2 and jid2 != jid
 
 
 def test_idempotency_key_replay():
     sha, cfg, key = _sha(), _cfg(), _key()
-    jid, _, c1 = _submit(sha, DATA, cfg, key)
-    jid2, _, c2 = _submit(sha, DATA, cfg, key)
+    jid, _, c1 = _submit(sha, DATA(),cfg, key)
+    jid2, _, c2 = _submit(sha, DATA(),cfg, key)
     assert c1 and c2 is False and jid2 == jid
 
 
 def test_idempotency_key_conflict():
     key = _key()
-    _submit(_sha(), DATA, _cfg(), key)
+    _submit(_sha(), DATA(),_cfg(), key)
     with pytest.raises(ApiError) as ei:
-        _submit(_sha(), DATA, _cfg(), key)            # same key, different content
+        _submit(_sha(), DATA(),_cfg(), key)            # same key, different content
     assert ei.value.status_code == 409
 
 
 def test_failed_job_can_be_superseded():
     sha, cfg = _sha(), _cfg()
-    jid, _, c1 = _submit(sha, DATA, cfg, None)
+    jid, _, c1 = _submit(sha, DATA(),cfg, None)
     with session_scope() as s:
         s.get(TakeoffJob, jid).status = STATUS_FAILED
-    jid2, _, c2 = _submit(sha, DATA, cfg, None)
+    jid2, _, c2 = _submit(sha, DATA(),cfg, None)
     assert c1 and c2 and jid2 != jid                  # failed job is superseded, not deduped
 
 

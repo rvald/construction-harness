@@ -41,6 +41,18 @@ def put_bytes(key: str, data: bytes, content_type: str) -> str:
     return key
 
 
+def upload_fileobj(key: str, fileobj, content_type: str) -> str:
+    """Stream a seekable binary file to object storage (boto3 does multipart automatically),
+    so a large PDF never lands wholly in memory. Caller positions fileobj at 0."""
+    client().upload_fileobj(fileobj, settings.s3_bucket, key,
+                            ExtraArgs={"ContentType": content_type})
+    return key
+
+
+def delete(key: str) -> None:
+    client().delete_object(Bucket=settings.s3_bucket, Key=key)
+
+
 def get_bytes(key: str) -> bytes:
     return client().get_object(Bucket=settings.s3_bucket, Key=key)["Body"].read()
 
