@@ -124,6 +124,11 @@ class JobStatus(BaseModel):
     content_sha256: str
     entity_schema_version: str
     attempts: int
+    # execution shape (single vs sharded) + partial-result flags — surfaced for both paths
+    mode: str = "single"
+    shard_count: int = 0
+    incomplete: bool = False
+    failed_shards: list = []
     created_at: datetime
     updated_at: datetime
     started_at: datetime | None = None

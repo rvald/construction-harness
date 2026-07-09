@@ -135,9 +135,9 @@ def _load(job_id: str) -> TakeoffJob:
 @router.get("/{job_id}", response_model=JobStatus)
 def get_ingestion(job_id: str) -> JobStatus:
     job = _load(job_id)
+    m = job.manifest or {}
     manifest = None
-    if job.manifest:
-        m = job.manifest
+    if m:
         manifest = ManifestSummary(
             file_id=m.get("file_id"),
             checksum=m.get("checksum"),
@@ -152,6 +152,10 @@ def get_ingestion(job_id: str) -> JobStatus:
         content_sha256=job.content_sha256,
         entity_schema_version=job.entity_schema_version,
         attempts=job.attempts,
+        mode=job.mode,
+        shard_count=job.shard_count,
+        incomplete=bool(m.get("incomplete", False)),
+        failed_shards=m.get("failed_shards", []),
         created_at=job.created_at,
         updated_at=job.updated_at,
         started_at=job.started_at,
