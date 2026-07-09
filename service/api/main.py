@@ -1,9 +1,10 @@
 """FastAPI application factory: middleware, error envelope, health/readiness, routes."""
 from __future__ import annotations
 
+import time
 import uuid
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Response
 from fastapi.responses import JSONResponse
 from sqlalchemy import text
 
@@ -13,7 +14,7 @@ from service.db import engine
 from service.errors import install_error_handlers
 from service.observability import configure_logging
 from service.queue import redis_conn
-from service import storage
+from service import metrics, storage
 
 
 def create_app() -> FastAPI:
@@ -25,9 +26,21 @@ def create_app() -> FastAPI:
     async def request_id(request: Request, call_next):
         rid = request.headers.get("X-Request-ID") or str(uuid.uuid4())
         request.state.request_id = rid
+        started = time.perf_counter()
         response = await call_next(request)
         response.headers["X-Request-ID"] = rid
+        # record RED metrics against the ROUTE TEMPLATE (bounded cardinality, not the raw path)
+        route = request.scope.get("route")
+        path = getattr(route, "path", "unmatched")
+        if path != "/metrics":
+            metrics.REQUESTS.labels(request.method, path, response.status_code).inc()
+            metrics.REQUEST_LATENCY.labels(request.method, path).observe(time.perf_counter() - started)
         return response
+
+    @app.get("/metrics", tags=["observability"])
+    def metrics_endpoint() -> Response:
+        body, content_type = metrics.render()
+        return Response(content=body, media_type=content_type)
 
     @app.on_event("startup")
     def _startup() -> None:

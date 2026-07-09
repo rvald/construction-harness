@@ -22,7 +22,7 @@ from service.models import STATUS_DEAD, STATUS_FAILED, STATUS_QUEUED, TakeoffJob
 from service.pipeline_adapter import ENTITY_SCHEMA_VERSION
 from service.queue import get_queue
 from service.schemas import IngestionCreated, JobStatus, ManifestSummary, TakeoffConfigIn
-from service import storage
+from service import metrics, storage
 
 router = APIRouter(prefix="/v1/takeoff/ingestions", tags=["takeoff"])
 log = logging.getLogger("takeoff.api")
@@ -123,6 +123,7 @@ async def create_ingestion(
     resolved_config = _resolve_config(config)
     job_id, status, created = _submit(content_sha256, data, resolved_config, idempotency_key)
     response.status_code = 202 if created else 200   # 200 signals a dedupe hit, not a new job
+    metrics.SUBMISSIONS.labels(created=str(created)).inc()
     # correlate the client request to the async job; every downstream log carries job_id
     log.info("takeoff.submit", extra={"job_id": job_id,
                                       "request_id": getattr(request.state, "request_id", "-"),
