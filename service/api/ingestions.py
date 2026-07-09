@@ -12,11 +12,12 @@ import uuid
 from fastapi import APIRouter, Form, Header, Response, UploadFile
 from pydantic import ValidationError
 from sqlalchemy import select
+from sqlalchemy.exc import IntegrityError
 
 from service.config import settings
 from service.db import session_scope
 from service.errors import ApiError
-from service.models import STATUS_QUEUED, TakeoffJob
+from service.models import STATUS_DEAD, STATUS_FAILED, STATUS_QUEUED, TakeoffJob
 from service.pipeline_adapter import ENTITY_SCHEMA_VERSION
 from service.queue import get_queue
 from service.schemas import IngestionCreated, JobStatus, ManifestSummary, TakeoffConfigIn
@@ -47,9 +48,62 @@ def _resolve_config(config_json: str | None) -> dict:
         raise ApiError(422, "invalid_config", f"config failed validation: {e}")
 
 
+def _find_existing(s, idempotency_key: str | None, sha: str, cfg_hash: str) -> TakeoffJob | None:
+    """Return a job this submit should dedupe onto, or None. Raises 409 if an Idempotency-Key
+    is reused with a different request."""
+    if idempotency_key:
+        j = s.scalar(select(TakeoffJob).where(TakeoffJob.idempotency_key == idempotency_key))
+        if j is not None:
+            if j.content_sha256 == sha and j.config_hash == cfg_hash:
+                return j
+            raise ApiError(409, "idempotency_key_conflict",
+                           "Idempotency-Key was reused with different content or config.")
+    # work dedup: an ACTIVE (non-failed/dead) job with identical content + config
+    return s.scalar(
+        select(TakeoffJob).where(
+            TakeoffJob.content_sha256 == sha, TakeoffJob.config_hash == cfg_hash,
+            TakeoffJob.status.notin_([STATUS_FAILED, STATUS_DEAD]))
+        .order_by(TakeoffJob.created_at.desc()))
+
+
+def _submit(content_sha256: str, data: bytes, resolved_config: dict,
+            idempotency_key: str | None) -> tuple[str, str, bool]:
+    """Dedupe-or-create. Returns (job_id, status, created). Uploads + enqueues only for a
+    genuinely new job; the partial unique indexes make the create race-safe."""
+    cfg_hash = _config_hash(resolved_config)
+
+    with session_scope() as s:
+        existing = _find_existing(s, idempotency_key, content_sha256, cfg_hash)
+        if existing is not None:
+            return existing.id, existing.status, False
+
+    job_id = str(uuid.uuid4())
+    pdf_key = f"uploads/{job_id}/drawings.pdf"
+    try:
+        with session_scope() as s:
+            s.add(TakeoffJob(
+                id=job_id, idempotency_key=idempotency_key, content_sha256=content_sha256,
+                config=resolved_config, config_hash=cfg_hash, status=STATUS_QUEUED,
+                pdf_object_key=pdf_key, entity_schema_version=ENTITY_SCHEMA_VERSION))
+    except IntegrityError:
+        # concurrent identical submit won the unique index — dedupe onto it
+        with session_scope() as s:
+            existing = _find_existing(s, idempotency_key, content_sha256, cfg_hash)
+            if existing is None:
+                raise
+            return existing.id, existing.status, False
+
+    # only a new job uploads its PDF + enqueues (worker never runs before the object exists)
+    storage.put_bytes(pdf_key, data, "application/pdf")
+    get_queue().enqueue("service.orchestrator.plan_and_dispatch", job_id,
+                        job_timeout=settings.job_timeout_seconds)
+    return job_id, STATUS_QUEUED, True
+
+
 @router.post("", status_code=202, response_model=IngestionCreated)
 async def create_ingestion(
     drawings: UploadFile,
+    response: Response,
     config: str | None = Form(default=None),
     idempotency_key: str | None = Header(default=None, alias="Idempotency-Key"),
 ) -> IngestionCreated:
@@ -64,30 +118,9 @@ async def create_ingestion(
 
     content_sha256 = hashlib.sha256(data).hexdigest()
     resolved_config = _resolve_config(config)
-    job_id = str(uuid.uuid4())
-    pdf_key = f"uploads/{job_id}/drawings.pdf"
-
-    storage.put_bytes(pdf_key, data, "application/pdf")
-
-    with session_scope() as s:
-        job = TakeoffJob(
-            id=job_id,
-            idempotency_key=idempotency_key,
-            content_sha256=content_sha256,
-            config=resolved_config,
-            config_hash=_config_hash(resolved_config),
-            status=STATUS_QUEUED,
-            pdf_object_key=pdf_key,
-            entity_schema_version=ENTITY_SCHEMA_VERSION,
-        )
-        s.add(job)
-
-    # Enqueue the orchestrator: it plans the shard windows and either runs the single-build
-    # fast path (small sets) or fans out into per-shard jobs (ADR-002).
-    get_queue().enqueue(
-        "service.orchestrator.plan_and_dispatch", job_id, job_timeout=settings.job_timeout_seconds
-    )
-    return IngestionCreated(job_id=job_id, status=STATUS_QUEUED)
+    job_id, status, created = _submit(content_sha256, data, resolved_config, idempotency_key)
+    response.status_code = 202 if created else 200   # 200 signals a dedupe hit, not a new job
+    return IngestionCreated(job_id=job_id, status=status)
 
 
 def _load(job_id: str) -> TakeoffJob:

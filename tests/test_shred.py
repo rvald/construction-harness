@@ -27,7 +27,8 @@ GOLDEN = ROOT / "output" / "reports" / "schedule_items.json"
 def _make_job() -> str:
     job_id = str(uuid.uuid4())
     with session_scope() as s:
-        s.add(TakeoffJob(id=job_id, content_sha256="x" * 64, config={}, config_hash="c",
+        s.add(TakeoffJob(id=job_id, content_sha256=uuid.uuid4().hex + uuid.uuid4().hex,
+                         config={}, config_hash=uuid.uuid4().hex,
                          status="succeeded", pdf_object_key=f"uploads/{job_id}/drawings.pdf",
                          entity_schema_version=ENTITY_SCHEMA_VERSION))
     return job_id
