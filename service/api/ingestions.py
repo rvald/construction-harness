@@ -7,9 +7,10 @@ from __future__ import annotations
 
 import hashlib
 import json
+import logging
 import uuid
 
-from fastapi import APIRouter, Form, Header, Response, UploadFile
+from fastapi import APIRouter, Form, Header, Request, Response, UploadFile
 from pydantic import ValidationError
 from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
@@ -24,6 +25,7 @@ from service.schemas import IngestionCreated, JobStatus, ManifestSummary, Takeof
 from service import storage
 
 router = APIRouter(prefix="/v1/takeoff/ingestions", tags=["takeoff"])
+log = logging.getLogger("takeoff.api")
 
 _PDF_MAGIC = b"%PDF-"
 
@@ -103,6 +105,7 @@ def _submit(content_sha256: str, data: bytes, resolved_config: dict,
 @router.post("", status_code=202, response_model=IngestionCreated)
 async def create_ingestion(
     drawings: UploadFile,
+    request: Request,
     response: Response,
     config: str | None = Form(default=None),
     idempotency_key: str | None = Header(default=None, alias="Idempotency-Key"),
@@ -120,6 +123,10 @@ async def create_ingestion(
     resolved_config = _resolve_config(config)
     job_id, status, created = _submit(content_sha256, data, resolved_config, idempotency_key)
     response.status_code = 202 if created else 200   # 200 signals a dedupe hit, not a new job
+    # correlate the client request to the async job; every downstream log carries job_id
+    log.info("takeoff.submit", extra={"job_id": job_id,
+                                      "request_id": getattr(request.state, "request_id", "-"),
+                                      "created": created})
     return IngestionCreated(job_id=job_id, status=status)
 
 

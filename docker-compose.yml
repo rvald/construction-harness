@@ -80,7 +80,7 @@ services:
     build:
       context: .
       dockerfile: service/Dockerfile
-    command: rq worker takeoff --url redis://redis:6379/0
+    command: python -m service.rq_worker
     environment: *service-env
     depends_on:
       postgres: {condition: service_healthy}

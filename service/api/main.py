@@ -11,11 +11,13 @@ from service.api.ingestions import router as ingestions_router
 from service.api.query import router as query_router
 from service.db import engine
 from service.errors import install_error_handlers
+from service.observability import configure_logging
 from service.queue import redis_conn
 from service import storage
 
 
 def create_app() -> FastAPI:
+    configure_logging()
     app = FastAPI(title="Takeoff Ingestion Service", version="1.0.0")
     install_error_handlers(app)
 

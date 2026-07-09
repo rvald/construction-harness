@@ -46,6 +46,10 @@ class Settings(BaseSettings):
     # --- queue ---
     rq_queue_name: str = "takeoff"
 
+    # --- observability ---
+    log_level: str = "INFO"
+    log_json: bool = True
+
     @property
     def max_candidates_per_shard(self) -> int:
         return max(1, self.shard_memory_budget_mb // self.mb_per_candidate)
