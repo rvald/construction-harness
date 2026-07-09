@@ -4,7 +4,7 @@ from __future__ import annotations
 import json
 import logging
 
-from service.observability import JsonFormatter, configure_logging
+from service.obs.observability import JsonFormatter, configure_logging
 
 
 def _record(**extra) -> logging.LogRecord:

@@ -4,7 +4,7 @@ from __future__ import annotations
 from redis import Redis
 from rq import Queue
 
-from service.config import settings
+from service.core.config import settings
 
 _redis: Redis | None = None
 

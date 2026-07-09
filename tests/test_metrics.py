@@ -6,10 +6,10 @@ import uuid
 import pytest
 from prometheus_client import generate_latest
 
-from service import metrics
-from service.db import session_scope
-from service.models import TakeoffJob
-from service.pipeline_adapter import ENTITY_SCHEMA_VERSION
+from service.obs import metrics
+from service.core.db import session_scope
+from service.core.models import TakeoffJob
+from service.takeoff.pipeline_adapter import ENTITY_SCHEMA_VERSION
 
 
 def test_metric_families_exposed():

@@ -12,8 +12,8 @@ from __future__ import annotations
 from prometheus_client import CONTENT_TYPE_LATEST, Counter, Gauge, Histogram, generate_latest
 from sqlalchemy import func, select
 
-from service.db import session_scope
-from service.models import TakeoffJob, TakeoffShard
+from service.core.db import session_scope
+from service.core.models import TakeoffJob, TakeoffShard
 
 REQUESTS = Counter("takeoff_requests_total", "HTTP requests", ["method", "path", "status"])
 REQUEST_LATENCY = Histogram("takeoff_request_duration_seconds", "HTTP request latency seconds",

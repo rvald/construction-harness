@@ -12,7 +12,7 @@ from sqlalchemy import Boolean, DateTime, Float, Index, Integer, String, Text, f
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column
 
-from service.db import Base
+from service.core.db import Base
 
 
 def _uuid() -> str:

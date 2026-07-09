@@ -10,11 +10,12 @@ from sqlalchemy import text
 
 from service.api.ingestions import router as ingestions_router
 from service.api.query import router as query_router
-from service.db import engine
-from service.errors import install_error_handlers
-from service.observability import configure_logging
-from service.queue import redis_conn
-from service import metrics, storage
+from service.core.db import engine
+from service.core.errors import install_error_handlers
+from service.obs.observability import configure_logging
+from service.clients.queue import redis_conn
+from service.obs import metrics
+from service.clients import storage
 
 
 def create_app() -> FastAPI:

@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import pytest
 
-from service.planner import ShardWindow, plan_shard_windows
+from service.takeoff.planner import ShardWindow, plan_shard_windows
 
 
 def _assert_covering_and_ordered(windows: list[ShardWindow], total_pages: int) -> None:

@@ -11,12 +11,12 @@ import uuid
 
 import pytest
 
-from service.db import session_scope
-from service.models import (
+from service.core.db import session_scope
+from service.core.models import (
     FixtureCountRow, RoomAreaRow, ScheduleItemRow, TakeoffJob,
 )
-from service.pipeline_adapter import ENTITY_SCHEMA_VERSION
-from service.projection import shred_entities
+from service.takeoff.pipeline_adapter import ENTITY_SCHEMA_VERSION
+from service.takeoff.projection import shred_entities
 
 pytestmark = pytest.mark.integration
 

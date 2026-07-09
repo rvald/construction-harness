@@ -14,11 +14,11 @@ import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 
-from service.db import session_scope
-from service.models import STATUS_FAILED, STATUS_RUNNING, STATUS_SUCCEEDED, TakeoffJob
-from service.pipeline_adapter import ENTITY_SCHEMA_VERSION, run_takeoff
-from service.projection import shred_entities
-from service import storage
+from service.core.db import session_scope
+from service.core.models import STATUS_FAILED, STATUS_RUNNING, STATUS_SUCCEEDED, TakeoffJob
+from service.takeoff.pipeline_adapter import ENTITY_SCHEMA_VERSION, run_takeoff
+from service.takeoff.projection import shred_entities
+from service.clients import storage
 
 log = logging.getLogger("takeoff.worker")
 

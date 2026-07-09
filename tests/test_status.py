@@ -7,9 +7,9 @@ import uuid
 import pytest
 
 from service.api.ingestions import get_ingestion
-from service.db import session_scope
-from service.models import MODE_SHARDED, MODE_SINGLE, TakeoffJob
-from service.pipeline_adapter import ENTITY_SCHEMA_VERSION
+from service.core.db import session_scope
+from service.core.models import MODE_SHARDED, MODE_SINGLE, TakeoffJob
+from service.takeoff.pipeline_adapter import ENTITY_SCHEMA_VERSION
 
 pytestmark = pytest.mark.integration
 

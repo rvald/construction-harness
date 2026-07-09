@@ -10,7 +10,7 @@ from __future__ import annotations
 import json
 import logging
 
-from service.config import settings
+from service.core.config import settings
 
 # Attributes present on a bare LogRecord — everything else is a call-site `extra` field.
 _STD_ATTRS = set(vars(logging.makeLogRecord({}))) | {"message", "asctime", "taskName"}

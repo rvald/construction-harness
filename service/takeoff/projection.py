@@ -10,7 +10,7 @@ nothing derived or interpretive (the grounding rule, ADR-003 §2).
 """
 from __future__ import annotations
 
-from service.models import FixtureCountRow, RoomAreaRow, ScheduleItemRow
+from service.core.models import FixtureCountRow, RoomAreaRow, ScheduleItemRow
 
 
 def _item_row(ordinal: int, d: dict) -> dict:

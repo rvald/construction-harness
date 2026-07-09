@@ -5,7 +5,7 @@ on (schedule, mark), in concatenated window order, empty marks dropped.
 """
 from __future__ import annotations
 
-from service.reduce import merge_partials
+from service.takeoff.reduce import merge_partials
 
 
 def _item(schedule, mark, page):

@@ -4,7 +4,7 @@ Merge the per-shard partials (each a list of item dicts, already in sorted-page 
 deduped within its window) into the global item list. This is a LIGHT reduce: concatenate
 the partials in window order, then apply first-wins dedup on `(schedule, mark)`.
 
-Because shard windows are contiguous and ordered (see `service.planner`), concatenating them
+Because shard windows are contiguous and ordered (see `service.takeoff.planner`), concatenating them
 reproduces the serial builder's whole-document page order, and a single `seen` set gives the
 same first-wins result as the serial extractor's global dedup. The dedup rule mirrors
 `extract_schedule_items` exactly: an item with an empty `mark`, or a `(schedule, mark)` seen

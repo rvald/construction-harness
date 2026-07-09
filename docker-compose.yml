@@ -80,7 +80,7 @@ services:
     build:
       context: .
       dockerfile: service/Dockerfile
-    command: python -m service.rq_worker
+    command: python -m service.jobs.rq_worker
     environment: *service-env
     depends_on:
       postgres: {condition: service_healthy}

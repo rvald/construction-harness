@@ -8,7 +8,7 @@ from __future__ import annotations
 import boto3
 from botocore.client import Config
 
-from service.config import settings
+from service.core.config import settings
 
 _client = None
 

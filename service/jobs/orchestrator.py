@@ -24,18 +24,18 @@ from pathlib import Path
 from rq import Retry
 from sqlalchemy import select, update
 
-from service import pipeline_adapter as adapter
-from service import storage
-from service.config import settings
-from service.db import session_scope
-from service.models import (
+from service.takeoff import pipeline_adapter as adapter
+from service.clients import storage
+from service.core.config import settings
+from service.core.db import session_scope
+from service.core.models import (
     MODE_SHARDED, MODE_SINGLE, STATUS_DEAD, STATUS_FAILED, STATUS_MAPPING, STATUS_PLANNING,
     STATUS_REDUCING, STATUS_RUNNING, STATUS_SUCCEEDED, TakeoffJob, TakeoffShard,
 )
-from service.planner import plan_shard_windows
-from service.projection import shred_entities
-from service.queue import get_queue
-from service.reduce import merge_partials
+from service.takeoff.planner import plan_shard_windows
+from service.takeoff.projection import shred_entities
+from service.clients.queue import get_queue
+from service.takeoff.reduce import merge_partials
 
 log = logging.getLogger("takeoff.orchestrator")
 
@@ -89,7 +89,7 @@ def plan_and_dispatch(job_id: str) -> str:
     if len(windows) <= 1:
         with session_scope() as s:
             s.get(TakeoffJob, job_id).mode = MODE_SINGLE
-        from service.worker import process_job
+        from service.jobs.worker import process_job
         return process_job(job_id)
 
     with session_scope() as s:
@@ -108,7 +108,7 @@ def plan_and_dispatch(job_id: str) -> str:
     if retries > 0:  # RQ's Retry requires max >= 1; omit it when no retries are configured
         enqueue_kwargs["retry"] = Retry(max=retries, interval=settings.shard_retry_backoff_seconds)
     for w in windows:
-        q.enqueue("service.orchestrator.run_shard", job_id, w.index, **enqueue_kwargs)
+        q.enqueue("service.jobs.orchestrator.run_shard", job_id, w.index, **enqueue_kwargs)
     return STATUS_MAPPING
 
 
@@ -169,7 +169,7 @@ def _finalize_shard(job_id: str) -> None:
             .returning(TakeoffJob.completed_shards, TakeoffJob.shard_count)
         ).one()
     if finished == total:
-        get_queue().enqueue("service.orchestrator.reduce_job", job_id,
+        get_queue().enqueue("service.jobs.orchestrator.reduce_job", job_id,
                             job_timeout=settings.job_timeout_seconds)
 
 

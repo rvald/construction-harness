@@ -14,7 +14,7 @@ import pathlib
 
 import pytest
 
-from service.pipeline_adapter import assemble_report
+from service.takeoff.pipeline_adapter import assemble_report
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 UCCS = ROOT / "data" / "uccs" / "drawings.pdf"

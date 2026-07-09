@@ -18,10 +18,10 @@ import pathlib
 
 import pytest
 
-from service.config import settings
-from service.pipeline_adapter import extract_shard, find_candidate_pages
-from service.planner import plan_shard_windows
-from service.reduce import merge_partials
+from service.core.config import settings
+from service.takeoff.pipeline_adapter import extract_shard, find_candidate_pages
+from service.takeoff.planner import plan_shard_windows
+from service.takeoff.reduce import merge_partials
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 UCCS = ROOT / "data" / "uccs" / "drawings.pdf"

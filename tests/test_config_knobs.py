@@ -5,9 +5,9 @@ from __future__ import annotations
 import pytest
 
 from service.api.ingestions import _resolve_config as api_resolve
-from service.errors import ApiError
-from service.planner import plan_shard_windows
-from service.schemas import TakeoffConfigIn
+from service.core.errors import ApiError
+from service.takeoff.planner import plan_shard_windows
+from service.core.schemas import TakeoffConfigIn
 
 
 # --- validation + normalization ------------------------------------------------
@@ -41,14 +41,14 @@ def test_invalid_config_rejected(bad):
 # --- config -> (TakeoffConfig, page_range) mapping -----------------------------
 
 def test_adapter_resolve_defaults():
-    from service.pipeline_adapter import _resolve_config
+    from service.takeoff.pipeline_adapter import _resolve_config
     tc, page_range = _resolve_config(None)
     assert tc.render_dpi == 100 and tc.spread_threshold == 0.35 and tc.min_tags == 3
     assert page_range is None
 
 
 def test_adapter_resolve_with_values():
-    from service.pipeline_adapter import _resolve_config
+    from service.takeoff.pipeline_adapter import _resolve_config
     tc, page_range = _resolve_config({"render_dpi": 150, "min_tags": 5, "page_range": [0, 50]})
     assert tc.render_dpi == 150 and tc.min_tags == 5
     assert list(page_range) == list(range(0, 50))
@@ -66,7 +66,7 @@ def test_run_takeoff_threads_config(monkeypatch):
         return ({}, {})
 
     monkeypatch.setattr(bsi, "build_schedule_items", spy)
-    from service.pipeline_adapter import run_takeoff
+    from service.takeoff.pipeline_adapter import run_takeoff
     run_takeoff("x.pdf", config={"render_dpi": 120, "page_range": [10, 40]})
     assert captured["config"].render_dpi == 120
     assert list(captured["page_range"]) == list(range(10, 40))

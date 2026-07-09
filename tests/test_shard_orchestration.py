@@ -12,11 +12,12 @@ import uuid
 
 import pytest
 
-from service import pipeline_adapter as adapter
-from service import orchestrator, storage
-from service.config import settings
-from service.db import session_scope
-from service.models import STATUS_SUCCEEDED, TakeoffJob, TakeoffShard
+from service.takeoff import pipeline_adapter as adapter
+from service.jobs import orchestrator
+from service.clients import storage
+from service.core.config import settings
+from service.core.db import session_scope
+from service.core.models import STATUS_SUCCEEDED, TakeoffJob, TakeoffShard
 
 pytestmark = pytest.mark.integration
 
@@ -25,8 +26,8 @@ class _FakeQueue:
     """Executes enqueued jobs synchronously, standing in for RQ workers."""
 
     _DISPATCH = {
-        "service.orchestrator.run_shard": lambda *a: orchestrator.run_shard(*a),
-        "service.orchestrator.reduce_job": lambda *a: orchestrator.reduce_job(*a),
+        "service.jobs.orchestrator.run_shard": lambda *a: orchestrator.run_shard(*a),
+        "service.jobs.orchestrator.reduce_job": lambda *a: orchestrator.reduce_job(*a),
     }
 
     def enqueue(self, path, *args, **kwargs):

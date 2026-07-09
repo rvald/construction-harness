@@ -52,7 +52,7 @@ def extract_shard(pdf_path: str | Path, page_range: tuple[int, int]) -> list[dic
 
     Returns items as plain dicts (the same shape as the artifact's `items` and the golden),
     in the pipeline's own sorted-page order. Items are deduped WITHIN the window by the
-    extractor; cross-window dedup is the reduce's job (`service.reduce.merge_partials`).
+    extractor; cross-window dedup is the reduce's job (`service.takeoff.reduce.merge_partials`).
 
     NB: the pipeline's `extract_schedule_items` iterates `for i in page_range`, so it wants an
     iterable of page indices — a ``range``, not a ``(start, end)`` tuple.

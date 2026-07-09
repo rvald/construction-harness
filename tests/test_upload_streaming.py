@@ -9,7 +9,7 @@ import uuid
 import pytest
 
 from service.api.ingestions import _hash_and_validate
-from service.errors import ApiError
+from service.core.errors import ApiError
 
 
 def test_hash_and_validate_ok():
@@ -45,7 +45,7 @@ def test_rejects_oversize_midstream():
 
 @pytest.mark.integration
 def test_upload_fileobj_roundtrip_minio():
-    from service import storage
+    from service.clients import storage
     storage.ensure_bucket()
     key = f"test/{uuid.uuid4()}.pdf"
     storage.upload_fileobj(key, io.BytesIO(b"%PDF-hello"), "application/pdf")

@@ -12,13 +12,13 @@ import json
 from fastapi import APIRouter
 from sqlalchemy import func, select
 
-from service import storage
-from service.db import session_scope
-from service.errors import ApiError
-from service.models import (
+from service.clients import storage
+from service.core.db import session_scope
+from service.core.errors import ApiError
+from service.core.models import (
     STATUS_SUCCEEDED, FixtureCountRow, RoomAreaRow, ScheduleItemRow, TakeoffJob,
 )
-from service.schemas import (
+from service.core.schemas import (
     FixtureCountOut, FixtureCountsPage, ItemOut, ItemsPage, Pagination, RoomAreaOut,
     RoomAreasPage, SourceOut, SummaryOut,
 )

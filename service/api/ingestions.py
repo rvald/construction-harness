@@ -16,14 +16,15 @@ from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 from starlette.concurrency import run_in_threadpool
 
-from service.config import settings
-from service.db import session_scope
-from service.errors import ApiError
-from service.models import STATUS_DEAD, STATUS_FAILED, STATUS_QUEUED, TakeoffJob
-from service.pipeline_adapter import ENTITY_SCHEMA_VERSION
-from service.queue import get_queue
-from service.schemas import IngestionCreated, JobStatus, ManifestSummary, TakeoffConfigIn
-from service import metrics, storage
+from service.core.config import settings
+from service.core.db import session_scope
+from service.core.errors import ApiError
+from service.core.models import STATUS_DEAD, STATUS_FAILED, STATUS_QUEUED, TakeoffJob
+from service.takeoff.pipeline_adapter import ENTITY_SCHEMA_VERSION
+from service.clients.queue import get_queue
+from service.core.schemas import IngestionCreated, JobStatus, ManifestSummary, TakeoffConfigIn
+from service.obs import metrics
+from service.clients import storage
 
 router = APIRouter(prefix="/v1/takeoff/ingestions", tags=["takeoff"])
 log = logging.getLogger("takeoff.api")
@@ -127,7 +128,7 @@ def _submit(content_sha256: str, fileobj, resolved_config: dict,
     # only a new job streams its PDF + enqueues (worker never runs before the object exists)
     fileobj.seek(0)
     storage.upload_fileobj(pdf_key, fileobj, "application/pdf")
-    get_queue().enqueue("service.orchestrator.plan_and_dispatch", job_id,
+    get_queue().enqueue("service.jobs.orchestrator.plan_and_dispatch", job_id,
                         job_timeout=settings.job_timeout_seconds)
     return job_id, STATUS_QUEUED, True
 

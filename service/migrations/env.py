@@ -1,4 +1,4 @@
-"""Alembic environment — DB URL from settings (env), metadata from service.models."""
+"""Alembic environment — DB URL from settings (env), metadata from service.core.models."""
 from __future__ import annotations
 
 from logging.config import fileConfig
@@ -6,9 +6,9 @@ from logging.config import fileConfig
 from alembic import context
 from sqlalchemy import engine_from_config, pool
 
-from service.config import settings
-from service.db import Base
-import service.models  # noqa: F401  (registers tables on Base.metadata)
+from service.core.config import settings
+from service.core.db import Base
+import service.core.models  # noqa: F401  (registers tables on Base.metadata)
 
 config = context.config
 config.set_main_option("sqlalchemy.url", settings.database_url)

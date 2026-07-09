@@ -10,7 +10,7 @@ import pathlib
 
 import pytest
 
-from service.projection import project
+from service.takeoff.projection import project
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 GOLDEN = ROOT / "output" / "reports" / "schedule_items.json"

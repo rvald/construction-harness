@@ -13,13 +13,13 @@ import uuid
 
 import pytest
 
-from service import storage
+from service.clients import storage
 from service.api import query
-from service.db import session_scope
-from service.errors import ApiError
-from service.models import STATUS_QUEUED, TakeoffJob
-from service.pipeline_adapter import ENTITY_SCHEMA_VERSION
-from service.projection import shred_entities
+from service.core.db import session_scope
+from service.core.errors import ApiError
+from service.core.models import STATUS_QUEUED, TakeoffJob
+from service.takeoff.pipeline_adapter import ENTITY_SCHEMA_VERSION
+from service.takeoff.projection import shred_entities
 
 pytestmark = pytest.mark.integration
 
@@ -99,7 +99,8 @@ def test_invalid_pagination_rejected(job):
 def test_state_gating_non_terminal_job():
     job_id = str(uuid.uuid4())
     with session_scope() as s:
-        s.add(TakeoffJob(id=job_id, content_sha256="x" * 64, config={}, config_hash="c",
+        s.add(TakeoffJob(id=job_id, content_sha256=uuid.uuid4().hex + uuid.uuid4().hex,
+                         config={}, config_hash=uuid.uuid4().hex,
                          status=STATUS_QUEUED, pdf_object_key="k",
                          entity_schema_version=ENTITY_SCHEMA_VERSION))
     with pytest.raises(ApiError) as ei:

@@ -8,13 +8,13 @@ import uuid
 import pytest
 from sqlalchemy.exc import IntegrityError
 
-from service import storage
+from service.clients import storage
 from service.api import ingestions
 from service.api.ingestions import _config_hash, _submit
-from service.db import session_scope
-from service.errors import ApiError
-from service.models import STATUS_FAILED, TakeoffJob
-from service.schemas import TakeoffConfigIn
+from service.core.db import session_scope
+from service.core.errors import ApiError
+from service.core.models import STATUS_FAILED, TakeoffJob
+from service.core.schemas import TakeoffConfigIn
 
 pytestmark = pytest.mark.integration
 
