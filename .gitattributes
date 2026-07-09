@@ -1,0 +1,8 @@
+# Normalize line endings to LF in the repo and on checkout, regardless of the editor/OS
+# that saved a file. Prevents CRLF churn on this Linux/WSL project.
+* text=auto eol=lf
+
+# Keep binary assets untouched.
+*.pdf binary
+*.png binary
+*.jpg binary
