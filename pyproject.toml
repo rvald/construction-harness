@@ -5,7 +5,9 @@ description = "Prototype data-ingestion pipeline validating the Construction Est
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "anthropic>=0.116.0",
     "networkx>=3.6.1",
+    "openai>=2.45.0",
     "pdfplumber>=0.11.10",
     "pydantic>=2.13.4",
     "pymupdf>=1.28.0",

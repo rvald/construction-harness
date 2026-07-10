@@ -1,47 +1,90 @@
 from __future__ import annotations
 
+import asyncio
 from typing import Callable
-from .providers.base import ProviderResponse, Provider
+
+from .messages import Message, Transcript, ToolCall, ToolResult
+from .providers.base import Provider, ProviderResponse, accumulate
+from .providers.events import StreamEvent, TextDelta
+from .tools.registry import ToolRegistry
+
 
 MAX_ITERATIONS = 20
 
-def run(
+
+async def arun(
     provider: Provider,
-    tools: dict[str, Callable[..., str]],
-    tool_schemas: list[dict],
+    registry: ToolRegistry,
     user_message: str,
+    transcript: Transcript | None = None,
+    system: str | None = None,
+    on_event: Callable[[StreamEvent], None] | None = None,
+    on_tool_call: Callable[[ToolCall], None] | None = None,
+    on_tool_result: Callable[[ToolResult], None] | None = None,
 ) -> str:
-    
-    transcript: list[dict] = [{"role": "user", "content": user_message}]
+    if transcript is None:
+        transcript = Transcript(system=system)
+    transcript.append(Message.user_text(user_message))
 
     for _ in range(MAX_ITERATIONS):
-        response = provider.complete(transcript, tool_schemas)
+        partial_text: list[str] = []
+        try:
+            response = await _one_turn(
+                provider, registry, transcript, partial_text, on_event,
+            )
+        except asyncio.CancelledError:
+            if partial_text:
+                transcript.append(Message.assistant_text(
+                    "".join(partial_text) + " [interrupted]"
+                ))
+            raise
 
-        if response.kind == "text":
-            transcript.append({"role": "assistant", "content": response.text})
+        if response.is_final:
+            transcript.append(Message.from_assistant_response(response))
             return response.text or ""
-        
-        if response.kind == "tool_call":
-            if response.tool_name is None:
-                raise RuntimeError("tool_call response missing tool_name")
-            if response.tool_name not in tools:
-                raise RuntimeError(f"unknown tool_name: {response.tool_name!r}")
-            
-            tool_fn = tools[response.tool_name]
-            result = tool_fn(**(response.tool_args or {}))
 
-            transcript.append({
-                "role": "assistant",
-                "content": [{"type": "tool_use", "name": response.tool_name, "id": response.tool_call_id, "input": response.tool_args}]
-            })
+        # Tool calls: commit the assistant turn (one message, N ToolCall
+        # blocks), then dispatch each call in arrival order. One tool_result
+        # message per call, matching Chapter 3's convention.
+        transcript.append(Message.from_assistant_response(response))
+        for ref in response.tool_calls:
+            call = ToolCall(id=ref.id, name=ref.name, args=dict(ref.args))
+            if on_tool_call is not None:
+                on_tool_call(call)
 
-            transcript.append({
-                "role": "user",
-                "content": [{"type": "tool_result", "tool_use_id": response.tool_call_id, "content": result}]
-            })
+            result = registry.dispatch(call.name, call.args, call.id)
+            transcript.append(Message.tool_result(result))
+            if on_tool_result is not None:
+                on_tool_result(result)
 
-            continue
-        
-        raise RuntimeError(f"unknown response kind: {response.kind!r}")
-    
     raise RuntimeError(f"agent did not finish in {MAX_ITERATIONS} iterations")
+
+
+def run(*args, **kwargs) -> str:
+    """Sync wrapper for scripts and tests."""
+    return asyncio.run(arun(*args, **kwargs))
+
+
+async def _one_turn(
+    provider: Provider,
+    registry: ToolRegistry,
+    transcript: Transcript,
+    partial_text: list[str],
+    on_event: Callable[[StreamEvent], None] | None,
+) -> ProviderResponse:
+    """Run one provider turn; push text deltas into `partial_text` as we go.
+
+    On CancelledError, whatever was accumulated so far is still in
+    `partial_text` — the caller can flush it into the transcript.
+    """
+    stream = provider.astream(transcript, registry.schemas())
+
+    async def forward():
+        async for event in stream:
+            if on_event is not None:
+                on_event(event)
+            if isinstance(event, TextDelta):
+                partial_text.append(event.text)
+            yield event
+
+    return await accumulate(forward())
