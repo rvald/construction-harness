@@ -66,7 +66,9 @@ async def main():
     for prompt in prompts:
         print(f"\n\nUser: {prompt}\nAssistant: ", end="", flush=True)
         await arun(
-            provider, registry, prompt,
+            provider, 
+            registry, 
+            prompt,
             transcript=transcript,
             on_event=on_event,
             on_tool_call=on_tool_call,

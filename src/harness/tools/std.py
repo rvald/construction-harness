@@ -6,6 +6,33 @@ from pathlib import Path
 
 from .decorator import tool
 
+import json
+
+@tool(side_effects={"read"})
+def json_query(data: str, path: str) -> str:
+    """Query JSON data with a simple dot-path expression.
+
+    data: a JSON string (object or array).
+    path: a dot-separated path; e.g. "items.0.name" or "user.email".
+          Array indices are integers; object keys are dot-separated.
+
+    Returns the queried value as JSON, or an error string if the path
+    doesn't exist.
+    Side effects: none.
+    """
+    obj = json.loads(data)  # will raise on invalid JSON; registry catches it
+    current = obj
+    for part in path.split("."):
+        if isinstance(current, list):
+            current = current[int(part)]
+        elif isinstance(current, dict):
+            if part not in current:
+                raise KeyError(f"path not found: {part}")
+            current = current[part]
+        else:
+            raise TypeError(f"cannot index {type(current).__name__} with {part}")
+    return json.dumps(current)
+
 @tool(side_effects={"read"})
 def calc(expression: str) -> str:
     """Evaluate a Python arithmetic expression.
