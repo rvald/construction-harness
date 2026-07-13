@@ -44,7 +44,7 @@ Block = TextBlock | ToolCall | ToolResult | ReasoningBlock
 class Message:
     role: Role
     blocks: list[Block]
-    create_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     id: str = field(default_factory=lambda: str(uuid4()))
 
     @classmethod
