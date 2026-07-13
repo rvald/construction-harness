@@ -1,12 +1,13 @@
 from __future__ import annotations
 
 import ast
-import subprocess
 from pathlib import Path
 
 from .decorator import tool
 
 import json
+
+BASH_OUTPUT_LIMIT = 4000  # characters
 
 @tool(side_effects={"read"})
 def json_query(data: str, path: str) -> str:
@@ -89,11 +90,28 @@ def bash(command: str, timeout_seconds: int = 30) -> str:
     the command. Caller is responsible for the blast radius.
     Returns combined stdout+stderr with the exit code appended.
     """
+    import subprocess
     timeout = min(int(timeout_seconds), 300)
     result = subprocess.run(
-        command, shell=True, capture_output=True, text=True,
-        timeout=timeout,
+        command, shell=True, capture_output=True, text=True, timeout=timeout,
     )
+    out = result.stdout
+    err = result.stderr
+
+    out_truncated = len(out) > BASH_OUTPUT_LIMIT
+    err_truncated = len(err) > BASH_OUTPUT_LIMIT // 2
+    if out_truncated:
+        out = out[:BASH_OUTPUT_LIMIT] + f"\n...[truncated at {BASH_OUTPUT_LIMIT} chars]"
+    if err_truncated:
+        err = err[:BASH_OUTPUT_LIMIT // 2] + f"\n...[truncated]"
+
+    note = ""
+    if out_truncated or err_truncated:
+        note = ("\n[note: output was truncated. For large output, "
+                "pipe through `head`, `tail`, `grep`, or save to a file "
+                "and use read_file_viewport.]")
+
     return (f"exit={result.returncode}\n"
-            f"---stdout---\n{result.stdout}\n"
-            f"---stderr---\n{result.stderr}")
+            f"---stdout---\n{out}\n"
+            f"---stderr---\n{err}"
+            + note)
