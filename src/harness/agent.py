@@ -8,6 +8,9 @@ from .providers.base import Provider, ProviderResponse, accumulate
 from .providers.events import StreamEvent, TextDelta
 from .tools.registry import ToolRegistry
 
+from .context.accountant import ContextAccountant, ContextSnapshot
+
+
 
 MAX_ITERATIONS = 20
 
@@ -21,12 +24,23 @@ async def arun(
     on_event: Callable[[StreamEvent], None] | None = None,
     on_tool_call: Callable[[ToolCall], None] | None = None,
     on_tool_result: Callable[[ToolResult], None] | None = None,
+    on_snapshot: Callable[[ContextSnapshot], None] | None = None,
+    accountant: ContextAccountant | None = None,
 ) -> str:
     if transcript is None:
         transcript = Transcript(system=system)
     transcript.append(Message.user_text(user_message))
+    accountant = accountant or ContextAccountant()    
 
     for _ in range(MAX_ITERATIONS):
+        snapshot = accountant.snapshot(transcript, tools=registry.schemas())
+        if on_snapshot is not None:
+            on_snapshot(snapshot)
+        
+        if snapshot.state == "red":
+            pass  # TODO: handle red state (e.g., truncate history, warn user, etc.)
+
+
         partial_text: list[str] = []
         try:
             response = await _one_turn(

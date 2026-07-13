@@ -12,6 +12,7 @@ dependencies = [
     "pdfplumber>=0.11.10",
     "pydantic>=2.13.4",
     "pymupdf>=1.28.0",
+    "tiktoken>=0.13.0",
 ]
 
 # Optional: the LLM backend for the semantic section resolver (B9). Lazily imported
