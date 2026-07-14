@@ -12,10 +12,18 @@ from .context.accountant import ContextAccountant, ContextSnapshot
 from .context.compactor import Compactor
 from .tools.selector import ToolCatalog, query_from_transcript
 from .permissions.manager import PermissionManager
+from dataclasses import dataclass
 
 log = logging.getLogger(__name__)
 
 MAX_ITERATIONS = 20
+
+@dataclass
+class AgentRunResult:
+    summary: str               # the final answer text (was arun's bare return)
+    tokens_used: int           # input + output across all turns
+    iterations_used: int       # how many turns the loop took
+    transcript: Transcript     # full record — useful for logs / debugging
 
 
 async def arun(
@@ -33,12 +41,16 @@ async def arun(
     pinned_tools: set[str] | None = None,
     tools_per_turn: int = 7,
     permission_manager: PermissionManager | None = None,
-) -> str:
+) -> AgentRunResult:
     if transcript is None:
         transcript = Transcript(system=system)
     transcript.append(Message.user_text(user_message))
-    accountant = accountant or ContextAccountant() 
-    compactor = compactor or Compactor(accountant, provider)   
+    accountant = accountant or ContextAccountant()
+    compactor = compactor or Compactor(accountant, provider)
+
+    # The accountant is stateless (it re-measures context size per snapshot and
+    # keeps no running total), so accumulate provider-reported cost here.
+    tokens_used = 0
 
     for _ in range(MAX_ITERATIONS):
         # Select tools for this turn.
@@ -80,9 +92,16 @@ async def arun(
                 ))
             raise
 
+        tokens_used += response.input_tokens + response.output_tokens
+
         if response.is_final:
             transcript.append(Message.from_assistant_response(response))
-            return response.text or ""
+            return AgentRunResult(
+                summary=response.text or "",
+                tokens_used=tokens_used,
+                iterations_used=len(transcript),
+                transcript=transcript
+            )
 
         # Tool calls: commit the assistant turn (one message, N ToolCall
         # blocks), then dispatch each call in arrival order. One tool_result

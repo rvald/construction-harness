@@ -24,7 +24,10 @@ class ToolCatalog:
         self._tokenized = [
             _tokenize(f"{t.name} {t.description}") for t in self.tools
         ]
-        self._bm25 = BM25Okapi(self._tokenized)
+        # BM25Okapi divides by the corpus size, so an empty tool list raises
+        # ZeroDivisionError. A catalog with no tools is a valid (degenerate)
+        # state — e.g. a sub-agent whose allowed set is empty — so guard it.
+        self._bm25 = BM25Okapi(self._tokenized) if self._tokenized else None
         self._by_name = {t.name: t for t in self.tools}
 
     def select(self, query: str, k: int = 7, must_include: set[str] | None = None) -> list[Tool]:
@@ -35,6 +38,9 @@ class ToolCatalog:
         """
         must_include = must_include or set()
         pinned = [self._by_name[n] for n in must_include if n in self._by_name]
+
+        if self._bm25 is None:
+            return pinned  # empty catalog: nothing to rank
 
         scores = self._bm25.get_scores(_tokenize(query))
         ranked = sorted(enumerate(scores), key=lambda x: -x[1])
