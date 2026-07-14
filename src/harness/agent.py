@@ -11,6 +11,7 @@ from .tools.registry import ToolRegistry
 from .context.accountant import ContextAccountant, ContextSnapshot
 from .context.compactor import Compactor
 from .tools.selector import ToolCatalog, query_from_transcript
+from .permissions.manager import PermissionManager
 
 log = logging.getLogger(__name__)
 
@@ -31,6 +32,7 @@ async def arun(
     compactor: Compactor | None = None,
     pinned_tools: set[str] | None = None,
     tools_per_turn: int = 7,
+    permission_manager: PermissionManager | None = None,
 ) -> str:
     if transcript is None:
         transcript = Transcript(system=system)
@@ -43,7 +45,9 @@ async def arun(
         query = query_from_transcript(transcript)
         selected = catalog.select(query, k=tools_per_turn,
                                    must_include=pinned_tools)
-        registry = ToolRegistry(tools=selected)
+        # One long-lived manager threaded into each turn's fresh registry so
+        # its session-approval cache survives across turns.
+        registry = ToolRegistry(tools=selected, permission_manager=permission_manager)
 
         snapshot = accountant.snapshot(transcript, tools=registry.schemas())
         if on_snapshot is not None:

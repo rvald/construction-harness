@@ -3,6 +3,9 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 import asyncio
 
+from ..permissions.manager import PermissionManager
+from ..permissions.trust import wrap_if_untrusted
+
 from ..messages import ToolResult
 from .base import Tool
 from .validation import validate, ValidationError
@@ -14,10 +17,18 @@ MAX_REPEAT_CALLS = 3
 class ToolRegistry:
     tools: dict[str, Tool] = field(default_factory=dict)
     _call_history: list[tuple[str, str]] = field(default_factory=list, init=False)
+    permission_manager: "PermissionManager | None" = None
 
-    def __init__(self, tools: list[Tool] | None = None) -> None:
+    def __init__(
+        self,
+        tools: list[Tool] | None = None,
+        permission_manager: "PermissionManager | None" = None,
+    ) -> None:
         self.tools = {}
         self._call_history = []
+        # A single manager is threaded in per turn so its session-approval
+        # cache persists across the fresh registries the loop builds.
+        self.permission_manager = permission_manager
         for t in tools or []:
             self.add(t)
 
@@ -37,6 +48,15 @@ class ToolRegistry:
         errors = validate(args, tool.input_schema)
         if errors:
             return self._validation_failure(name, errors, call_id)
+        
+        if self.permission_manager is not None:
+            outcome = await self.permission_manager.check(tool, args)
+            if outcome.decision == "deny":
+                return ToolResult(
+                    call_id=call_id,
+                    content=f"{name}: permission denied — {outcome.reason}",
+                    is_error=True,
+                )
 
         self._record(name, args)
         loop_result = self._check_loop(name, args, call_id)
@@ -45,9 +65,9 @@ class ToolRegistry:
 
         try:
             if tool.arun is not None:
-                content = await tool.arun(**args)
+                content = wrap_if_untrusted(tool, await tool.arun(**args))
             elif tool.run is not None:
-                content = tool.run(**args)
+                content = wrap_if_untrusted(tool, tool.run(**args))
             else:
                 raise RuntimeError(f"tool {name!r} has no implementation")
 
