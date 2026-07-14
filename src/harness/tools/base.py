@@ -1,6 +1,6 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
-from typing import Literal, Callable
+from typing import Awaitable, Literal, Callable
 
 SideEffect = Literal["read", "write", "network", "mutate"]
 
@@ -19,7 +19,8 @@ class Tool:
     name: str
     description: str
     input_schema: dict
-    run: Callable[..., str]
+    run: Callable[..., str] | None = None
+    arun: Callable[..., Awaitable[str]] | None = None 
     side_effects: frozenset[SideEffect] = field(default_factory=frozenset)
 
     def schema_for_provider(self) -> dict:
@@ -29,3 +30,7 @@ class Tool:
             "description": self.description,
             "input_schema": self.input_schema,
         }
+    
+    def __post_init__(self) -> None:
+        if self.run is None and self.arun is None:
+            raise ValueError(f"tool {self.name!r}: exactly one of run/arun required")

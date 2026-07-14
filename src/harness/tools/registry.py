@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+import asyncio
 
 from ..messages import ToolResult
 from .base import Tool
@@ -28,7 +29,7 @@ class ToolRegistry:
     def schemas(self) -> list[dict]:
         return [t.schema_for_provider() for t in self.tools.values()]
 
-    def dispatch(self, name: str, args: dict, call_id: str) -> ToolResult:
+    async def dispatch(self, name: str, args: dict, call_id: str) -> ToolResult:
         if name not in self.tools:
             return self._unknown_tool(name, call_id)
 
@@ -43,7 +44,13 @@ class ToolRegistry:
             return loop_result
 
         try:
-            content = tool.run(**args)
+            if tool.arun is not None:
+                content = await tool.arun(**args)
+            elif tool.run is not None:
+                content = tool.run(**args)
+            else:
+                raise RuntimeError(f"tool {name!r} has no implementation")
+
         except Exception as e:
             return ToolResult(
                 call_id=call_id,

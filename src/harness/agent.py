@@ -89,7 +89,7 @@ async def arun(
             if on_tool_call is not None:
                 on_tool_call(call)
 
-            result = registry.dispatch(call.name, call.args, call.id)
+            result = await registry.dispatch(call.name, call.args, call.id)
             transcript.append(Message.tool_result(result))
             if on_tool_result is not None:
                 on_tool_result(result)

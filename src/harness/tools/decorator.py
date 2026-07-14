@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import inspect
 import typing
+import asyncio
 from typing import Callable, get_type_hints
 
 from .base import SideEffect, Tool
@@ -76,3 +77,22 @@ def _type_to_schema(t: type) -> dict:
 def types_union():
     import types
     return types.UnionType
+
+def async_tool(name: str | None = None,
+               description: str | None = None,
+               side_effects: set[SideEffect] | frozenset[SideEffect] = frozenset()):
+    def wrap(fn):
+        actual_name = name or fn.__name__
+        actual_description = description or (fn.__doc__ or "").strip()
+        if not actual_description:
+            raise ValueError(f"tool {actual_name!r}: description required")
+        if not asyncio.iscoroutinefunction(fn):
+            raise TypeError(f"@async_tool target must be `async def`: {actual_name}")
+        return Tool(
+            name=actual_name,
+            description=actual_description,
+            input_schema=_schema_from_signature(fn),   # from Chapter 4
+            arun=fn,
+            side_effects=frozenset(side_effects),
+        )
+    return wrap
