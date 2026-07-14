@@ -10,6 +10,7 @@ from .tools.registry import ToolRegistry
 
 from .context.accountant import ContextAccountant, ContextSnapshot
 from .context.compactor import Compactor
+from .tools.selector import ToolCatalog, query_from_transcript
 
 log = logging.getLogger(__name__)
 
@@ -18,7 +19,7 @@ MAX_ITERATIONS = 20
 
 async def arun(
     provider: Provider,
-    registry: ToolRegistry,
+    catalog: ToolCatalog,
     user_message: str,
     transcript: Transcript | None = None,
     system: str | None = None,
@@ -28,6 +29,8 @@ async def arun(
     on_snapshot: Callable[[ContextSnapshot], None] | None = None,
     accountant: ContextAccountant | None = None,
     compactor: Compactor | None = None,
+    pinned_tools: set[str] | None = None,
+    tools_per_turn: int = 7,
 ) -> str:
     if transcript is None:
         transcript = Transcript(system=system)
@@ -36,6 +39,12 @@ async def arun(
     compactor = compactor or Compactor(accountant, provider)   
 
     for _ in range(MAX_ITERATIONS):
+        # Select tools for this turn.
+        query = query_from_transcript(transcript)
+        selected = catalog.select(query, k=tools_per_turn,
+                                   must_include=pinned_tools)
+        registry = ToolRegistry(tools=selected)
+
         snapshot = accountant.snapshot(transcript, tools=registry.schemas())
         if on_snapshot is not None:
             on_snapshot(snapshot)
