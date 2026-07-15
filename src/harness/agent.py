@@ -29,6 +29,10 @@ GRACE_NUDGE = (
     "report what you did determine — do not fabricate."
 )
 _EXHAUSTED_MARKER = "[stopped: reached max_iterations without a final answer]"
+# A "final" turn with no tool call and empty text is an absence, not an answer.
+# Returning "" with stop_reason="completed" would report success to a headless
+# worker that has no human to notice the blank — so we surface it explicitly.
+_EMPTY_MARKER = "[stopped: model returned an empty final response]"
 
 
 @dataclass
@@ -38,8 +42,11 @@ class AgentRunResult:
     iterations_used: int       # how many turns the loop took
     transcript: Transcript     # full record — useful for logs / debugging
     # Why the loop stopped. "completed" = model produced a final answer;
-    # the others are bounded-loop terminations, not errors.
-    stop_reason: Literal["completed", "max_iterations", "deadline"] = "completed"
+    # "empty_response" = it stopped with no tool call and no text (an absence,
+    # not an answer); the others are bounded-loop terminations, not errors.
+    stop_reason: Literal[
+        "completed", "max_iterations", "deadline", "empty_response"
+    ] = "completed"
 
 
 async def arun(
@@ -133,6 +140,17 @@ async def arun(
 
         if response.is_final:
             transcript.append(Message.from_assistant_response(response))
+            # `accumulate` always sets text to a string, so an empty/whitespace
+            # final means the model produced nothing usable. Surface that as its
+            # own outcome instead of returning a blank "completed" answer.
+            if not (response.text or "").strip():
+                return AgentRunResult(
+                    summary=_EMPTY_MARKER,
+                    tokens_used=tokens_used,
+                    iterations_used=iteration + 1,
+                    transcript=transcript,
+                    stop_reason="empty_response",
+                )
             return AgentRunResult(
                 summary=response.text or "",
                 tokens_used=tokens_used,

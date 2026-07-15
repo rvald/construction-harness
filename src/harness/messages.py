@@ -7,6 +7,12 @@ from uuid import uuid4
 
 Role = Literal["user", "assistant", "system"]
 
+# When a provider can't parse a tool call's arguments as JSON, it stashes the
+# raw buffer under this key so the registry can return a JSON-specific error
+# instead of a misleading schema error. Dunder-named so it can never collide
+# with a real tool parameter.
+MALFORMED_ARGS_KEY = "__malformed_json__"
+
 @dataclass(frozen=True)
 class TextBlock:
     text: str
