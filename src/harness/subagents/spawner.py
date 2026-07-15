@@ -60,11 +60,16 @@ class SubagentSpawner:
                 ),
                 system=system,
                 accountant=accountant,
+                max_iterations=spec.max_iterations,
             )
             return SubagentResult(
                 summary=result.summary,
                 tokens_used=result.tokens_used,
                 iterations_used=result.iterations_used,
+                # A sub-agent that stopped on a bound rather than finishing is a
+                # failure the parent must see — don't let it read as "done".
+                error=None if result.stop_reason == "completed"
+                else f"subagent stopped: {result.stop_reason}",
             )
         except SubagentBudgetExceeded:
             raise  # let budget failures propagate to the caller
