@@ -6,7 +6,7 @@ import asyncio
 from ..permissions.manager import PermissionManager
 from ..permissions.trust import wrap_if_untrusted
 
-from ..messages import ToolResult
+from ..messages import MALFORMED_ARGS_KEY, ToolResult
 from .base import Tool
 from .validation import validate, ValidationError
 
@@ -47,6 +47,13 @@ class ToolRegistry:
     async def dispatch(self, name: str, args: dict, call_id: str) -> ToolResult:
         if name not in self.tools:
             return self._unknown_tool(name, call_id)
+
+        # Before schema validation: if the provider couldn't parse the args as
+        # JSON it stashed the raw buffer here. Catch it now so the model gets a
+        # parse-specific message — and so the sentinel never reaches the tool
+        # body as a stray kwarg.
+        if MALFORMED_ARGS_KEY in args:
+            return self._malformed_args(name, args[MALFORMED_ARGS_KEY], call_id)
 
         tool = self.tools[name]
         errors = validate(args, tool.input_schema)
@@ -100,6 +107,22 @@ class ToolRegistry:
             content=(
                 f"unknown tool: {name!r}.{suggestion} "
                 f"Available: {sorted(self.tools.keys())}"
+            ),
+            is_error=True,
+        )
+
+    def _malformed_args(self, name: str, raw: str, call_id: str) -> ToolResult:
+        # The model's tool-call arguments were not valid JSON (often a truncated
+        # or unquoted value). Tell it exactly that, so it re-emits the call
+        # rather than "fixing" a field it never got wrong. The preview is the
+        # model's own current-turn output echoed back — no new content, capped.
+        preview = raw if len(raw) <= 200 else raw[:200] + "…"
+        return ToolResult(
+            call_id=call_id,
+            content=(
+                f"{name}: arguments were not valid JSON and could not be parsed. "
+                f"Re-issue the call with a single well-formed JSON object. "
+                f"Received: {preview!r}"
             ),
             is_error=True,
         )

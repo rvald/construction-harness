@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import AsyncIterator, Protocol
 
-from ..messages import Transcript
+from ..messages import MALFORMED_ARGS_KEY, Transcript
 from .events import StreamEvent
 
 import json
@@ -136,9 +136,11 @@ async def accumulate(stream: AsyncIterator[StreamEvent]) -> ProviderResponse:
         try:
             args = json.loads(entry["args_buffer"]) if entry["args_buffer"] else {}
         except json.JSONDecodeError:
-            # Surface the raw buffer; the registry's validator will return a
-            # structured error to the model on the next turn.
-            args = {"_raw": entry["args_buffer"]}
+            # Parse failed here — the only layer that knows it was a JSON error.
+            # Stash the raw buffer under a sentinel so the registry emits a
+            # parse-specific message next turn, not a schema error that has lost
+            # the fact that this was malformed JSON in the first place.
+            args = {MALFORMED_ARGS_KEY: entry["args_buffer"]}
         tool_calls.append(ToolCallRef(id=tid, name=entry["name"], args=args))
 
     if tool_calls:
