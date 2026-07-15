@@ -1,9 +1,10 @@
 from __future__ import annotations
 
 import asyncio, logging
-from typing import Callable
+from time import monotonic
+from typing import Callable, Literal
 
-from .messages import Message, Transcript, ToolCall, ToolResult
+from .messages import Message, TextBlock, Transcript, ToolCall, ToolResult
 from .providers.base import Provider, ProviderResponse, accumulate
 from .providers.events import StreamEvent, TextDelta
 from .tools.registry import ToolRegistry
@@ -18,12 +19,27 @@ log = logging.getLogger(__name__)
 
 MAX_ITERATIONS = 20
 
+# Injected on budget exhaustion for a final tool-stripped "grace turn": the
+# model gets one chance to synthesize the work it already did into an answer,
+# instead of being cut off one step short with its last tool results unread.
+GRACE_NUDGE = (
+    "You have reached your step budget and cannot call any more tools. "
+    "Using only the information already gathered above, give your best final "
+    "answer now. If you could not fully complete the task, say so plainly and "
+    "report what you did determine — do not fabricate."
+)
+_EXHAUSTED_MARKER = "[stopped: reached max_iterations without a final answer]"
+
+
 @dataclass
 class AgentRunResult:
     summary: str               # the final answer text (was arun's bare return)
     tokens_used: int           # input + output across all turns
     iterations_used: int       # how many turns the loop took
     transcript: Transcript     # full record — useful for logs / debugging
+    # Why the loop stopped. "completed" = model produced a final answer;
+    # the others are bounded-loop terminations, not errors.
+    stop_reason: Literal["completed", "max_iterations", "deadline"] = "completed"
 
 
 async def arun(
@@ -41,6 +57,8 @@ async def arun(
     pinned_tools: set[str] | None = None,
     tools_per_turn: int = 7,
     permission_manager: PermissionManager | None = None,
+    max_iterations: int = MAX_ITERATIONS,
+    deadline_s: float | None = None,
 ) -> AgentRunResult:
     if transcript is None:
         transcript = Transcript(system=system)
@@ -52,14 +70,33 @@ async def arun(
     # keeps no running total), so accumulate provider-reported cost here.
     tokens_used = 0
 
-    for _ in range(MAX_ITERATIONS):
+    # Loop-detection history is run-scoped: it must outlive the fresh registry
+    # the loop builds each turn (below), or cross-turn repeats go unseen.
+    call_history: list[tuple[str, str]] = []
+
+    # Optional wall-clock bound for headless runs with no human to interrupt.
+    # Checked between turns, so a single turn may overrun by its own duration.
+    deadline = monotonic() + deadline_s if deadline_s is not None else None
+
+    for iteration in range(max_iterations):
+        if deadline is not None and monotonic() > deadline:
+            return AgentRunResult(
+                summary=_last_assistant_text(transcript)
+                or "[stopped: wall-clock deadline reached]",
+                tokens_used=tokens_used,
+                iterations_used=iteration,
+                transcript=transcript,
+                stop_reason="deadline",
+            )
         # Select tools for this turn.
         query = query_from_transcript(transcript)
         selected = catalog.select(query, k=tools_per_turn,
                                    must_include=pinned_tools)
-        # One long-lived manager threaded into each turn's fresh registry so
-        # its session-approval cache survives across turns.
-        registry = ToolRegistry(tools=selected, permission_manager=permission_manager)
+        # A long-lived manager and the loop-detection history are threaded into
+        # each turn's fresh registry so their state survives across turns.
+        registry = ToolRegistry(tools=selected,
+                                permission_manager=permission_manager,
+                                call_history=call_history)
 
         snapshot = accountant.snapshot(transcript, tools=registry.schemas())
         if on_snapshot is not None:
@@ -99,8 +136,9 @@ async def arun(
             return AgentRunResult(
                 summary=response.text or "",
                 tokens_used=tokens_used,
-                iterations_used=len(transcript),
-                transcript=transcript
+                iterations_used=iteration + 1,
+                transcript=transcript,
+                stop_reason="completed",
             )
 
         # Tool calls: commit the assistant turn (one message, N ToolCall
@@ -117,12 +155,58 @@ async def arun(
             if on_tool_result is not None:
                 on_tool_result(result)
 
-    raise RuntimeError(f"agent did not finish in {MAX_ITERATIONS} iterations")
+    # Budget exhausted. Rather than cut the model off one step short, give it
+    # one final tool-stripped "grace turn" to synthesize an answer. The empty
+    # registry means the provider is called with no tools, so the model *must*
+    # produce text — that guarantees a single-shot wrap-up, not another turn.
+    #
+    # Best-effort: this must never turn a graceful termination back into a
+    # crash, so any failure falls back to the marker summary.
+    transcript.append(Message.user_text(GRACE_NUDGE))
+    partial_text: list[str] = []
+    summary = _EXHAUSTED_MARKER
+    try:
+        response = await _one_turn(
+            provider, ToolRegistry(), transcript, partial_text, on_event,
+        )
+        tokens_used += response.input_tokens + response.output_tokens
+        transcript.append(Message.from_assistant_response(response))
+        summary = response.text or _EXHAUSTED_MARKER
+    except asyncio.CancelledError:
+        if partial_text:
+            transcript.append(Message.assistant_text(
+                "".join(partial_text) + " [interrupted]"
+            ))
+        raise
+    except Exception:
+        log.warning("grace turn failed; returning best-effort marker",
+                    exc_info=True)
+        summary = _last_assistant_text(transcript) or _EXHAUSTED_MARKER
+
+    return AgentRunResult(
+        summary=summary,
+        tokens_used=tokens_used,
+        iterations_used=max_iterations,
+        transcript=transcript,
+        stop_reason="max_iterations",
+    )
 
 
 def run(*args, **kwargs) -> str:
     """Sync wrapper for scripts and tests."""
     return asyncio.run(arun(*args, **kwargs))
+
+
+def _last_assistant_text(transcript: Transcript) -> str | None:
+    """The most recent assistant text block, if any — a best-effort partial
+    answer when the loop stops without producing a clean final response."""
+    for message in reversed(transcript.messages):
+        if message.role != "assistant":
+            continue
+        for block in reversed(message.blocks):
+            if isinstance(block, TextBlock):
+                return block.text
+    return None
 
 
 async def _one_turn(

@@ -23,9 +23,13 @@ class ToolRegistry:
         self,
         tools: list[Tool] | None = None,
         permission_manager: "PermissionManager | None" = None,
+        call_history: list[tuple[str, str]] | None = None,
     ) -> None:
         self.tools = {}
-        self._call_history = []
+        # Run-scoped when the caller threads a list in — so cross-turn repeats
+        # stay visible across the fresh registries the loop builds each turn;
+        # otherwise per-registry, for standalone use.
+        self._call_history = call_history if call_history is not None else []
         # A single manager is threaded in per turn so its session-approval
         # cache persists across the fresh registries the loop builds.
         self.permission_manager = permission_manager
@@ -114,7 +118,9 @@ class ToolRegistry:
         import json
         self._call_history.append((name, json.dumps(args, sort_keys=True)))
         if len(self._call_history) > 100:
-            self._call_history = self._call_history[-100:]
+            # In-place: a threaded (run-scoped) history must stay the same list
+            # object, or rebinding would silently detach it from the caller.
+            self._call_history[:] = self._call_history[-100:]
 
     def _check_loop(self, name: str, args: dict, call_id: str) -> ToolResult | None:
         import json
