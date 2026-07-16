@@ -88,7 +88,16 @@ class ToolRegistry:
         # loop needs. A gated registry never holds spawn tools (the spawner
         # strips them), so a gated call can't itself spawn and re-enter → no
         # nested acquisition, no deadlock.
-        mutates = bool(tool.side_effects & {"write", "mutate"})
+        #
+        # Fail CLOSED on the label: a call takes the gate unless it is provably
+        # pure-read (side_effects ⊆ {"read"} and non-empty). An empty/omitted
+        # effect set is "unknown" → gated, not waved through. This keeps the
+        # guarantee from resting on a positive write/mutate label that a tool
+        # might under-declare — e.g. `bash`, which can write the filesystem —
+        # while pure reads still overlap. (network-labelled tools also gate;
+        # the only concurrency that survives today is pure-{read} local calls.)
+        read_only = bool(tool.side_effects) and tool.side_effects <= {"read"}
+        mutates = not read_only
         try:
             if self.write_gate is not None and mutates:
                 async with self.write_gate:

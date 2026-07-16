@@ -80,14 +80,17 @@ def write_file(path: str, content: str) -> str:
     return f"wrote {len(content)} bytes to {path}"
 
 
-@tool(side_effects={"read", "network"})
+@tool(side_effects={"read", "write", "network", "mutate"})
 def bash(command: str, timeout_seconds: int = 30) -> str:
     """Run a shell command in the current working directory.
 
     command: a shell command line.
     timeout_seconds: hard time limit; default 30, cap 300.
     Side effects: MAY read/write files, MAY make network calls — depends on
-    the command. Caller is responsible for the blast radius.
+    the command. Declared as the full effect set (read+write+network+mutate)
+    because an arbitrary shell command can do all four: under-declaring would
+    let the permission layer or the write-gate wave a mutation through.
+    Caller is responsible for the blast radius.
     Returns combined stdout+stderr with the exit code appended.
     """
     import subprocess

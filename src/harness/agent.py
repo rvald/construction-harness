@@ -14,11 +14,20 @@ from .context.compactor import Compactor
 from .context.masking import drop_orphan_tool_results
 from .tools.selector import ToolCatalog, query_from_transcript
 from .permissions.manager import PermissionManager
+from .plans.tools import PlanHolder
+from .plans.model import Plan
 from dataclasses import dataclass
 
 log = logging.getLogger(__name__)
 
 MAX_ITERATIONS = 20
+
+# When a plan is active, a "final" turn is only accepted if the plan is ready to
+# finalize (all steps terminal, all postconditions verified). If it isn't, the
+# model is nudged back to work — but only this many times, so a model that can't
+# satisfy the plan still terminates instead of looping forever. Fail-closed: on
+# exhaustion the run ends with stop_reason="incomplete_plan", never "completed".
+MAX_COMPLETION_NUDGES = 2
 
 # Injected on budget exhaustion for a final tool-stripped "grace turn": the
 # model gets one chance to synthesize the work it already did into an answer,
@@ -44,9 +53,12 @@ class AgentRunResult:
     transcript: Transcript     # full record — useful for logs / debugging
     # Why the loop stopped. "completed" = model produced a final answer;
     # "empty_response" = it stopped with no tool call and no text (an absence,
-    # not an answer); the others are bounded-loop terminations, not errors.
+    # not an answer); "incomplete_plan" = it tried to finalize but an active
+    # plan's steps/postconditions were not all satisfied and the nudge budget
+    # ran out; the others are bounded-loop terminations, not errors.
     stop_reason: Literal[
-        "completed", "max_iterations", "deadline", "empty_response"
+        "completed", "max_iterations", "deadline", "empty_response",
+        "incomplete_plan",
     ] = "completed"
 
 
@@ -66,6 +78,7 @@ async def arun(
     tools_per_turn: int = 7,
     permission_manager: PermissionManager | None = None,
     write_gate: asyncio.Lock | None = None,
+    plan_holder: PlanHolder | None = None,
     max_iterations: int = MAX_ITERATIONS,
     deadline_s: float | None = None,
 ) -> AgentRunResult:
@@ -87,6 +100,10 @@ async def arun(
     # Loop-detection history is run-scoped: it must outlive the fresh registry
     # the loop builds each turn (below), or cross-turn repeats go unseen.
     call_history: list[tuple[str, str]] = []
+
+    # How many times the completion gate has nudged the model back to work this
+    # run (see MAX_COMPLETION_NUDGES). Run-scoped, bounded — never per-turn.
+    completion_nudges = 0
 
     # Optional wall-clock bound for headless runs with no human to interrupt.
     # Checked between turns, so a single turn may overrun by its own duration.
@@ -173,6 +190,32 @@ async def arun(
                     transcript=transcript,
                     stop_reason="empty_response",
                 )
+            # Completion gate: a model that says "done" while an active plan
+            # still has non-terminal steps or unverified postconditions has not
+            # actually finished. Nudge it back to work rather than report a
+            # false "completed" — bounded, so it still terminates. The nudge is
+            # a plain user turn that consumes an iteration from the same budget,
+            # so no separate budget and no infinite loop. Enforced HERE, on the
+            # clean-finalization path — this is the gate the plan tools' evidence
+            # requirements only hint at until the loop actually checks them.
+            if (plan_holder is not None and plan_holder.plan is not None
+                    and not plan_holder.plan.is_ready_to_finalize()):
+                if completion_nudges < MAX_COMPLETION_NUDGES:
+                    completion_nudges += 1
+                    transcript.append(
+                        Message.user_text(_completion_nudge(plan_holder.plan))
+                    )
+                    continue
+                # Nudge budget spent and still not ready: fail closed. A headless
+                # caller sees "incomplete_plan", never a "completed" it can't trust.
+                return AgentRunResult(
+                    summary=(response.text or "").strip()
+                    + "\n\n" + _unsatisfied_note(plan_holder.plan),
+                    tokens_used=tokens_used,
+                    iterations_used=iteration + 1,
+                    transcript=transcript,
+                    stop_reason="incomplete_plan",
+                )
             return AgentRunResult(
                 summary=response.text or "",
                 tokens_used=tokens_used,
@@ -247,6 +290,37 @@ def _last_assistant_text(transcript: Transcript) -> str | None:
             if isinstance(block, TextBlock):
                 return block.text
     return None
+
+
+def _unsatisfied_note(plan: Plan) -> str:
+    """A one-line-per-item list of what's still blocking finalization: steps
+    that aren't terminal and postconditions that aren't verified."""
+    open_steps = [s.description for s in plan.steps if not s.is_terminal()]
+    open_pcs = [pc.description for pc in plan.postconditions if not pc.satisfied]
+    lines = ["[stopped: plan not verified complete]"]
+    for d in open_steps:
+        lines.append(f"  - step not done: {d}")
+    for d in open_pcs:
+        lines.append(f"  - postcondition not verified: {d}")
+    return "\n".join(lines)
+
+
+def _completion_nudge(plan: Plan) -> str:
+    """Sent when the model tries to finalize with an active plan still open.
+    Shows the plan state and points at the exact remaining work, so the model
+    either does it, verifies it with evidence, or marks it blocked — rather
+    than declaring done."""
+    return (
+        "You indicated you are finished, but the active plan is not yet "
+        "complete:\n\n"
+        f"{plan.to_render()}\n\n"
+        "Before finishing you must either:\n"
+        "  - finish each remaining step and mark it 'done' (with evidence), or "
+        "mark it 'blocked' if it genuinely cannot be completed; and\n"
+        "  - verify each remaining postcondition (with concrete evidence).\n"
+        "Do the outstanding work now, or update the plan to reflect reality. "
+        "Do not claim completion while items remain open."
+    )
 
 
 async def _one_turn(

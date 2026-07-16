@@ -131,6 +131,40 @@ def test_write_gate_serializes_concurrent_mutations():
     )
 
 
+def test_write_gate_gates_a_tool_that_under_declares_its_mutation():
+    # The gate must not rest on a positive write/mutate label. This tool mutates
+    # a shared counter but is labelled {read, network} — exactly `bash`'s old,
+    # under-declared label. The fail-closed rule (gate unless provably pure-read)
+    # must still serialize it; under the old `& {write, mutate}` rule it would
+    # not take the gate and the read-modify-write would interleave to 1.
+    state = {"counter": 0}
+
+    @async_tool(side_effects={"read", "network"})
+    async def bump() -> str:
+        """Non-atomic increment, under-declared as a network read."""
+        current = state["counter"]
+        await asyncio.sleep(0.01)          # let a sibling run if it can
+        state["counter"] = current + 1
+        return f"counter={current + 1}"
+
+    catalog = ToolCatalog(tools=[bump])
+    provider = ToolThenAnswerProvider("bump", {})
+    spawner = SubagentSpawner(provider=provider, catalog=catalog)
+    parallel = ParallelSpawner(inner=spawner, max_parallel=4)
+
+    specs = [
+        SubagentSpec(objective=f"o{i}", output_format="text",
+                     tools_allowed=["bump"], max_iterations=3)
+        for i in range(2)
+    ]
+
+    results = asyncio.run(parallel.spawn_all(specs, justification="parallel"))
+    assert all(r.error is None for r in results), [r.error for r in results]
+    assert state["counter"] == 2, (
+        f"under-declared mutator was not gated: counter={state['counter']} (want 2)"
+    )
+
+
 def test_subagent_inherits_deny_permission():
     # A parent whose PermissionManager denies everything must gate sub-agent
     # tool calls too: the mutating tool never runs, so the counter stays 0.
