@@ -83,9 +83,19 @@ class ToolRegistry:
                 raise RuntimeError(f"tool {name!r} has no implementation")
 
         except Exception as e:
+            # The exception *message* is data from the same (possibly untrusted)
+            # source as the tool's return value — fence it exactly as we fence a
+            # successful return, or a network/MCP tool could smuggle instructions
+            # into the trusted channel via its error text. The harness-generated
+            # prefix stays outside the fence as a trusted, provider-independent
+            # error signal; wrap_if_untrusted no-ops for non-network tools, so
+            # trusted tools' messages are unchanged.
             return ToolResult(
                 call_id=call_id,
-                content=f"{name} raised {type(e).__name__}: {e}",
+                content=(
+                    f"{name} raised {type(e).__name__}: "
+                    + wrap_if_untrusted(tool, str(e))
+                ),
                 is_error=True,
             )
         return ToolResult(call_id=call_id, content=content)
