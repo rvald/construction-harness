@@ -23,11 +23,13 @@ class AnthropicProvider(Provider):
                  client: Any | None = None,
                  enable_thinking: bool = False,
                  thinking_budget_tokens: int = 2000,
-                 max_tokens: int = 4096) -> None:
+                 max_tokens: int = 4096,
+                 enable_prompt_cache: bool = True) -> None:
         self.model = model
         self.enable_thinking = enable_thinking
         self.thinking_budget_tokens = thinking_budget_tokens
         self.max_tokens = max_tokens
+        self.enable_prompt_cache = enable_prompt_cache
         if client is None:
             from anthropic import AsyncAnthropic  # external SDK
             client = AsyncAnthropic()
@@ -45,10 +47,13 @@ class AnthropicProvider(Provider):
                 "max_tokens": self.max_tokens,
                 "messages": [_to_anthropic(m, self.enable_thinking)
                               for m in transcript.messages],
-                "tools": tools,
+                "tools": _cached_tools(tools) if self.enable_prompt_cache else tools,
             }
             if transcript.system:
-                kwargs["system"] = transcript.system
+                kwargs["system"] = (
+                    _cached_system(transcript.system)
+                    if self.enable_prompt_cache else transcript.system
+                )
             if self.enable_thinking:
                 kwargs["thinking"] = {
                     "type": "enabled",
@@ -78,6 +83,32 @@ class AnthropicProvider(Provider):
 
     async def acomplete(self, transcript, tools):
         return await accumulate(self.astream(transcript, tools))
+
+
+# Anthropic caches the request prefix (tools → system → messages) only up to
+# an explicit `cache_control` breakpoint. Marking the last tool caches the whole
+# tools array; marking system caches tools+system — the largest always-stable
+# chunk of a tool-using turn. Two breakpoints give a shorter-prefix fallback hit
+# if system ever changes but tools don't; both are well within Anthropic's limit
+# of four. The prefix only stays cacheable if it's byte-stable across turns —
+# that's what ToolCatalog.for_turn guarantees for a fits-in-budget catalog.
+_CACHE_CONTROL = {"type": "ephemeral"}
+
+
+def _cached_tools(tools: list[dict]) -> list[dict]:
+    """Copy `tools`, marking the last one as a cache breakpoint. Copies so the
+    caller's provider-neutral schemas are never mutated."""
+    if not tools:
+        return tools
+    out = [dict(t) for t in tools]
+    out[-1] = {**out[-1], "cache_control": _CACHE_CONTROL}
+    return out
+
+
+def _cached_system(system: str) -> list[dict]:
+    """Render the system prompt as a single text block carrying a cache
+    breakpoint (a bare string can't hold cache_control)."""
+    return [{"type": "text", "text": system, "cache_control": _CACHE_CONTROL}]
 
 
 def _to_anthropic(message: Message, keep_reasoning: bool) -> dict:
