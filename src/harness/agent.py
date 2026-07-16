@@ -65,6 +65,7 @@ async def arun(
     pinned_tools: set[str] | None = None,
     tools_per_turn: int = 7,
     permission_manager: PermissionManager | None = None,
+    write_gate: asyncio.Lock | None = None,
     max_iterations: int = MAX_ITERATIONS,
     deadline_s: float | None = None,
 ) -> AgentRunResult:
@@ -112,7 +113,8 @@ async def arun(
         # each turn's fresh registry so their state survives across turns.
         registry = ToolRegistry(tools=selected,
                                 permission_manager=permission_manager,
-                                call_history=call_history)
+                                call_history=call_history,
+                                write_gate=write_gate)
 
         snapshot = accountant.snapshot(transcript, tools=registry.schemas(),
                                        last_real_input_tokens=last_input_tokens)

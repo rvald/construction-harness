@@ -5,6 +5,7 @@ from dataclasses import dataclass, field
 
 from ..agent import arun
 from ..context.accountant import ContextAccountant, ContextBudget
+from ..permissions.manager import PermissionManager
 from ..providers.base import Provider
 from ..tools.selector import ToolCatalog
 from .subagent import SubagentResult, SubagentSpec
@@ -14,11 +15,23 @@ class SubagentBudgetExceeded(Exception):
     pass
 
 
+# Tools a sub-agent must never receive, however it phrases tools_allowed: the
+# delegation tools themselves. Stripping them makes agent-in-agent recursion
+# structurally impossible (gemini blocks the same way) — and, because a gated
+# sub-agent registry therefore never holds a spawn tool, it also rules out
+# re-entering the shared write-gate, so that gate can never deadlock.
+_DELEGATION_TOOL_NAMES = {"spawn_subagent", "spawn_parallel_subagents"}
+
+
 @dataclass
 class SubagentSpawner:
     provider: Provider
     catalog: ToolCatalog
     max_subagents_per_session: int = 5
+    # Threaded into every sub-agent so delegated tool calls are gated exactly
+    # like the parent's — fail-closed in headless (an "ask" becomes "deny").
+    # None means sub-agents run ungated; pass one whenever the parent has one.
+    permission_manager: PermissionManager | None = None
     _spawn_count: int = field(default=0, init=False)
 
     async def spawn(
@@ -26,15 +39,24 @@ class SubagentSpawner:
         spec: SubagentSpec,
         parent_scratchpad_root: str | None = None,
         justification: str = "",
+        write_gate: asyncio.Lock | None = None,
     ) -> SubagentResult:
+        # Budget check and increment run with no `await` between them, so under
+        # single-threaded asyncio no sibling spawn can interleave and overshoot
+        # the cap. Keep them adjacent: an await here would reintroduce the race.
         if self._spawn_count >= self.max_subagents_per_session:
             raise SubagentBudgetExceeded(
                 f"spawn budget of {self.max_subagents_per_session} exhausted"
             )
         self._spawn_count += 1
 
-        # restrict the catalog to the tools the sub-agent is allowed
-        allowed = [t for t in self.catalog.tools if t.name in spec.tools_allowed]
+        # Restrict the catalog to the tools the sub-agent is allowed, minus the
+        # delegation tools — a sub-agent can never spawn (see above).
+        allowed = [
+            t for t in self.catalog.tools
+            if t.name in spec.tools_allowed
+            and t.name not in _DELEGATION_TOOL_NAMES
+        ]
         if not allowed:
             available = sorted(t.name for t in self.catalog.tools)
             return SubagentResult(
@@ -60,6 +82,8 @@ class SubagentSpawner:
                 ),
                 system=system,
                 accountant=accountant,
+                permission_manager=self.permission_manager,
+                write_gate=write_gate,
                 max_iterations=spec.max_iterations,
             )
             return SubagentResult(

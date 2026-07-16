@@ -18,12 +18,14 @@ class ToolRegistry:
     tools: dict[str, Tool] = field(default_factory=dict)
     _call_history: list[tuple[str, str]] = field(default_factory=list, init=False)
     permission_manager: "PermissionManager | None" = None
+    write_gate: "asyncio.Lock | None" = None
 
     def __init__(
         self,
         tools: list[Tool] | None = None,
         permission_manager: "PermissionManager | None" = None,
         call_history: list[tuple[str, str]] | None = None,
+        write_gate: "asyncio.Lock | None" = None,
     ) -> None:
         self.tools = {}
         # Run-scoped when the caller threads a list in — so cross-turn repeats
@@ -33,6 +35,11 @@ class ToolRegistry:
         # A single manager is threaded in per turn so its session-approval
         # cache persists across the fresh registries the loop builds.
         self.permission_manager = permission_manager
+        # Optional mutual-exclusion gate for mutating tools. Threaded in — and
+        # SHARED — across the sibling sub-agents of one parallel batch, so their
+        # write/mutate calls can't interleave at an await point. None (the
+        # default) for a single agent, whose dispatch is already serial.
+        self.write_gate = write_gate
         for t in tools or []:
             self.add(t)
 
@@ -74,13 +81,20 @@ class ToolRegistry:
         if loop_result is not None:
             return loop_result
 
+        # Serialize mutating tools against their siblings when a shared write
+        # gate is present (parallel sub-agents). Read-only tools never take the
+        # gate, so concurrent reads still overlap — this is codex's read/write
+        # split (a full RwLock there) reduced to what a single-threaded event
+        # loop needs. A gated registry never holds spawn tools (the spawner
+        # strips them), so a gated call can't itself spawn and re-enter → no
+        # nested acquisition, no deadlock.
+        mutates = bool(tool.side_effects & {"write", "mutate"})
         try:
-            if tool.arun is not None:
-                content = wrap_if_untrusted(tool, await tool.arun(**args))
-            elif tool.run is not None:
-                content = wrap_if_untrusted(tool, tool.run(**args))
+            if self.write_gate is not None and mutates:
+                async with self.write_gate:
+                    content = await self._invoke(tool, args)
             else:
-                raise RuntimeError(f"tool {name!r} has no implementation")
+                content = await self._invoke(tool, args)
 
         except Exception as e:
             # The exception *message* is data from the same (possibly untrusted)
@@ -99,7 +113,16 @@ class ToolRegistry:
                 is_error=True,
             )
         return ToolResult(call_id=call_id, content=content)
-    
+
+    async def _invoke(self, tool: Tool, args: dict) -> str:
+        """Call the tool's implementation and fence its (possibly untrusted)
+        return value. Sync or async; exactly one is present (Tool.__post_init__)."""
+        if tool.arun is not None:
+            return wrap_if_untrusted(tool, await tool.arun(**args))
+        if tool.run is not None:
+            return wrap_if_untrusted(tool, tool.run(**args))
+        raise RuntimeError(f"tool {tool.name!r} has no implementation")
+
 
 
     def _unknown_tool(self, name: str, call_id: str) -> ToolResult:
