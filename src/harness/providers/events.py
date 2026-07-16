@@ -40,6 +40,12 @@ class Completed:
     input_tokens: int
     output_tokens: int
     reasoning_tokens: int = 0
+    # Anthropic reports cached prompt tokens in separate usage fields — they are
+    # NOT included in input_tokens (which is the uncached remainder only). Carry
+    # them so the loop can reconstruct true prompt size (input + these two).
+    # OpenAI's input_tokens is already the full count, so it leaves these at 0.
+    cache_read_input_tokens: int = 0
+    cache_creation_input_tokens: int = 0
     reasoning_metadata: dict = field(default_factory=dict)
     kind: Literal["completed"] = "completed"
 

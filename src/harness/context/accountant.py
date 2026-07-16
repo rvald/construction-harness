@@ -25,10 +25,16 @@ class ContextBudget:
 class ContextSnapshot:
     totals: dict[Component, int] = field(default_factory=dict)
     budget: ContextBudget = field(default_factory=ContextBudget)
+    # Provider-reported input tokens from the previous send, if known. Used only
+    # as a floor: the tiktoken estimate can undercount the real tokenizer, and an
+    # undercount would trip compaction too late and 400 on a real-window overflow
+    # — unrecoverable in a headless worker. The floor fails toward compact-sooner.
+    real_input_tokens: int | None = None
 
     @property
     def total_used(self) -> int:
-        return sum(v for k, v in self.totals.items() if k != "headroom")
+        estimate = sum(v for k, v in self.totals.items() if k != "headroom")
+        return max(estimate, self.real_input_tokens or 0)
 
     @property
     def utilization(self) -> float:
@@ -57,6 +63,7 @@ class ContextAccountant:
         transcript: Transcript,
         tools: list[dict] | None = None,
         retrieved: list[str] | None = None,
+        last_real_input_tokens: int | None = None,
     ) -> ContextSnapshot:
         totals: dict[Component, int] = {
             "system": self._count_text(transcript.system or ""),
@@ -65,7 +72,8 @@ class ContextAccountant:
             "retrieved": sum(self._count_text(r) for r in (retrieved or [])),
             "headroom": self.budget.headroom,
         }
-        return ContextSnapshot(totals=totals, budget=self.budget)
+        return ContextSnapshot(totals=totals, budget=self.budget,
+                               real_input_tokens=last_real_input_tokens)
 
     def _count_text(self, s: str) -> int:
             return len(self._enc.encode(s))

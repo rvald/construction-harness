@@ -26,6 +26,10 @@ memory, so it must be accurate and complete.
 """
 
 
+def _has_tool_result(m: Message) -> bool:
+    return any(isinstance(b, ToolResult) for b in m.blocks)
+
+
 @dataclass
 class SummarizationResult:
     summary_text: str
@@ -46,6 +50,14 @@ async def summarize_prefix(
 
     first_user = transcript.messages[0]
     prefix_end = len(transcript.messages) - keep_recent_turns
+
+    # Never cut between a tool_call and its tool_result. A kept tool_result whose
+    # originating tool_call landed in the summarized prefix is an orphan that both
+    # provider APIs 400 on. Retreat the cut past any leading tool_result run so the
+    # assistant turn that issued those calls is kept alongside its results.
+    while prefix_end > 1 and _has_tool_result(transcript.messages[prefix_end]):
+        prefix_end -= 1
+
     prefix_to_summarize = transcript.messages[1:prefix_end]
     if not prefix_to_summarize:
         return None

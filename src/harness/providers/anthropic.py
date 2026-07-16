@@ -76,9 +76,16 @@ class AnthropicProvider(Provider):
                     yield event
 
             final = await stream.get_final_message()
+            # usage.input_tokens is the UNCACHED remainder; cached prompt tokens
+            # are reported separately. Forward both so the loop can reconstruct
+            # true prompt size (input + cache_read + cache_creation).
             yield Completed(
                 input_tokens=final.usage.input_tokens,
                 output_tokens=final.usage.output_tokens,
+                cache_read_input_tokens=(
+                    getattr(final.usage, "cache_read_input_tokens", 0) or 0),
+                cache_creation_input_tokens=(
+                    getattr(final.usage, "cache_creation_input_tokens", 0) or 0),
             )
 
     async def acomplete(self, transcript, tools):

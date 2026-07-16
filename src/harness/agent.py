@@ -11,6 +11,7 @@ from .tools.registry import ToolRegistry
 
 from .context.accountant import ContextAccountant, ContextSnapshot
 from .context.compactor import Compactor
+from .context.masking import drop_orphan_tool_results
 from .tools.selector import ToolCatalog, query_from_transcript
 from .permissions.manager import PermissionManager
 from dataclasses import dataclass
@@ -77,6 +78,11 @@ async def arun(
     # keeps no running total), so accumulate provider-reported cost here.
     tokens_used = 0
 
+    # Previous turn's real input-token count, fed into the accountant as a floor
+    # under its tiktoken estimate (see ContextSnapshot.real_input_tokens). None
+    # until the first turn completes.
+    last_input_tokens: int | None = None
+
     # Loop-detection history is run-scoped: it must outlive the fresh registry
     # the loop builds each turn (below), or cross-turn repeats go unseen.
     call_history: list[tuple[str, str]] = []
@@ -108,7 +114,8 @@ async def arun(
                                 permission_manager=permission_manager,
                                 call_history=call_history)
 
-        snapshot = accountant.snapshot(transcript, tools=registry.schemas())
+        snapshot = accountant.snapshot(transcript, tools=registry.schemas(),
+                                       last_real_input_tokens=last_input_tokens)
         if on_snapshot is not None:
             on_snapshot(snapshot)
         
@@ -124,7 +131,9 @@ async def arun(
             # matters if the next turn is the one that returns a final
             # answer (there's no iteration after that to re-fire).
             if on_snapshot is not None:
-                on_snapshot(accountant.snapshot(transcript, tools=registry.schemas()))
+                on_snapshot(accountant.snapshot(
+                    transcript, tools=registry.schemas(),
+                    last_real_input_tokens=last_input_tokens))
 
 
         partial_text: list[str] = []
@@ -140,6 +149,14 @@ async def arun(
             raise
 
         tokens_used += response.input_tokens + response.output_tokens
+        # True prompt size, not just the uncached remainder: under Anthropic
+        # prompt caching, input_tokens excludes the cached prefix (reported in
+        # the cache_* fields). Summing them keeps the accountant floor honest.
+        last_input_tokens = (
+            response.input_tokens
+            + response.cache_read_input_tokens
+            + response.cache_creation_input_tokens
+        )
 
         if response.is_final:
             transcript.append(Message.from_assistant_response(response))
@@ -242,6 +259,14 @@ async def _one_turn(
     On CancelledError, whatever was accumulated so far is still in
     `partial_text` — the caller can flush it into the transcript.
     """
+    # Last line of defense before every send: an orphaned tool_result (a result
+    # whose tool_call was dropped) 400s both providers. The summarizer snaps its
+    # cut to avoid this, so a hit here means an upstream mutation is buggy — repair
+    # and log rather than send a request we know will fail.
+    dropped = drop_orphan_tool_results(transcript)
+    if dropped:
+        log.warning("dropped %d orphan tool_result(s) before send", dropped)
+
     stream = provider.astream(transcript, registry.schemas())
 
     async def forward():

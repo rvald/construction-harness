@@ -35,6 +35,11 @@ class ProviderResponse:
     input_tokens: int = 0
     output_tokens: int = 0
     reasoning_tokens: int = 0
+    # Anthropic-only: cached prompt tokens, reported separately from
+    # input_tokens (see providers.events.Completed). True prompt size is
+    # input_tokens + these two; used by the loop as a context-accounting floor.
+    cache_read_input_tokens: int = 0
+    cache_creation_input_tokens: int = 0
 
     @property
     def is_tool_call(self) -> bool:
@@ -91,6 +96,8 @@ async def accumulate(stream: AsyncIterator[StreamEvent]) -> ProviderResponse:
     input_tokens = 0
     output_tokens = 0
     reasoning_tokens = 0
+    cache_read_input_tokens = 0
+    cache_creation_input_tokens = 0
     reasoning_metadata: dict = {}
 
     async for event in stream:
@@ -123,9 +130,14 @@ async def accumulate(stream: AsyncIterator[StreamEvent]) -> ProviderResponse:
                     last_opened_id = target_id
                 tool_entries[target_id]["args_buffer"] += frag
             case Completed(input_tokens=it, output_tokens=ot,
-                        reasoning_tokens=rt, reasoning_metadata=rmeta):
+                        reasoning_tokens=rt,
+                        cache_read_input_tokens=crt,
+                        cache_creation_input_tokens=cct,
+                        reasoning_metadata=rmeta):
                 input_tokens, output_tokens = it, ot
                 reasoning_tokens = rt
+                cache_read_input_tokens = crt
+                cache_creation_input_tokens = cct
                 reasoning_metadata = dict(rmeta)
 
     reasoning_text = "".join(reasoning_parts) if reasoning_parts else None
@@ -150,6 +162,8 @@ async def accumulate(stream: AsyncIterator[StreamEvent]) -> ProviderResponse:
             reasoning_metadata=reasoning_metadata,
             input_tokens=input_tokens, output_tokens=output_tokens,
             reasoning_tokens=reasoning_tokens,
+            cache_read_input_tokens=cache_read_input_tokens,
+            cache_creation_input_tokens=cache_creation_input_tokens,
         )
     return ProviderResponse(
         text="".join(text_parts),
@@ -157,4 +171,6 @@ async def accumulate(stream: AsyncIterator[StreamEvent]) -> ProviderResponse:
         reasoning_metadata=reasoning_metadata,
         input_tokens=input_tokens, output_tokens=output_tokens,
         reasoning_tokens=reasoning_tokens,
+        cache_read_input_tokens=cache_read_input_tokens,
+        cache_creation_input_tokens=cache_creation_input_tokens,
     )
