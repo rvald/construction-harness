@@ -10,7 +10,7 @@ from src.harness.providers.local import LocalProvider
 from src.harness.agent import arun
 from src.harness.messages import Transcript, ToolCall, ToolResult
 from src.harness.providers.events import TextDelta
-from src.harness.tools.registry import ToolRegistry
+from src.harness.tools.selector import ToolCatalog
 from src.harness.tools.std import  calc, bash
 
 # Choose the provider once. The rest of the script doesn't care which one.
@@ -36,7 +36,9 @@ provider = {
 
 async def main():
     provider = OpenAIProvider()
-    registry = ToolRegistry(tools=[calc, bash])
+    # arun drives a ToolCatalog (it re-derives the per-turn tool set itself);
+    # a small catalog like this one is sent whole and stable every turn.
+    catalog = ToolCatalog(tools=[calc, bash])
 
     def on_event(event):
         if isinstance(event, TextDelta):
@@ -66,8 +68,8 @@ async def main():
     for prompt in prompts:
         print(f"\n\nUser: {prompt}\nAssistant: ", end="", flush=True)
         await arun(
-            provider, 
-            registry, 
+            provider,
+            catalog,
             prompt,
             transcript=transcript,
             on_event=on_event,

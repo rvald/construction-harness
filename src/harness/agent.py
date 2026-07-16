@@ -95,10 +95,13 @@ async def arun(
                 transcript=transcript,
                 stop_reason="deadline",
             )
-        # Select tools for this turn.
+        # Tools for this turn. A catalog that fits the budget goes out whole,
+        # in a stable order, so the tools prefix stays byte-identical turn to
+        # turn (prompt cache holds; no tool vanishes mid-plan). Only an
+        # over-budget catalog falls back to per-turn BM25 selection.
         query = query_from_transcript(transcript)
-        selected = catalog.select(query, k=tools_per_turn,
-                                   must_include=pinned_tools)
+        selected = catalog.for_turn(query, k=tools_per_turn,
+                                    must_include=pinned_tools)
         # A long-lived manager and the loop-detection history are threaded into
         # each turn's fresh registry so their state survives across turns.
         registry = ToolRegistry(tools=selected,

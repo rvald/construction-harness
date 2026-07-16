@@ -62,6 +62,22 @@ class ToolCatalog:
 
         return picks
 
+    def for_turn(
+        self, query: str, k: int, must_include: set[str] | None = None
+    ) -> list[Tool]:
+        """The tools to expose this turn.
+
+        A catalog that fits the budget goes out whole, in stable insertion
+        order, so the serialized `tools` prefix stays byte-identical across
+        turns — the provider's prompt cache holds, and no tool can vanish
+        out from under a plan (the "tool cliff"). Only a catalog too large
+        to send whole falls back to BM25 selection, which necessarily churns
+        the prefix. See select() for the ranking used in that case.
+        """
+        if len(self.tools) <= k:
+            return list(self.tools)
+        return self.select(query, k=k, must_include=must_include)
+
     def get(self, name: str) -> Tool | None:
         return self._by_name.get(name)
 
@@ -86,31 +102,3 @@ def query_from_transcript(transcript: Transcript) -> str:
             elif isinstance(b, ToolCall):
                 parts.append(f"{b.name} {list(b.args.keys())}")
     return " ".join(parts)
-
-
-def discovery_tool(catalog: ToolCatalog) -> Tool:
-    from .decorator import tool as tool_decorator
-
-    @tool_decorator(side_effects={"read"})
-    def list_available_tools(filter_term: str | None = None) -> str:
-        """List tools available in this harness.
-
-        filter_term: optional substring to match against tool name or
-                    description. Use this to narrow a large catalog.
-
-        Returns a newline-separated list of `name — one-line summary`.
-
-        Use this when you think a capability you need exists but isn't in
-        your current tool list. After discovering a tool name, you can call
-        it directly — the tool will be loaded for your next turn.
-        """
-        results = []
-        for t in catalog.tools:
-            first_line = t.description.split("\n", 1)[0]
-            text = f"{t.name} — {first_line}"
-            if filter_term and filter_term.lower() not in text.lower():
-                continue
-            results.append(text)
-        return "\n".join(results) if results else "(no matching tools)"
-
-    return list_available_tools
