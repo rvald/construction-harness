@@ -67,9 +67,12 @@ services:
     build:
       context: .
       dockerfile: service/Dockerfile
-    command: uvicorn service.api.main:app --host 0.0.0.0 --port 8000
+    command: uvicorn service.api.main:app --host 0.0.0.0 --port 8089 --reload
     environment: *service-env
-    ports: ["8000:8000"]
+    volumes:
+      - ./service:/app/service
+      - ./src:/app/src
+    ports: ["8089:8089"]
     depends_on:
       postgres: {condition: service_healthy}
       redis: {condition: service_healthy}
@@ -82,6 +85,9 @@ services:
       dockerfile: service/Dockerfile
     command: python -m service.jobs.rq_worker
     environment: *service-env
+    volumes:
+      - ./service:/app/service
+      - ./src:/app/src
     depends_on:
       postgres: {condition: service_healthy}
       redis: {condition: service_healthy}

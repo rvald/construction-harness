@@ -153,7 +153,7 @@ async def create_ingestion(
     # correlate the client request to the async job; every downstream log carries job_id
     log.info("takeoff.submit", extra={"job_id": job_id,
                                       "request_id": getattr(request.state, "request_id", "-"),
-                                      "created": created})
+                                      "job_created": created})
     return IngestionCreated(job_id=job_id, status=status)
 
 
