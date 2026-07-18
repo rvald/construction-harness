@@ -246,6 +246,7 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "anthropic" },
+    { name = "httpx" },
     { name = "jsonschema" },
     { name = "mcp" },
     { name = "networkx" },
@@ -287,6 +288,7 @@ requires-dist = [
     { name = "anthropic", marker = "extra == 'llm'", specifier = ">=0.40" },
     { name = "boto3", marker = "extra == 'service'", specifier = ">=1.35" },
     { name = "fastapi", marker = "extra == 'service'", specifier = ">=0.115" },
+    { name = "httpx", specifier = ">=0.28" },
     { name = "jsonschema", specifier = ">=4.26.0" },
     { name = "mcp", specifier = ">=1.28.1" },
     { name = "networkx", specifier = ">=3.6.1" },
