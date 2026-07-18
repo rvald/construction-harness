@@ -179,25 +179,15 @@ async def arun(
 
         if response.is_final:
             transcript.append(Message.from_assistant_response(response))
-            # `accumulate` always sets text to a string, so an empty/whitespace
-            # final means the model produced nothing usable. Surface that as its
-            # own outcome instead of returning a blank "completed" answer.
-            if not (response.text or "").strip():
-                return AgentRunResult(
-                    summary=_EMPTY_MARKER,
-                    tokens_used=tokens_used,
-                    iterations_used=iteration + 1,
-                    transcript=transcript,
-                    stop_reason="empty_response",
-                )
-            # Completion gate: a model that says "done" while an active plan
-            # still has non-terminal steps or unverified postconditions has not
-            # actually finished. Nudge it back to work rather than report a
-            # false "completed" — bounded, so it still terminates. The nudge is
-            # a plain user turn that consumes an iteration from the same budget,
-            # so no separate budget and no infinite loop. Enforced HERE, on the
-            # clean-finalization path — this is the gate the plan tools' evidence
-            # requirements only hint at until the loop actually checks them.
+            # Completion gate FIRST: a model that stops while an active plan still has
+            # non-terminal steps or unverified postconditions has not actually finished —
+            # nudge it back to work rather than report a false "completed", bounded so it
+            # still terminates. Checked BEFORE the empty-text case below, because an empty
+            # final while plan work remains is a premature stop, not an answer; checking
+            # emptiness first would let it bypass the gate. The nudge is a plain user turn
+            # that consumes an iteration from the same budget, so no separate budget and no
+            # infinite loop. This is the gate the plan tools' evidence requirements only
+            # hint at until the loop actually checks them.
             if (plan_holder is not None and plan_holder.plan is not None
                     and not plan_holder.plan.is_ready_to_finalize()):
                 if completion_nudges < MAX_COMPLETION_NUDGES:
@@ -215,6 +205,17 @@ async def arun(
                     iterations_used=iteration + 1,
                     transcript=transcript,
                     stop_reason="incomplete_plan",
+                )
+            # Plan complete (or none): `accumulate` always sets text to a string, so an
+            # empty/whitespace final means the model produced nothing usable. Surface that
+            # as its own outcome instead of returning a blank "completed" answer.
+            if not (response.text or "").strip():
+                return AgentRunResult(
+                    summary=_EMPTY_MARKER,
+                    tokens_used=tokens_used,
+                    iterations_used=iteration + 1,
+                    transcript=transcript,
+                    stop_reason="empty_response",
                 )
             return AgentRunResult(
                 summary=response.text or "",
